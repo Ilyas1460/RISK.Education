@@ -1,20 +1,25 @@
 ﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Questions;
 using Education.Persistence.Topics;
 
 namespace Education.Persistence.Quizes;
 
 public class Quiz : Entity {
-	public Guid QuizId { get; init; }
+	public int QuizId { get; init; }
 	public string Title { get; private set; }
 	public string Description { get; private set; }
-	public Guid TopicId { get; private set; }
+	public int OrderNumber { get; private set; }
+	public int TopicId { get; private set; }
 	
 	public Topic Topic { get; set; }
 	
-	public Quiz(Guid quizId, string title, string description, Guid topicId) {
+	public List<Question> Questions { get; set; }
+	
+	public Quiz(int quizId, string title, string description, int orderNumber, int topicId) {
 		QuizId = quizId;
 		Title = title;
 		Description = description;
+		OrderNumber = orderNumber;
 		TopicId = topicId;
 	}
 	
@@ -26,7 +31,11 @@ public class Quiz : Entity {
 		Description = description;
 	}
 	
-	public void UpdateTopicId(Guid topicId) {
+	public void UpdateOrderNumber(int orderNumber) {
+		OrderNumber = orderNumber;
+	}
+	
+	public void UpdateTopicId(int topicId) {
 		TopicId = topicId;
 	}
 }

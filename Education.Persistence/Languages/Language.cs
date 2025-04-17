@@ -1,13 +1,16 @@
 ﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Courses;
 
 namespace Education.Persistence.Languages;
 
 public class Language : Entity {
-	public Guid LanguageId { get; init; }
+	public int LanguageId { get; init; }
 	public string Name { get; private set; }
 	public string Code { get; private set; }
 	
-	public Language(Guid languageId, string name, string code) {
+	public List<Course> Courses { get; set; }
+	
+	public Language(int languageId, string name, string code) {
 		LanguageId = languageId;
 		Name = name;
 		Code = code;

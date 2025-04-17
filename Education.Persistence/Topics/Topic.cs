@@ -1,18 +1,25 @@
 ﻿using Education.Persistence.Abstractions;
 using Education.Persistence.Courses;
+using Education.Persistence.Quizes;
+using Education.Persistence.Theories;
+using Education.Persistence.Videos;
 
 namespace Education.Persistence.Topics;
 
 public class Topic : Entity {
-	public Guid TopicId { get; init; }
+	public int TopicId { get; init; }
 	public string Title { get; private set; }
 	public string Description { get; private set; }
 	public int OrderNumber { get; private set; }
-	public Guid CourseId { get; private set; }
+	public int CourseId { get; private set; }
 	
 	public Course Course { get; set; }
-	
-	public Topic(Guid topicId, string title, string description, int orderNumber, Guid courseId) {
+
+	public List<Theory> Theories { get; set; }
+	public List<Video> Videos { get; set; }
+	public List<Quiz> Quizzes { get; set; }
+
+	public Topic(int topicId, string title, string description, int orderNumber, int courseId) {
 		TopicId = topicId;
 		Title = title;
 		Description = description;
@@ -32,7 +39,7 @@ public class Topic : Entity {
 		OrderNumber = orderNumber;
 	}
 	
-	public void UpdateCourseId(Guid courseId) {
+	public void UpdateCourseId(int courseId) {
 		CourseId = courseId;
 	}
 }
