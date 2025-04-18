@@ -4,6 +4,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.API", "Education.
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Persistence", "Education.Persistence\Education.Persistence.csproj", "{EBAEC70A-4805-455C-993C-79FAA32B0FC5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Infrastructure", "Education.Infrastructure\Education.Infrastructure.csproj", "{FC90693C-9AF6-4F4A-8222-3C36378B43DF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Application", "Education.Application\Education.Application.csproj", "{6EF4F2E8-1554-4EC4-81A4-42B4E4CF4FE3}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -18,5 +22,13 @@ Global
 		{EBAEC70A-4805-455C-993C-79FAA32B0FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBAEC70A-4805-455C-993C-79FAA32B0FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBAEC70A-4805-455C-993C-79FAA32B0FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FC90693C-9AF6-4F4A-8222-3C36378B43DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FC90693C-9AF6-4F4A-8222-3C36378B43DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FC90693C-9AF6-4F4A-8222-3C36378B43DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FC90693C-9AF6-4F4A-8222-3C36378B43DF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EF4F2E8-1554-4EC4-81A4-42B4E4CF4FE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EF4F2E8-1554-4EC4-81A4-42B4E4CF4FE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EF4F2E8-1554-4EC4-81A4-42B4E4CF4FE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EF4F2E8-1554-4EC4-81A4-42B4E4CF4FE3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

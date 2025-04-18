@@ -6,7 +6,7 @@ namespace Education.Persistence.Videos;
 public class Video : Entity {
 	public int VideoId { get; init; }
 	public string Title { get; private set; }
-	public string URL { get; private set; }
+	public string Url { get; private set; }
 	public int OrderNumber { get; private set; }
 	public int TopicId { get; private set; }
 	
@@ -15,7 +15,7 @@ public class Video : Entity {
 	public Video(int videoId, string title, string url, int orderNumber, int topicId) {
 		VideoId = videoId;
 		Title = title;
-		URL = url;
+		Url = url;
 		OrderNumber = orderNumber;
 		TopicId = topicId;
 	}
@@ -25,7 +25,7 @@ public class Video : Entity {
 	}
 	
 	public void UpdateURL(string url) {
-		URL = url;
+		Url = url;
 	}
 	
 	public void UpdateOrderNumber(int orderNumber) {
