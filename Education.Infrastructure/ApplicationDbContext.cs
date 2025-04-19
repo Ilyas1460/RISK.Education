@@ -8,7 +8,9 @@ public class ApplicationDbContext : DbContext {
     }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder.AddInterceptors(new AuditableEntityInterceptor());
+        optionsBuilder
+            .AddInterceptors(new AuditableEntityInterceptor())
+            .UseSnakeCaseNamingConvention();
     
     protected override void OnModelCreating(ModelBuilder modelBuilder) {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
