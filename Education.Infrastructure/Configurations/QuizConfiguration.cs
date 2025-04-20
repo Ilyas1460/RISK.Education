@@ -7,7 +7,7 @@ namespace Education.Infrastructure.Configurations;
 internal class QuizConfiguration : SoftDeleteEntityConfiguration<Quiz> {
     protected override void ConfigureEntity(EntityTypeBuilder<Quiz> builder) {
         builder.ToTable("quizzes", 
-            tb => tb.HasCheckConstraint("CK_Quiz_OrderNumber_Positive", "\"OrderNumber\" > 0"));
+            tb => tb.HasCheckConstraint("CK_Quiz_OrderNumber_Positive", "\"order_number\" > 0"));
         
         builder.HasKey(q => q.QuizId);
         

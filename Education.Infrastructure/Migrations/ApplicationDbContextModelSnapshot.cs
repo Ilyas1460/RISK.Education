@@ -281,7 +281,7 @@ namespace Education.Infrastructure.Migrations
 
                     b.ToTable("quizzes", null, t =>
                         {
-                            t.HasCheckConstraint("CK_Quiz_OrderNumber_Positive", "\"OrderNumber\" > 0");
+                            t.HasCheckConstraint("CK_Quiz_OrderNumber_Positive", "\"order_number\" > 0");
                         });
                 });
 
@@ -332,7 +332,7 @@ namespace Education.Infrastructure.Migrations
 
                     b.ToTable("theories", null, t =>
                         {
-                            t.HasCheckConstraint("CK_Theory_OrderNumber_Positive", "\"OrderNumber\" > 0");
+                            t.HasCheckConstraint("CK_Theory_OrderNumber_Positive", "\"order_number\" > 0");
                         });
                 });
 
@@ -383,7 +383,7 @@ namespace Education.Infrastructure.Migrations
 
                     b.ToTable("topics", null, t =>
                         {
-                            t.HasCheckConstraint("CK_Topic_OrderNumber_Positive", "\"OrderNumber\" > 0");
+                            t.HasCheckConstraint("CK_Topic_OrderNumber_Positive", "\"order_number\" > 0");
                         });
                 });
 
@@ -434,7 +434,7 @@ namespace Education.Infrastructure.Migrations
 
                     b.ToTable("videos", null, t =>
                         {
-                            t.HasCheckConstraint("CK_Video_OrderNumber_Positive", "\"OrderNumber\" > 0");
+                            t.HasCheckConstraint("CK_Video_OrderNumber_Positive", "\"order_number\" > 0");
                         });
                 });
 

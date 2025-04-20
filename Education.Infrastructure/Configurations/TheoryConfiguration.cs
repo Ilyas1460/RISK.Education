@@ -7,7 +7,7 @@ namespace Education.Infrastructure.Configurations;
 internal class TheoryConfiguration : SoftDeleteEntityConfiguration<Theory> {
     protected override void ConfigureEntity(EntityTypeBuilder<Theory> builder) {
         builder.ToTable("theories",
-            tb => tb.HasCheckConstraint("CK_Theory_OrderNumber_Positive", "\"OrderNumber\" > 0"));
+            tb => tb.HasCheckConstraint("CK_Theory_OrderNumber_Positive", "\"order_number\" > 0"));
         
         builder.HasKey(t => t.TheoryId);
         

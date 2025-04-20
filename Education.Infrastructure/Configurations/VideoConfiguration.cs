@@ -7,7 +7,7 @@ namespace Education.Infrastructure.Configurations;
 internal class VideoConfiguration : SoftDeleteEntityConfiguration<Video> {
     protected override void ConfigureEntity(EntityTypeBuilder<Video> builder) {
         builder.ToTable("videos", 
-            tb => tb.HasCheckConstraint("CK_Video_OrderNumber_Positive", "\"OrderNumber\" > 0"));
+            tb => tb.HasCheckConstraint("CK_Video_OrderNumber_Positive", "\"order_number\" > 0"));
 
         builder.HasKey(v => v.VideoId);
 

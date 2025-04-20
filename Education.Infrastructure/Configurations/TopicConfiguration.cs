@@ -7,7 +7,7 @@ namespace Education.Infrastructure.Configurations;
 internal class TopicConfiguration : SoftDeleteEntityConfiguration<Topic> {
     protected override void ConfigureEntity(EntityTypeBuilder<Topic> builder) {
         builder.ToTable("topics", 
-            tb => tb.HasCheckConstraint("CK_Topic_OrderNumber_Positive", "\"OrderNumber\" > 0"));
+            tb => tb.HasCheckConstraint("CK_Topic_OrderNumber_Positive", "\"order_number\" > 0"));
         
         builder.HasKey(t => t.TopicId);
         

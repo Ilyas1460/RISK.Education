@@ -118,7 +118,7 @@ namespace Education.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_topics", x => x.topic_id);
-                    table.CheckConstraint("CK_Topic_OrderNumber_Positive", "\"OrderNumber\" > 0");
+                    table.CheckConstraint("CK_Topic_OrderNumber_Positive", "\"order_number\" > 0");
                     table.ForeignKey(
                         name: "fk_topics_courses_course_id",
                         column: x => x.course_id,
@@ -168,7 +168,7 @@ namespace Education.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_quizzes", x => x.quiz_id);
-                    table.CheckConstraint("CK_Quiz_OrderNumber_Positive", "\"OrderNumber\" > 0");
+                    table.CheckConstraint("CK_Quiz_OrderNumber_Positive", "\"order_number\" > 0");
                     table.ForeignKey(
                         name: "fk_quizzes_topic_topic_id",
                         column: x => x.topic_id,
@@ -194,7 +194,7 @@ namespace Education.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_theories", x => x.theory_id);
-                    table.CheckConstraint("CK_Theory_OrderNumber_Positive", "\"OrderNumber\" > 0");
+                    table.CheckConstraint("CK_Theory_OrderNumber_Positive", "\"order_number\" > 0");
                     table.ForeignKey(
                         name: "fk_theories_topic_topic_id",
                         column: x => x.topic_id,
@@ -220,7 +220,7 @@ namespace Education.Infrastructure.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("pk_videos", x => x.video_id);
-                    table.CheckConstraint("CK_Video_OrderNumber_Positive", "\"OrderNumber\" > 0");
+                    table.CheckConstraint("CK_Video_OrderNumber_Positive", "\"order_number\" > 0");
                     table.ForeignKey(
                         name: "fk_videos_topics_topic_id",
                         column: x => x.topic_id,
