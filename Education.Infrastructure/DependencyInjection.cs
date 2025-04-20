@@ -1,4 +1,6 @@
-﻿using Education.Persistence.Abstractions;
+﻿using Education.Infrastructure.Repositories;
+using Education.Persistence.Abstractions;
+using Education.Persistence.Categories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -19,6 +21,8 @@ public static class DependencyInjection {
         services.AddDbContext<ApplicationDbContext>(options => {
             options.UseNpgsql(connectionString);
         });
+
+        services.AddScoped<ICategoryRepository, CategoryRepository>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
     }
