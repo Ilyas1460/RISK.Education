@@ -2,7 +2,7 @@
 using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
 
-namespace Education.Application.Categories.AddACategory;
+namespace Education.Application.Categories.CreateACategory;
 
 public class CreateACategoryCommandHandler : ICommandHandler<CreateACategoryCommand> {
     private readonly ICategoryRepository _categoryRepository;

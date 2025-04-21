@@ -1,4 +1,4 @@
-﻿using Education.Application.Categories.AddACategory;
+﻿using Education.Application.Categories.CreateACategory;
 using Education.Application.Categories.DeleteACategory;
 using Education.Application.Categories.GetACategory;
 using Education.Application.Categories.GetAllCategories;
