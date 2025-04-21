@@ -10,8 +10,7 @@ public class Category : Entity {
 	
 	public List<Course> Courses { get; set; } 
 	
-	public Category(int categoryId, string title, string description) {
-		CategoryId = categoryId;
+	public Category(string title, string description) {
 		Title = title;
 		Description = description;
 	}

@@ -12,8 +12,7 @@ public class Video : Entity {
 	
 	public Topic Topic { get; set; }
 	
-	public Video(int videoId, string title, string url, int orderNumber, int topicId) {
-		VideoId = videoId;
+	public Video(string title, string url, int orderNumber, int topicId) {
 		Title = title;
 		Url = url;
 		OrderNumber = orderNumber;

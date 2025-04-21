@@ -12,8 +12,7 @@ public class Theory : Entity {
 	
 	public Topic Topic { get; set; }
 	
-	public Theory(int theoryId, string title, string content, int orderNumber, int topicId) {
-		TheoryId = theoryId;
+	public Theory(string title, string content, int orderNumber, int topicId) {
 		Title = title;
 		Content = content;
 		OrderNumber = orderNumber;

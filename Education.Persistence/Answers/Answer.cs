@@ -11,8 +11,7 @@ public class Answer : Entity {
 	
 	public Question Question { get; set; }
 	
-	public Answer(int answerId, string content, bool isCorrect, int questionId) {
-		AnswerId = answerId;
+	public Answer(string content, bool isCorrect, int questionId) {
 		Content = content;
 		IsCorrect = isCorrect;
 		QuestionId = questionId;

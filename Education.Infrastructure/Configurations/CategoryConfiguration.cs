@@ -13,6 +13,9 @@ internal class CategoryConfiguration : SoftDeleteEntityConfiguration<Category> {
 
         builder.Property(c => c.Title)
             .IsRequired();
+
+        builder.HasIndex(c => c.Title)
+            .IsUnique();
         
         builder.Property(c => c.Description)
             .IsRequired();

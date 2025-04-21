@@ -19,8 +19,7 @@ public class Course : Entity {
 	public List<Topic> Topics { get; set; }
 	public List<Question> Questions { get; set; }
 
-	public Course(int courseId, string title, string description, int categoryId, int languageId) {
-		CourseId = courseId;
+	public Course(string title, string description, int categoryId, int languageId) {
 		Title = title;
 		Description = description;
 		CategoryId = categoryId;

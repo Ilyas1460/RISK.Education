@@ -1,13 +1,13 @@
 ﻿namespace Education.Persistence.Categories;
 
 public interface ICategoryRepository {
-    Task<IEnumerable<Category>> GetAllAsync(CancellationToken cancellationToken);
+    Task<IEnumerable<Category>> GetAllAsync(CancellationToken cancellationToken = default);
     
-    Task<Category?> GetByIdAsync(int id, CancellationToken cancellationToken);
+    Task<Category?> GetByIdAsync(int id, CancellationToken cancellationToken = default);
     
-    void Add(Category category, CancellationToken cancellationToken);
+    Task<Category?> GetByTitleAsync(string title, CancellationToken cancellationToken = default);
     
-    void Update(Category category, CancellationToken cancellationToken);
+    void Add(Category category, CancellationToken cancellationToken = default);
     
-    void Delete(Category category, CancellationToken cancellationToken);
+    void Delete(Category category, CancellationToken cancellationToken = default);
 }

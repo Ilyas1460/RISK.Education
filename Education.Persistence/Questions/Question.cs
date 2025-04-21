@@ -16,8 +16,7 @@ public class Question : Entity {
 	public List<Answer> Answers { get; set; }
 	public List<Quiz> Quizzes { get; set; }
 	
-	public Question(int questionId, string content, QuestionType type, int courseId) {
-		QuestionId = questionId;
+	public Question(string content, QuestionType type, int courseId) {
 		Content = content;
 		Type = type;
 		CourseId = courseId;

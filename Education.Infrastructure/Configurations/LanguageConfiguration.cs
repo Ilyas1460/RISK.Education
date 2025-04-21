@@ -16,6 +16,12 @@ internal class LanguageConfiguration : SoftDeleteEntityConfiguration<Language> {
         builder.Property(l => l.Code)
             .IsRequired()
             .HasMaxLength(5);
+
+        builder.HasIndex(l => l.Name)
+            .IsUnique();
+        
+        builder.HasIndex(l => l.Code)
+            .IsUnique();
         
         builder.HasMany(l => l.Courses)
             .WithOne(c => c.Language)

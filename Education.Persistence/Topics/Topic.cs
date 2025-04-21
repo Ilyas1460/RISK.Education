@@ -19,8 +19,7 @@ public class Topic : Entity {
 	public List<Video> Videos { get; set; }
 	public List<Quiz> Quizzes { get; set; }
 
-	public Topic(int topicId, string title, string description, int orderNumber, int courseId) {
-		TopicId = topicId;
+	public Topic(string title, string description, int orderNumber, int courseId) {
 		Title = title;
 		Description = description;
 		OrderNumber = orderNumber;

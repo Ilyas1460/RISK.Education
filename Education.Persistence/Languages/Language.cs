@@ -10,8 +10,7 @@ public class Language : Entity {
 	
 	public List<Course> Courses { get; set; }
 	
-	public Language(int languageId, string name, string code) {
-		LanguageId = languageId;
+	public Language(string name, string code) {
 		Name = name;
 		Code = code;
 	}
