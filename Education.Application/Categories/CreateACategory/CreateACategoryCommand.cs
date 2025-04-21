@@ -2,4 +2,4 @@
 
 namespace Education.Application.Categories.AddACategory;
 
-public record AddACategoryCommand(string Title, string Description) : ICommand;
+public record CreateACategoryCommand(string Title, string Description) : ICommand;

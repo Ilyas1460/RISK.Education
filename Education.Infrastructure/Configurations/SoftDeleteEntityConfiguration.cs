@@ -7,7 +7,7 @@ namespace Education.Infrastructure.Configurations;
 internal abstract class SoftDeleteEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity> 
     where TEntity : Entity {
     public virtual void Configure(EntityTypeBuilder<TEntity> builder) {
-        builder.HasQueryFilter(e => !e.IsDeleted());
+        builder.HasQueryFilter(e => e.DeletedAt == null);
         
         builder.Property(e => e.DeletedAt)
             .IsRequired(false);

@@ -2,8 +2,8 @@
 
 public abstract class Entity {
 	public DateTime CreatedAt { get; } = DateTime.UtcNow;
-	public DateTime? UpdatedAt { get; private set; } = null;
-	public DateTime? DeletedAt { get; private set; } = null;
+	public DateTime? UpdatedAt { get; protected set; } = null;
+	public DateTime? DeletedAt { get; protected set; } = null;
 	
 	public void MarkAsUpdated() {
 		UpdatedAt = DateTime.UtcNow;

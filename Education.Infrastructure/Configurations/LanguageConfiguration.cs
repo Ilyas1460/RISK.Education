@@ -18,10 +18,12 @@ internal class LanguageConfiguration : SoftDeleteEntityConfiguration<Language> {
             .HasMaxLength(5);
 
         builder.HasIndex(l => l.Name)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("\"deleted_at\" IS NULL");;
         
         builder.HasIndex(l => l.Code)
-            .IsUnique();
+            .IsUnique()
+            .HasFilter("\"deleted_at\" IS NULL");;
         
         builder.HasMany(l => l.Courses)
             .WithOne(c => c.Language)

@@ -1,4 +1,5 @@
-﻿using Education.Infrastructure.Repositories;
+﻿using Education.Infrastructure.Interceptors;
+using Education.Infrastructure.Repositories;
 using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
 using Microsoft.EntityFrameworkCore;
@@ -19,7 +20,9 @@ public static class DependencyInjection {
                                throw new ArgumentNullException(nameof(configuration), "Database connection string is missing.");
 
         services.AddDbContext<ApplicationDbContext>(options => {
-            options.UseNpgsql(connectionString);
+            options.UseNpgsql(connectionString)
+                .UseSnakeCaseNamingConvention()
+                .AddInterceptors(new AuditableEntityInterceptor());
         });
 
         services.AddScoped<ICategoryRepository, CategoryRepository>();

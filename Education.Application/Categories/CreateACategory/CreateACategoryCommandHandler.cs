@@ -4,16 +4,16 @@ using Education.Persistence.Categories;
 
 namespace Education.Application.Categories.AddACategory;
 
-public class AddACategoryCommandHandler : ICommandHandler<AddACategoryCommand> {
+public class CreateACategoryCommandHandler : ICommandHandler<CreateACategoryCommand> {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUnitOfWork _unitOfWork;
     
-    public AddACategoryCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork) {
+    public CreateACategoryCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork) {
         _categoryRepository = categoryRepository;
         _unitOfWork = unitOfWork;
     }
     
-    public async Task<Result> Handle(AddACategoryCommand request, CancellationToken cancellationToken) {
+    public async Task<Result> Handle(CreateACategoryCommand request, CancellationToken cancellationToken) {
         var category = await _categoryRepository.GetByTitleAsync(request.Title, cancellationToken);
         
         if (category is not null) {

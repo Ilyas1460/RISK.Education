@@ -27,11 +27,6 @@ public class ApplicationDbContext : DbContext, IUnitOfWork {
     public DbSet<Question> Questions { get; set; }
     public DbSet<Answer> Answers { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
-        optionsBuilder
-            .AddInterceptors(new AuditableEntityInterceptor())
-            .UseSnakeCaseNamingConvention();
-
     public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) {
         var result = await base.SaveChangesAsync(cancellationToken);
 

@@ -5,20 +5,40 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 namespace Education.Infrastructure.Interceptors;
 
 public class AuditableEntityInterceptor : SaveChangesInterceptor {
+    // Synchronous SaveChanges()
     public override InterceptionResult<int> SavingChanges(
-        DbContextEventData eventData, 
-        InterceptionResult<int> result) {
-        if (eventData.Context is null) return result;
+        DbContextEventData eventData,
+        InterceptionResult<int> result)
+    {
+        ApplyAuditRules(eventData);
+        return base.SavingChanges(eventData, result);
+    }
+    
+    // Asynchronous SaveChangesAsync()
+    public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
+        DbContextEventData eventData,
+        InterceptionResult<int> result,
+        CancellationToken cancellationToken = default)
+    {
+        ApplyAuditRules(eventData);
+        return base.SavingChangesAsync(eventData, result, cancellationToken);
+    }
+    
+    private void ApplyAuditRules(DbContextEventData eventData)
+    {
+        if (eventData.Context is null) return;
 
-        foreach (var entry in eventData.Context.ChangeTracker.Entries<Entity>()) {
-            if (entry is { State: EntityState.Deleted }) {
+        foreach (var entry in eventData.Context.ChangeTracker.Entries<Entity>())
+        {
+            if (entry.State == EntityState.Deleted)
+            {
                 entry.State = EntityState.Modified;
                 entry.Entity.MarkAsDeleted();
-            } else if (entry is { State: EntityState.Modified }) {
+            }
+            else if (entry.State == EntityState.Modified)
+            {
                 entry.Entity.MarkAsUpdated();
             }
         }
-
-        return result;
     }
 }
