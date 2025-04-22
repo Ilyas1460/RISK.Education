@@ -1,6 +1,7 @@
-﻿using Education.Persistence.Abstractions;
+﻿using Education.Application.Abstractions.Exceptions;
 using FluentValidation;
 using MediatR;
+using ValidationException = Education.Application.Abstractions.Exceptions.ValidationException;
 
 namespace Education.Application.Abstractions.Behaviors;
 
@@ -22,11 +23,11 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
             return await next(cancellationToken);
         }
 
-        List<Error> validationErrors = _validators
+        List<ValidationError> validationErrors = _validators
             .Select(validator => validator.Validate(request))
             .SelectMany(validationResult => validationResult.Errors)
             .Where(validationFailure => validationFailure is not null)
-            .Select(failure => new Error(
+            .Select(failure => new ValidationError(
                 failure.PropertyName,
                 failure.ErrorMessage))
             .Distinct()
@@ -34,7 +35,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
 
         if (validationErrors.Any())
         {
-            // How should I handle these validation errors?
+            throw new ValidationException(validationErrors);
         }
 
         return await next(cancellationToken);

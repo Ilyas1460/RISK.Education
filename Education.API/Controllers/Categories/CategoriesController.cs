@@ -3,8 +3,6 @@ using Education.Application.Categories.DeleteCategory;
 using Education.Application.Categories.GetAllCategories;
 using Education.Application.Categories.GetCategory;
 using Education.Application.Categories.UpdateCategory;
-using Education.Persistence.Abstractions;
-using Education.Persistence.Categories;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
