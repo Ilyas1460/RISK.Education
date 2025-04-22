@@ -2,8 +2,10 @@
 
 namespace Education.Application.Categories.CreateACategory;
 
-public class CreateACategoryCommandValidator : AbstractValidator<CreateACategoryCommand> {
-    public CreateACategoryCommandValidator() {
+public class CreateACategoryCommandValidator : AbstractValidator<CreateACategoryCommand>
+{
+    public CreateACategoryCommandValidator()
+    {
         RuleFor(c => c.Title)
             .NotEmpty()
             .WithMessage("Title is required.")

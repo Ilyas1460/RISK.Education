@@ -3,35 +3,29 @@ using Education.Persistence.Topics;
 
 namespace Education.Persistence.Videos;
 
-public class Video : Entity {
-	public int VideoId { get; init; }
-	public string Title { get; private set; }
-	public string Url { get; private set; }
-	public int OrderNumber { get; private set; }
-	public int TopicId { get; private set; }
-	
-	public Topic Topic { get; set; }
-	
-	public Video(string title, string url, int orderNumber, int topicId) {
-		Title = title;
-		Url = url;
-		OrderNumber = orderNumber;
-		TopicId = topicId;
-	}
-	
-	public void UpdateTitle(string title) {
-		Title = title;
-	}
-	
-	public void UpdateURL(string url) {
-		Url = url;
-	}
-	
-	public void UpdateOrderNumber(int orderNumber) {
-		OrderNumber = orderNumber;
-	}
-	
-	public void UpdateTopicId(int topicId) {
-		TopicId = topicId;
-	}
+public class Video : Entity
+{
+    public int VideoId { get; init; }
+    public string Title { get; private set; }
+    public string Url { get; private set; }
+    public int OrderNumber { get; private set; }
+    public int TopicId { get; private set; }
+
+    public Topic Topic { get; set; }
+
+    public Video(string title, string url, int orderNumber, int topicId)
+    {
+        Title = title;
+        Url = url;
+        OrderNumber = orderNumber;
+        TopicId = topicId;
+    }
+
+    public void UpdateTitle(string title) => Title = title;
+
+    public void UpdateURL(string url) => Url = url;
+
+    public void UpdateOrderNumber(int orderNumber) => OrderNumber = orderNumber;
+
+    public void UpdateTopicId(int topicId) => TopicId = topicId;
 }

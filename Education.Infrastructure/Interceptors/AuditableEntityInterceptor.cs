@@ -1,10 +1,12 @@
 ﻿using Education.Persistence.Abstractions;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Education.Infrastructure.Interceptors;
 
-public class AuditableEntityInterceptor : SaveChangesInterceptor {
+public class AuditableEntityInterceptor : SaveChangesInterceptor
+{
     // Synchronous SaveChanges()
     public override InterceptionResult<int> SavingChanges(
         DbContextEventData eventData,
@@ -13,7 +15,7 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor {
         ApplyAuditRules(eventData);
         return base.SavingChanges(eventData, result);
     }
-    
+
     // Asynchronous SaveChangesAsync()
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
@@ -23,12 +25,15 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor {
         ApplyAuditRules(eventData);
         return base.SavingChangesAsync(eventData, result, cancellationToken);
     }
-    
+
     private void ApplyAuditRules(DbContextEventData eventData)
     {
-        if (eventData.Context is null) return;
+        if (eventData.Context is null)
+        {
+            return;
+        }
 
-        foreach (var entry in eventData.Context.ChangeTracker.Entries<Entity>())
+        foreach (EntityEntry<Entity>? entry in eventData.Context.ChangeTracker.Entries<Entity>())
         {
             if (entry.State == EntityState.Deleted)
             {

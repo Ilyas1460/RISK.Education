@@ -1,5 +1,4 @@
-﻿using Education.Infrastructure.Interceptors;
-using Education.Persistence.Abstractions;
+﻿using Education.Persistence.Abstractions;
 using Education.Persistence.Answers;
 using Education.Persistence.Categories;
 using Education.Persistence.Courses;
@@ -13,8 +12,10 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Education.Infrastructure;
 
-public class ApplicationDbContext : DbContext, IUnitOfWork {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options) {
+public class ApplicationDbContext : DbContext, IUnitOfWork
+{
+    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
+    {
     }
 
     public DbSet<Category> Categories { get; set; }
@@ -27,15 +28,17 @@ public class ApplicationDbContext : DbContext, IUnitOfWork {
     public DbSet<Question> Questions { get; set; }
     public DbSet<Answer> Answers { get; set; }
 
-    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default) {
-        var result = await base.SaveChangesAsync(cancellationToken);
+    public override async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
+    {
+        int result = await base.SaveChangesAsync(cancellationToken);
 
         return result;
     }
 
-    protected override void OnModelCreating(ModelBuilder modelBuilder) {
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
         modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDbContext).Assembly);
-        
+
         base.OnModelCreating(modelBuilder);
     }
 }

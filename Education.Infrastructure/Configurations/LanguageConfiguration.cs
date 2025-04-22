@@ -4,10 +4,12 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Education.Infrastructure.Configurations;
 
-internal class LanguageConfiguration : SoftDeleteEntityConfiguration<Language> {
-    protected override void ConfigureEntity(EntityTypeBuilder<Language> builder) {
+internal class LanguageConfiguration : SoftDeleteEntityConfiguration<Language>
+{
+    protected override void ConfigureEntity(EntityTypeBuilder<Language> builder)
+    {
         builder.ToTable("languages");
-        
+
         builder.HasKey(l => l.LanguageId);
 
         builder.Property(l => l.Name)
@@ -19,12 +21,14 @@ internal class LanguageConfiguration : SoftDeleteEntityConfiguration<Language> {
 
         builder.HasIndex(l => l.Name)
             .IsUnique()
-            .HasFilter("\"deleted_at\" IS NULL");;
-        
+            .HasFilter("\"deleted_at\" IS NULL");
+        ;
+
         builder.HasIndex(l => l.Code)
             .IsUnique()
-            .HasFilter("\"deleted_at\" IS NULL");;
-        
+            .HasFilter("\"deleted_at\" IS NULL");
+        ;
+
         builder.HasMany(l => l.Courses)
             .WithOne(c => c.Language)
             .HasForeignKey(c => c.LanguageId)

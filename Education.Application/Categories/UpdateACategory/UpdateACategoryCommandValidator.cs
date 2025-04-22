@@ -2,8 +2,10 @@
 
 namespace Education.Application.Categories.UpdateACategory;
 
-internal class UpdateACategoryCommandValidator : AbstractValidator<UpdateACategoryCommand> {
-    public UpdateACategoryCommandValidator() {
+internal class UpdateACategoryCommandValidator : AbstractValidator<UpdateACategoryCommand>
+{
+    public UpdateACategoryCommandValidator()
+    {
         RuleFor(x => x.CategoryId)
             .NotEmpty()
             .WithMessage("CategoryId is required.")
