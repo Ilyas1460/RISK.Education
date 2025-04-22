@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Education.Application.Categories.CreateACategory;
+namespace Education.Application.Categories.CreateCategory;
 
-public class CreateACategoryCommandValidator : AbstractValidator<CreateACategoryCommand>
+public class CreateCategoryCommandValidator : AbstractValidator<CreateCategoryCommand>
 {
-    public CreateACategoryCommandValidator()
+    public CreateCategoryCommandValidator()
     {
         RuleFor(c => c.Title)
             .NotEmpty()

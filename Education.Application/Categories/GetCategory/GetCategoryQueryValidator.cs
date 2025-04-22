@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Education.Application.Categories.GetACategory;
+namespace Education.Application.Categories.GetCategory;
 
-public class GetACategoryQueryValidator : AbstractValidator<GetACategoryQuery>
+public class GetCategoryQueryValidator : AbstractValidator<GetCategoryQuery>
 {
-    public GetACategoryQueryValidator() =>
+    public GetCategoryQueryValidator() =>
         RuleFor(x => x.CategoryId)
             .NotEmpty()
             .WithMessage("CategoryId is required.")

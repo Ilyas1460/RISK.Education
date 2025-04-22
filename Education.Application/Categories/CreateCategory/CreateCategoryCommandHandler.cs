@@ -2,20 +2,20 @@
 using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
 
-namespace Education.Application.Categories.CreateACategory;
+namespace Education.Application.Categories.CreateCategory;
 
-public class CreateACategoryCommandHandler : ICommandHandler<CreateACategoryCommand>
+public class CreateCategoryCommandHandler : ICommandHandler<CreateCategoryCommand>
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public CreateACategoryCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
+    public CreateCategoryCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
     {
         _categoryRepository = categoryRepository;
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result> Handle(CreateACategoryCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
         Category? category = await _categoryRepository.GetByTitleAsync(request.Title, cancellationToken);
 

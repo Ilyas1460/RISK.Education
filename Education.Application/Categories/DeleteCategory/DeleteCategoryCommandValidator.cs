@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Education.Application.Categories.DeleteACategory;
+namespace Education.Application.Categories.DeleteCategory;
 
-public class DeleteACategoryCommandValidator : AbstractValidator<DeleteACategoryCommand>
+public class DeleteCategoryCommandValidator : AbstractValidator<DeleteCategoryCommand>
 {
-    public DeleteACategoryCommandValidator() =>
+    public DeleteCategoryCommandValidator() =>
         RuleFor(x => x.CategoryId)
             .NotEmpty()
             .WithMessage("Category ID must not be empty.")

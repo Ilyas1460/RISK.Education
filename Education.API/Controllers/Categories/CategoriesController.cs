@@ -1,8 +1,8 @@
-﻿using Education.Application.Categories.CreateACategory;
-using Education.Application.Categories.DeleteACategory;
-using Education.Application.Categories.GetACategory;
+﻿using Education.Application.Categories.CreateCategory;
+using Education.Application.Categories.DeleteCategory;
 using Education.Application.Categories.GetAllCategories;
-using Education.Application.Categories.UpdateACategory;
+using Education.Application.Categories.GetCategory;
+using Education.Application.Categories.UpdateCategory;
 using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
 using MediatR;
@@ -25,7 +25,7 @@ public class CategoriesController : ControllerBase
     [HttpGet("{categoryId:int}")]
     public async Task<IActionResult> GetCategoryById(int categoryId, CancellationToken cancellationToken)
     {
-        GetACategoryQuery query = new(categoryId);
+        GetCategoryQuery query = new(categoryId);
 
         Result<Category> result = await _sender.Send(query, cancellationToken);
 
@@ -41,7 +41,7 @@ public class CategoriesController : ControllerBase
     public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequest request,
         CancellationToken cancellationToken)
     {
-        CreateACategoryCommand command = new(request.Title, request.Description);
+        CreateCategoryCommand command = new(request.Title, request.Description);
 
         Result result = await _sender.Send(command, cancellationToken);
 
@@ -54,7 +54,7 @@ public class CategoriesController : ControllerBase
     }
 
     [HttpPut("{categoryId:int}")]
-    public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody] UpdateACategoryCommand request,
+    public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody] UpdateCategoryCommand request,
         CancellationToken cancellationToken)
     {
         // request.CategoryId = categoryId;
@@ -64,7 +64,7 @@ public class CategoriesController : ControllerBase
     [HttpDelete("{categoryId:int}")]
     public async Task<IActionResult> DeleteCategory(int categoryId, CancellationToken cancellationToken)
     {
-        DeleteACategoryCommand command = new(categoryId);
+        DeleteCategoryCommand command = new(categoryId);
 
         Result result = await _sender.Send(command, cancellationToken);
 

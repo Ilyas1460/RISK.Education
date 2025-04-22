@@ -1,10 +1,10 @@
 ﻿using FluentValidation;
 
-namespace Education.Application.Categories.UpdateACategory;
+namespace Education.Application.Categories.UpdateCategory;
 
-internal class UpdateACategoryCommandValidator : AbstractValidator<UpdateACategoryCommand>
+internal class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
 {
-    public UpdateACategoryCommandValidator()
+    public UpdateCategoryCommandValidator()
     {
         RuleFor(x => x.CategoryId)
             .NotEmpty()

@@ -2,20 +2,20 @@
 using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
 
-namespace Education.Application.Categories.DeleteACategory;
+namespace Education.Application.Categories.UpdateCategory;
 
-public class DeleteACategoryCommandHandler : ICommandHandler<DeleteACategoryCommand>
+public class UpdateCategoryCommandHandler : ICommandHandler<UpdateCategoryCommand>
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteACategoryCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
+    public UpdateCategoryCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
     {
         _categoryRepository = categoryRepository;
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result> Handle(DeleteACategoryCommand request, CancellationToken cancellationToken)
+    public async Task<Result> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
         Category? category = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
 
@@ -24,7 +24,8 @@ public class DeleteACategoryCommandHandler : ICommandHandler<DeleteACategoryComm
             return Result.Failure(CategoryErrors.NotFound(request.CategoryId));
         }
 
-        _categoryRepository.Delete(category, cancellationToken);
+        category.UpdateTitle(request.NewTitle);
+        category.UpdateDescription(request.NewDescription);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 

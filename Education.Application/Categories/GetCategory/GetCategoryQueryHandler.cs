@@ -2,15 +2,15 @@
 using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
 
-namespace Education.Application.Categories.GetACategory;
+namespace Education.Application.Categories.GetCategory;
 
-public class GetACategoryQueryHandler : IQueryHandler<GetACategoryQuery, Category>
+public class GetCategoryQueryHandler : IQueryHandler<GetCategoryQuery, Category>
 {
     private readonly ICategoryRepository _categoryRepository;
 
-    public GetACategoryQueryHandler(ICategoryRepository categoryRepository) => _categoryRepository = categoryRepository;
+    public GetCategoryQueryHandler(ICategoryRepository categoryRepository) => _categoryRepository = categoryRepository;
 
-    public async Task<Result<Category>> Handle(GetACategoryQuery request, CancellationToken cancellationToken)
+    public async Task<Result<Category>> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
         Category? result = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
 
