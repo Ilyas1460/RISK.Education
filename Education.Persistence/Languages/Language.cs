@@ -3,7 +3,7 @@ using Education.Persistence.Courses;
 
 namespace Education.Persistence.Languages;
 
-public class Language : Entity
+public class Language : BaseEntity
 {
     public int LanguageId { get; init; }
     public string Name { get; private set; }

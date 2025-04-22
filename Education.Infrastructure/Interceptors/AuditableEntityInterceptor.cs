@@ -33,7 +33,7 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
             return;
         }
 
-        foreach (EntityEntry<Entity>? entry in eventData.Context.ChangeTracker.Entries<Entity>())
+        foreach (EntityEntry<BaseEntity>? entry in eventData.Context.ChangeTracker.Entries<BaseEntity>())
         {
             if (entry.State == EntityState.Deleted)
             {

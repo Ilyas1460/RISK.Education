@@ -3,7 +3,7 @@ using Education.Persistence.Courses;
 
 namespace Education.Persistence.Categories;
 
-public class Category : Entity
+public class Category : BaseEntity
 {
     public int CategoryId { get; init; }
     public string Title { get; private set; }

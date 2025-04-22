@@ -9,14 +9,17 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
-    public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators) => _validators = validators;
+    public ValidationBehavior(IEnumerable<IValidator<TRequest>> validators)
+    {
+        _validators = validators;
+    }
 
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
         if (!_validators.Any())
         {
-            return await next();
+            return await next(cancellationToken);
         }
 
         List<Error> validationErrors = _validators
@@ -34,6 +37,6 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
             // How should I handle these validation errors?
         }
 
-        return await next();
+        return await next(cancellationToken);
     }
 }

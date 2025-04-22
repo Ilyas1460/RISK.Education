@@ -2,7 +2,7 @@
 
 namespace Education.Infrastructure.Repositories;
 
-public abstract class Repository<T> where T : Entity
+public abstract class Repository<T> where T : BaseEntity
 {
     protected readonly ApplicationDbContext _dbContext;
 

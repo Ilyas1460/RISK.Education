@@ -5,7 +5,7 @@ using Education.Persistence.Quizes;
 
 namespace Education.Persistence.Questions;
 
-public class Question : Entity
+public class Question : BaseEntity
 {
     public int QuestionId { get; init; }
     public string Content { get; private set; }

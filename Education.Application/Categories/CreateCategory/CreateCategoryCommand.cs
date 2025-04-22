@@ -1,5 +1,5 @@
-﻿using Education.Application.Abstractions.Messaging;
+﻿using MediatR;
 
 namespace Education.Application.Categories.CreateCategory;
 
-public record CreateCategoryCommand(string Title, string Description) : ICommand;
+public record CreateCategoryCommand(string Title, string Description) : IRequest;

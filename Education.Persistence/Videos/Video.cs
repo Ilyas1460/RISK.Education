@@ -3,7 +3,7 @@ using Education.Persistence.Topics;
 
 namespace Education.Persistence.Videos;
 
-public class Video : Entity
+public class Video : BaseEntity
 {
     public int VideoId { get; init; }
     public string Title { get; private set; }

@@ -6,7 +6,7 @@ using Education.Persistence.Topics;
 
 namespace Education.Persistence.Courses;
 
-public class Course : Entity
+public class Course : BaseEntity
 {
     public int CourseId { get; init; }
     public string Title { get; private set; }

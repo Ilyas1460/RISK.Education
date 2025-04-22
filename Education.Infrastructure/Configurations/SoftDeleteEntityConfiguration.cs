@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 namespace Education.Infrastructure.Configurations;
 
 internal abstract class SoftDeleteEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
-    where TEntity : Entity
+    where TEntity : BaseEntity
 {
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
@@ -15,7 +15,7 @@ internal abstract class SoftDeleteEntityConfiguration<TEntity> : IEntityTypeConf
             .IsRequired(false);
 
         builder.Property(e => e.UpdatedAt)
-            .IsRequired(false);
+            .IsRequired();
 
         builder.Property(e => e.CreatedAt)
             .IsRequired();

@@ -19,37 +19,22 @@ public class CategoriesController : ControllerBase
     public CategoriesController(IMediator sender) => _sender = sender;
 
     [HttpGet]
-    public async Task<IActionResult> GetAllCategories(CancellationToken cancellationToken) =>
-        Ok(await _sender.Send(new GetAllCategoriesQuery(), cancellationToken));
+    public async Task<IActionResult> GetAllCategories(CancellationToken cancellationToken)
+    {
+        return Ok(await _sender.Send(new GetAllCategoriesQuery(), cancellationToken));
+    }
 
     [HttpGet("{categoryId:int}")]
     public async Task<IActionResult> GetCategoryById(int categoryId, CancellationToken cancellationToken)
     {
-        GetCategoryQuery query = new(categoryId);
-
-        Result<Category> result = await _sender.Send(query, cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return NotFound(result.Error);
-        }
-
-        return Ok(result.Value);
+        return Ok(await _sender.Send(new GetCategoryQuery(categoryId), cancellationToken));
     }
 
     [HttpPost]
-    public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryRequest request,
+    public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand request,
         CancellationToken cancellationToken)
     {
-        CreateCategoryCommand command = new(request.Title, request.Description);
-
-        Result result = await _sender.Send(command, cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return BadRequest(result.Error);
-        }
-
+        await _sender.Send(request, cancellationToken);
         return Created();
     }
 
@@ -57,22 +42,15 @@ public class CategoriesController : ControllerBase
     public async Task<IActionResult> UpdateCategory(int categoryId, [FromBody] UpdateCategoryCommand request,
         CancellationToken cancellationToken)
     {
-        // request.CategoryId = categoryId;
-        return Ok(await _sender.Send(request, cancellationToken));
+        request.CategoryId = categoryId;
+        await _sender.Send(request, cancellationToken);
+        return Ok();
     }
 
     [HttpDelete("{categoryId:int}")]
     public async Task<IActionResult> DeleteCategory(int categoryId, CancellationToken cancellationToken)
     {
-        DeleteCategoryCommand command = new(categoryId);
-
-        Result result = await _sender.Send(command, cancellationToken);
-
-        if (result.IsFailure)
-        {
-            return NotFound(result.Error);
-        }
-
+        await _sender.Send(new DeleteCategoryCommand(categoryId), cancellationToken);
         return Ok();
     }
 }

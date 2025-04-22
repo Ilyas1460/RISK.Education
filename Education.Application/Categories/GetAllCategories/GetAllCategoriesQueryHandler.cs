@@ -1,21 +1,18 @@
-﻿using Education.Application.Abstractions.Messaging;
-using Education.Persistence.Abstractions;
-using Education.Persistence.Categories;
+﻿using Education.Persistence.Categories;
+using MediatR;
 
 namespace Education.Application.Categories.GetAllCategories;
 
-public class GetAllCategoriesQueryHandler : IQueryHandler<GetAllCategoriesQuery, IEnumerable<Category>>
+public class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuery, IEnumerable<Category>>
 {
     private readonly ICategoryRepository _categoryRepository;
 
     public GetAllCategoriesQueryHandler(ICategoryRepository categoryRepository) =>
         _categoryRepository = categoryRepository;
 
-    public async Task<Result<IEnumerable<Category>>> Handle(GetAllCategoriesQuery request,
+    public async Task<IEnumerable<Category>> Handle(GetAllCategoriesQuery request,
         CancellationToken cancellationToken)
     {
-        IEnumerable<Category>? result = await _categoryRepository.GetAllAsync(cancellationToken);
-
-        return Result.Success(result);
+        return await _categoryRepository.GetAllAsync(cancellationToken);
     }
 }

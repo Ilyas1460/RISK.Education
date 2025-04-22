@@ -6,7 +6,7 @@ using Education.Persistence.Videos;
 
 namespace Education.Persistence.Topics;
 
-public class Topic : Entity
+public class Topic : BaseEntity
 {
     public int TopicId { get; init; }
     public string Title { get; private set; }

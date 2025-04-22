@@ -3,7 +3,7 @@ using Education.Persistence.Topics;
 
 namespace Education.Persistence.Theories;
 
-public class Theory : Entity
+public class Theory : BaseEntity
 {
     public int TheoryId { get; init; }
     public string Title { get; private set; }

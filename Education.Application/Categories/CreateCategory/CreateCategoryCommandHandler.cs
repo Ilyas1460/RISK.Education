@@ -1,10 +1,10 @@
-﻿using Education.Application.Abstractions.Messaging;
-using Education.Persistence.Abstractions;
+﻿using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
+using MediatR;
 
 namespace Education.Application.Categories.CreateCategory;
 
-public class CreateCategoryCommandHandler : ICommandHandler<CreateCategoryCommand>
+public class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand>
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -15,13 +15,13 @@ public class CreateCategoryCommandHandler : ICommandHandler<CreateCategoryComman
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
+    public async Task Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
         Category? category = await _categoryRepository.GetByTitleAsync(request.Title, cancellationToken);
 
         if (category is not null)
         {
-            return Result.Failure(CategoryErrors.AlreadyExists(request.Title));
+            throw new InvalidOperationException("A category with the same title already exists.");
         }
 
         Category newCategory = new(request.Title, request.Description);
@@ -29,7 +29,5 @@ public class CreateCategoryCommandHandler : ICommandHandler<CreateCategoryComman
         _categoryRepository.Add(newCategory, cancellationToken);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-        return Result.Success();
     }
 }

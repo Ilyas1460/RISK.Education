@@ -3,7 +3,7 @@ using Education.Persistence.Questions;
 
 namespace Education.Persistence.Answers;
 
-public class Answer : Entity
+public class Answer : BaseEntity
 {
     public int AnswerId { get; init; }
     public string Content { get; private set; }

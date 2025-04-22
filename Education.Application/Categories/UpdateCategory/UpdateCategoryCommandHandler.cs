@@ -1,10 +1,10 @@
-﻿using Education.Application.Abstractions.Messaging;
-using Education.Persistence.Abstractions;
+﻿using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
+using MediatR;
 
 namespace Education.Application.Categories.UpdateCategory;
 
-public class UpdateCategoryCommandHandler : ICommandHandler<UpdateCategoryCommand>
+public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand>
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -15,20 +15,18 @@ public class UpdateCategoryCommandHandler : ICommandHandler<UpdateCategoryComman
         _unitOfWork = unitOfWork;
     }
 
-    public async Task<Result> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+    public async Task Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
         Category? category = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
 
         if (category is null)
         {
-            return Result.Failure(CategoryErrors.NotFound(request.CategoryId));
+            throw new InvalidOperationException($"Category with ID {request.CategoryId} not found.");
         }
 
-        category.UpdateTitle(request.NewTitle);
-        category.UpdateDescription(request.NewDescription);
+        category.UpdateTitle(request.Title);
+        category.UpdateDescription(request.Description);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-        return Result.Success();
     }
 }

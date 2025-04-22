@@ -1,6 +1,6 @@
-﻿using Education.Application.Abstractions.Messaging;
-using Education.Persistence.Categories;
+﻿using Education.Persistence.Categories;
+using MediatR;
 
 namespace Education.Application.Categories.GetCategory;
 
-public record GetCategoryQuery(int CategoryId) : IQuery<Category>;
+public record GetCategoryQuery(int CategoryId) : IRequest<Category>;

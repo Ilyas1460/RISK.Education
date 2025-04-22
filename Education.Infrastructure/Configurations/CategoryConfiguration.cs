@@ -18,7 +18,6 @@ internal class CategoryConfiguration : SoftDeleteEntityConfiguration<Category>
         builder.HasIndex(c => c.Title)
             .IsUnique()
             .HasFilter("\"deleted_at\" IS NULL");
-        ;
 
         builder.Property(c => c.Description)
             .IsRequired();

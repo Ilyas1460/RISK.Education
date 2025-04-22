@@ -12,13 +12,13 @@ internal class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategory
             .GreaterThan(0)
             .WithMessage("CategoryId must be greater than 0.");
 
-        RuleFor(c => c.NewTitle)
+        RuleFor(c => c.Title)
             .NotEmpty()
             .WithMessage("Title is required.")
             .MinimumLength(4)
             .WithMessage("Title must be at least 4 characters long.");
 
-        RuleFor(c => c.NewDescription)
+        RuleFor(c => c.Description)
             .NotEmpty()
             .WithMessage("Description is required.")
             .MinimumLength(15)
