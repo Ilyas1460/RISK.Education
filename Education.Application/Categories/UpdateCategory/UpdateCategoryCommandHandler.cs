@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Education.Application.Categories.UpdateCategory;
 
-public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand>
+internal sealed class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand>
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -17,7 +17,7 @@ public class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryComman
 
     public async Task Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
-        Category? category = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
+        var category = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
 
         if (category is null)
         {

@@ -4,7 +4,7 @@ using Education.Persistence.Categories;
 using Education.Persistence.Courses;
 using Education.Persistence.Languages;
 using Education.Persistence.Questions;
-using Education.Persistence.Quizes;
+using Education.Persistence.Quizzes;
 using Education.Persistence.Theories;
 using Education.Persistence.Topics;
 using Education.Persistence.Videos;

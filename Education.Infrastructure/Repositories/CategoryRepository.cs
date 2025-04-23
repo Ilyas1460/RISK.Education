@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace Education.Infrastructure.Repositories;
 
-public class CategoryRepository : Repository<Category>, ICategoryRepository
+public sealed class CategoryRepository : Repository<Category>, ICategoryRepository
 {
     public CategoryRepository(ApplicationDbContext dbContext) : base(dbContext)
     {
@@ -16,7 +16,7 @@ public class CategoryRepository : Repository<Category>, ICategoryRepository
 
     public async Task<Category?> GetByIdAsync(int id, CancellationToken cancellationToken = default) =>
         await _dbContext.Categories
-            .FirstOrDefaultAsync(c => c.CategoryId == id, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
 
     public async Task<Category?> GetByTitleAsync(string title, CancellationToken cancellationToken = default) =>
         await _dbContext.Categories

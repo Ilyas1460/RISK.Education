@@ -5,9 +5,8 @@ using Microsoft.EntityFrameworkCore.Diagnostics;
 
 namespace Education.Infrastructure.Interceptors;
 
-public class AuditableEntityInterceptor : SaveChangesInterceptor
+public sealed class AuditableEntityInterceptor : SaveChangesInterceptor
 {
-    // Synchronous SaveChanges()
     public override InterceptionResult<int> SavingChanges(
         DbContextEventData eventData,
         InterceptionResult<int> result)
@@ -16,7 +15,6 @@ public class AuditableEntityInterceptor : SaveChangesInterceptor
         return base.SavingChanges(eventData, result);
     }
 
-    // Asynchronous SaveChangesAsync()
     public override ValueTask<InterceptionResult<int>> SavingChangesAsync(
         DbContextEventData eventData,
         InterceptionResult<int> result,

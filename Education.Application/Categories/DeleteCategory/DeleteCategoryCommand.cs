@@ -2,4 +2,4 @@
 
 namespace Education.Application.Categories.DeleteCategory;
 
-public record DeleteCategoryCommand(int CategoryId) : IRequest;
+public sealed record DeleteCategoryCommand(int CategoryId) : IRequest;

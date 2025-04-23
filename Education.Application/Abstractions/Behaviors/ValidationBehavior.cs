@@ -5,7 +5,7 @@ using ValidationException = Education.Application.Abstractions.Exceptions.Valida
 
 namespace Education.Application.Abstractions.Behaviors;
 
-public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
+public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
     where TRequest : IRequest<TResponse>
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
@@ -23,7 +23,7 @@ public class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TReques
             return await next(cancellationToken);
         }
 
-        List<ValidationError> validationErrors = _validators
+        var validationErrors = _validators
             .Select(validator => validator.Validate(request))
             .SelectMany(validationResult => validationResult.Errors)
             .Where(validationFailure => validationFailure is not null)

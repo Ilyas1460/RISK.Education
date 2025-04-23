@@ -1,14 +1,14 @@
 using Education.Application;
 using Education.Infrastructure;
 
-WebApplicationBuilder? builder = WebApplication.CreateBuilder();
+var builder = WebApplication.CreateBuilder();
 
 builder.Services.AddControllers();
 
 builder.Services.AddApplication();
 builder.Services.AddInfrastructure(builder.Configuration);
 
-WebApplication? app = builder.Build();
+var app = builder.Build();
 
 app.UseHttpsRedirection();
 

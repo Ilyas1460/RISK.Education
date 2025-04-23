@@ -4,14 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Education.Infrastructure.Configurations;
 
-internal class TopicConfiguration : SoftDeleteEntityConfiguration<Topic>
+internal sealed class TopicConfiguration : SoftDeleteEntityConfiguration<Topic>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<Topic> builder)
     {
         builder.ToTable("topics",
             tb => tb.HasCheckConstraint("CK_Topic_OrderNumber_Positive", "\"order_number\" > 0"));
 
-        builder.HasKey(t => t.TopicId);
+        builder.HasKey(t => t.Id);
 
         builder.Property(t => t.Title)
             .IsRequired();

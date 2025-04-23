@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Education.Infrastructure.Configurations;
 
-internal class LanguageConfiguration : SoftDeleteEntityConfiguration<Language>
+internal sealed class LanguageConfiguration : SoftDeleteEntityConfiguration<Language>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<Language> builder)
     {
         builder.ToTable("languages");
 
-        builder.HasKey(l => l.LanguageId);
+        builder.HasKey(l => l.Id);
 
         builder.Property(l => l.Name)
             .IsRequired();

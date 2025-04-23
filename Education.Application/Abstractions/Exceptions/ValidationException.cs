@@ -1,6 +1,6 @@
 ﻿namespace Education.Application.Abstractions.Exceptions;
 
-public class ValidationException : Exception
+public sealed class ValidationException : Exception
 {
     public IEnumerable<ValidationError> Errors { get; }
 

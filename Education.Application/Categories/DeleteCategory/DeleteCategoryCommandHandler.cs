@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Education.Application.Categories.DeleteCategory;
 
-public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand>
+internal sealed class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand>
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -17,7 +17,7 @@ public class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryComman
 
     public async Task Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
     {
-        Category? category = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
+        var category = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
 
         if (category is null)
         {

@@ -3,20 +3,24 @@ using Education.Persistence.Questions;
 
 namespace Education.Persistence.Answers;
 
-public class Answer : BaseEntity
+public sealed class Answer : BaseEntity
 {
-    public int AnswerId { get; init; }
     public string Content { get; private set; }
     public bool IsCorrect { get; private set; }
     public int QuestionId { get; private set; }
 
     public Question Question { get; set; }
 
-    public Answer(string content, bool isCorrect, int questionId)
+    private Answer(string content, bool isCorrect, int questionId)
     {
         Content = content;
         IsCorrect = isCorrect;
         QuestionId = questionId;
+    }
+
+    public static Answer Create(string content, bool isCorrect, int questionId)
+    {
+        return new Answer(content, isCorrect, questionId);
     }
 
     public void UpdateContent(string content) => Content = content;

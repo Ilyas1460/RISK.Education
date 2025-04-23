@@ -6,9 +6,8 @@ using Education.Persistence.Topics;
 
 namespace Education.Persistence.Courses;
 
-public class Course : BaseEntity
+public sealed class Course : BaseEntity
 {
-    public int CourseId { get; init; }
     public string Title { get; private set; }
     public string Description { get; private set; }
     public int CategoryId { get; private set; }
@@ -20,12 +19,17 @@ public class Course : BaseEntity
     public List<Topic> Topics { get; set; }
     public List<Question> Questions { get; set; }
 
-    public Course(string title, string description, int categoryId, int languageId)
+    private Course(string title, string description, int categoryId, int languageId)
     {
         Title = title;
         Description = description;
         CategoryId = categoryId;
         LanguageId = languageId;
+    }
+
+    public static Course Create(string title, string description, int categoryId, int languageId)
+    {
+        return new Course(title, description, categoryId, languageId);
     }
 
     public void UpdateTitle(string title) => Title = title;

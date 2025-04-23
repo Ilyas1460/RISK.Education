@@ -2,11 +2,10 @@
 using Education.Persistence.Questions;
 using Education.Persistence.Topics;
 
-namespace Education.Persistence.Quizes;
+namespace Education.Persistence.Quizzes;
 
-public class Quiz : BaseEntity
+public sealed class Quiz : BaseEntity
 {
-    public int QuizId { get; init; }
     public string Title { get; private set; }
     public string Description { get; private set; }
     public int OrderNumber { get; private set; }
@@ -16,12 +15,17 @@ public class Quiz : BaseEntity
 
     public List<Question> Questions { get; set; }
 
-    public Quiz(string title, string description, int orderNumber, int topicId)
+    private Quiz(string title, string description, int orderNumber, int topicId)
     {
         Title = title;
         Description = description;
         OrderNumber = orderNumber;
         TopicId = topicId;
+    }
+
+    public static Quiz Create(string title, string description, int orderNumber, int topicId)
+    {
+        return new Quiz(title, description, orderNumber, topicId);
     }
 
     public void UpdateTitle(string title) => Title = title;

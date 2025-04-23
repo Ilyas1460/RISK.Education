@@ -4,13 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Education.Infrastructure.Configurations;
 
-internal class CourseConfiguration : SoftDeleteEntityConfiguration<Course>
+internal sealed class CourseConfiguration : SoftDeleteEntityConfiguration<Course>
 {
     protected override void ConfigureEntity(EntityTypeBuilder<Course> builder)
     {
         builder.ToTable("courses");
 
-        builder.HasKey(c => c.CourseId);
+        builder.HasKey(c => c.Id);
 
         builder.Property(c => c.Title)
             .IsRequired();

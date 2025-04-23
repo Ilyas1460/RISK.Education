@@ -2,7 +2,7 @@
 
 namespace Education.Application.Categories.GetCategory;
 
-public class GetCategoryQueryValidator : AbstractValidator<GetCategoryQuery>
+internal sealed class GetCategoryQueryValidator : AbstractValidator<GetCategoryQuery>
 {
     public GetCategoryQueryValidator() =>
         RuleFor(x => x.CategoryId)

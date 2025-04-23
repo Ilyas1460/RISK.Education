@@ -3,9 +3,8 @@ using Education.Persistence.Topics;
 
 namespace Education.Persistence.Videos;
 
-public class Video : BaseEntity
+public sealed class Video : BaseEntity
 {
-    public int VideoId { get; init; }
     public string Title { get; private set; }
     public string Url { get; private set; }
     public int OrderNumber { get; private set; }
@@ -13,12 +12,17 @@ public class Video : BaseEntity
 
     public Topic Topic { get; set; }
 
-    public Video(string title, string url, int orderNumber, int topicId)
+    private Video(string title, string url, int orderNumber, int topicId)
     {
         Title = title;
         Url = url;
         OrderNumber = orderNumber;
         TopicId = topicId;
+    }
+
+    public static Video Create(string title, string url, int orderNumber, int topicId)
+    {
+        return new Video(title, url, orderNumber, topicId);
     }
 
     public void UpdateTitle(string title) => Title = title;

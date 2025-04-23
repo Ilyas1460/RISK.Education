@@ -10,11 +10,11 @@ namespace Education.API.Controllers.Categories;
 
 [ApiController]
 [Route("api/categories")]
-public class CategoriesController : ControllerBase
+public sealed class CategoryController : ControllerBase
 {
     private readonly IMediator _sender;
 
-    public CategoriesController(IMediator sender) => _sender = sender;
+    public CategoryController(IMediator sender) => _sender = sender;
 
     [HttpGet]
     public async Task<IActionResult> GetAllCategories(CancellationToken cancellationToken)

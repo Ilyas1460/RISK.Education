@@ -2,7 +2,7 @@
 
 namespace Education.Application.Categories.UpdateCategory;
 
-internal class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
+internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateCategoryCommand>
 {
     public UpdateCategoryCommandValidator()
     {
