@@ -27,12 +27,4 @@ public sealed class Quiz : BaseEntity
     {
         return new Quiz(title, description, orderNumber, topicId);
     }
-
-    public void UpdateTitle(string title) => Title = title;
-
-    public void UpdateDescription(string description) => Description = description;
-
-    public void UpdateOrderNumber(int orderNumber) => OrderNumber = orderNumber;
-
-    public void UpdateTopicId(int topicId) => TopicId = topicId;
 }

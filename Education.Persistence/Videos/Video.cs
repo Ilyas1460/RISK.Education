@@ -24,12 +24,4 @@ public sealed class Video : BaseEntity
     {
         return new Video(title, url, orderNumber, topicId);
     }
-
-    public void UpdateTitle(string title) => Title = title;
-
-    public void UpdateURL(string url) => Url = url;
-
-    public void UpdateOrderNumber(int orderNumber) => OrderNumber = orderNumber;
-
-    public void UpdateTopicId(int topicId) => TopicId = topicId;
 }

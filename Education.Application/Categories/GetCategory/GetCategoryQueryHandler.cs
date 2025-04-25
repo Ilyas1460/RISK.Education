@@ -3,16 +3,21 @@ using MediatR;
 
 namespace Education.Application.Categories.GetCategory;
 
-internal sealed class GetCategoryQueryHandler : IRequestHandler<GetCategoryQuery, Category>
+internal sealed class GetCategoryQueryHandler : IRequestHandler<GetCategoryQuery, GetCategoryQueryResponse>
 {
     private readonly ICategoryRepository _categoryRepository;
 
     public GetCategoryQueryHandler(ICategoryRepository categoryRepository) => _categoryRepository = categoryRepository;
 
-    public async Task<Category> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
+    public async Task<GetCategoryQueryResponse> Handle(GetCategoryQuery request, CancellationToken cancellationToken)
     {
         var result = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
 
-        return result ?? throw new InvalidOperationException($"Category with ID {request.CategoryId} not found.");
+        return new GetCategoryQueryResponse(
+            result!.Id,
+            result.Title,
+            result.Description,
+            result.CreatedAt,
+            result.UpdatedAt);
     }
 }

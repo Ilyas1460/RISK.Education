@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Education.Application.Categories.UpdateCategory;
 
-internal sealed class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand>
+internal sealed class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, UpdateCategoryCommandResponse>
 {
     private readonly ICategoryRepository _categoryRepository;
     private readonly IUnitOfWork _unitOfWork;
@@ -15,7 +15,7 @@ internal sealed class UpdateCategoryCommandHandler : IRequestHandler<UpdateCateg
         _unitOfWork = unitOfWork;
     }
 
-    public async Task Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
+    public async Task<UpdateCategoryCommandResponse> Handle(UpdateCategoryCommand request, CancellationToken cancellationToken)
     {
         var category = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
 
@@ -24,9 +24,10 @@ internal sealed class UpdateCategoryCommandHandler : IRequestHandler<UpdateCateg
             throw new InvalidOperationException($"Category with ID {request.CategoryId} not found.");
         }
 
-        category.UpdateTitle(request.Title);
-        category.UpdateDescription(request.Description);
+        category.UpdateCategory(request.Title, request.Description);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
+
+        return new UpdateCategoryCommandResponse(category.Id);
     }
 }

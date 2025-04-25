@@ -31,12 +31,4 @@ public sealed class Course : BaseEntity
     {
         return new Course(title, description, categoryId, languageId);
     }
-
-    public void UpdateTitle(string title) => Title = title;
-
-    public void UpdateDescription(string description) => Description = description;
-
-    public void UpdateCategoryId(int categoryId) => CategoryId = categoryId;
-
-    public void UpdateLanguageId(int languageId) => LanguageId = languageId;
 }

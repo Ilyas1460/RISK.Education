@@ -31,12 +31,4 @@ public sealed class Topic : BaseEntity
     {
         return new Topic(title, description, orderNumber, courseId);
     }
-
-    public void UpdateTitle(string title) => Title = title;
-
-    public void UpdateDescription(string description) => Description = description;
-
-    public void UpdateOrderNumber(int orderNumber) => OrderNumber = orderNumber;
-
-    public void UpdateCourseId(int courseId) => CourseId = courseId;
 }

@@ -20,8 +20,4 @@ public sealed class Language : BaseEntity
     {
         return new Language(name, code);
     }
-
-    public void UpdateName(string name) => Name = name;
-
-    public void UpdateCode(string code) => Code = code;
 }

@@ -6,7 +6,7 @@ using Education.Application.Categories.UpdateCategory;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Education.API.Controllers.Categories;
+namespace Education.API.Controllers;
 
 [ApiController]
 [Route("api/categories")]
@@ -32,8 +32,8 @@ public sealed class CategoryController : ControllerBase
     public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryCommand request,
         CancellationToken cancellationToken)
     {
-        await _sender.Send(request, cancellationToken);
-        return Created();
+        var result = await _sender.Send(request, cancellationToken);
+        return CreatedAtAction(nameof(GetCategoryById), new { categoryId = result.Id }, result);
     }
 
     [HttpPut("{categoryId:int}")]
@@ -41,14 +41,12 @@ public sealed class CategoryController : ControllerBase
         CancellationToken cancellationToken)
     {
         request.CategoryId = categoryId;
-        await _sender.Send(request, cancellationToken);
-        return Ok();
+        return Ok(await _sender.Send(request, cancellationToken));
     }
 
     [HttpDelete("{categoryId:int}")]
     public async Task<IActionResult> DeleteCategory(int categoryId, CancellationToken cancellationToken)
     {
-        await _sender.Send(new DeleteCategoryCommand(categoryId), cancellationToken);
-        return Ok();
+        return Ok(await _sender.Send(new DeleteCategoryCommand(categoryId), cancellationToken));
     }
 }

@@ -22,10 +22,4 @@ public sealed class Answer : BaseEntity
     {
         return new Answer(content, isCorrect, questionId);
     }
-
-    public void UpdateContent(string content) => Content = content;
-
-    public void UpdateIsCorrect(bool isCorrect) => IsCorrect = isCorrect;
-
-    public void UpdateQuestionId(int questionId) => QuestionId = questionId;
 }

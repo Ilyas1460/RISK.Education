@@ -21,7 +21,9 @@ public sealed class Category : BaseEntity
         return new Category(title, description);
     }
 
-    public void UpdateTitle(string title) => Title = title;
-
-    public void UpdateDescription(string description) => Description = description;
+    public void UpdateCategory(string title, string description)
+    {
+        Title = title;
+        Description = description;
+    }
 }

@@ -27,10 +27,4 @@ public sealed class Question : BaseEntity
     {
         return new Question(content, type, courseId);
     }
-
-    public void UpdateContent(string content) => Content = content;
-
-    public void UpdateType(QuestionType type) => Type = type;
-
-    public void UpdateCourseId(int courseId) => CourseId = courseId;
 }

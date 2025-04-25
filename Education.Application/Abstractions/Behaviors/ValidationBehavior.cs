@@ -6,7 +6,7 @@ using ValidationException = Education.Application.Abstractions.Exceptions.Valida
 namespace Education.Application.Abstractions.Behaviors;
 
 public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<TRequest, TResponse>
-    where TRequest : IRequest<TResponse>
+    where TRequest : notnull
 {
     private readonly IEnumerable<IValidator<TRequest>> _validators;
 
@@ -23,13 +23,16 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
             return await next(cancellationToken);
         }
 
-        var validationErrors = _validators
-            .Select(validator => validator.Validate(request))
-            .SelectMany(validationResult => validationResult.Errors)
-            .Where(validationFailure => validationFailure is not null)
-            .Select(failure => new ValidationError(
-                failure.PropertyName,
-                failure.ErrorMessage))
+        var context = new ValidationContext<TRequest>(request);
+
+        var validationResults = await Task.WhenAll(
+            _validators.Select(validator => validator.ValidateAsync(context, cancellationToken)));
+
+        // TODO: Use ProblemDetails instead
+        var validationErrors = validationResults
+            .SelectMany(result => result.Errors)
+            .Where(failure => failure is not null)
+            .Select(failure => new ValidationError(failure.PropertyName, failure.ErrorMessage))
             .Distinct()
             .ToList();
 

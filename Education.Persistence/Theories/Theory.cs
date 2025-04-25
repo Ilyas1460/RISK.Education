@@ -24,12 +24,4 @@ public sealed class Theory : BaseEntity
     {
         return new Theory(title, content, orderNumber, topicId);
     }
-
-    public void UpdateTitle(string title) => Title = title;
-
-    public void UpdateContent(string content) => Content = content;
-
-    public void UpdateOrderNumber(int orderNumber) => OrderNumber = orderNumber;
-
-    public void UpdateTopicId(int topicId) => TopicId = topicId;
 }

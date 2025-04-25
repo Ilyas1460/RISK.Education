@@ -1,18 +1,30 @@
-﻿using Education.Persistence.Categories;
+﻿using Education.Application.Categories.GetCategory;
+using Education.Persistence.Categories;
 using MediatR;
 
 namespace Education.Application.Categories.GetAllCategories;
 
-internal sealed class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuery, IEnumerable<Category>>
+internal sealed class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuery, GetAllCategoriesQueryResponse>
 {
     private readonly ICategoryRepository _categoryRepository;
 
     public GetAllCategoriesQueryHandler(ICategoryRepository categoryRepository) =>
         _categoryRepository = categoryRepository;
 
-    public async Task<IEnumerable<Category>> Handle(GetAllCategoriesQuery request,
+    public async Task<GetAllCategoriesQueryResponse> Handle(GetAllCategoriesQuery request,
         CancellationToken cancellationToken)
     {
-        return await _categoryRepository.GetAllAsync(cancellationToken);
+        var categories = await _categoryRepository.GetAllAsync(cancellationToken);
+
+        var responseCategories = categories
+            .Select(c => new GetCategoryQueryResponse(
+                c.Id,
+                c.Title,
+                c.Description,
+                c.CreatedAt,
+                c.UpdatedAt))
+            .ToList();
+
+        return new GetAllCategoriesQueryResponse(responseCategories);
     }
 }
