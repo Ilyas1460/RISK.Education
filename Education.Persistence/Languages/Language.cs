@@ -3,24 +3,21 @@ using Education.Persistence.Courses;
 
 namespace Education.Persistence.Languages;
 
-public class Language : Entity {
-	public int LanguageId { get; init; }
-	public string Name { get; private set; }
-	public string Code { get; private set; }
-	
-	public List<Course> Courses { get; set; }
-	
-	public Language(int languageId, string name, string code) {
-		LanguageId = languageId;
-		Name = name;
-		Code = code;
-	}
-	
-	public void UpdateName(string name) {
-		Name = name;
-	}
-	
-	public void UpdateCode(string code) {
-		Code = code;
-	}
+public sealed class Language : BaseEntity
+{
+    public string Name { get; private set; }
+    public string Code { get; private set; }
+
+    public List<Course> Courses { get; set; }
+
+    private Language(string name, string code)
+    {
+        Name = name;
+        Code = code;
+    }
+
+    public static Language Create(string name, string code)
+    {
+        return new Language(name, code);
+    }
 }

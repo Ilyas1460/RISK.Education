@@ -1,15 +1,16 @@
-﻿using Education.Persistence.Categories;
-using Education.Persistence.Courses;
+﻿using Education.Persistence.Courses;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Education.Infrastructure.Configurations;
 
-internal class CourseConfiguration : SoftDeleteEntityConfiguration<Course> {
-    protected override void ConfigureEntity(EntityTypeBuilder<Course> builder) {
+internal sealed class CourseConfiguration : SoftDeleteEntityConfiguration<Course>
+{
+    protected override void ConfigureEntity(EntityTypeBuilder<Course> builder)
+    {
         builder.ToTable("courses");
-        
-        builder.HasKey(c => c.CourseId);
+
+        builder.HasKey(c => c.Id);
 
         builder.Property(c => c.Title)
             .IsRequired();
@@ -21,7 +22,7 @@ internal class CourseConfiguration : SoftDeleteEntityConfiguration<Course> {
             .WithOne(t => t.Course)
             .HasForeignKey(t => t.CourseId)
             .OnDelete(DeleteBehavior.Cascade);
-        
+
         builder.HasMany(c => c.Questions)
             .WithOne(q => q.Course)
             .HasForeignKey(q => q.CourseId)

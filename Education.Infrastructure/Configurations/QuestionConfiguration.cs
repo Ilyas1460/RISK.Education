@@ -4,11 +4,13 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Education.Infrastructure.Configurations;
 
-internal class QuestionConfiguration : SoftDeleteEntityConfiguration<Question> {
-    protected override void ConfigureEntity(EntityTypeBuilder<Question> builder) {
+internal sealed class QuestionConfiguration : SoftDeleteEntityConfiguration<Question>
+{
+    protected override void ConfigureEntity(EntityTypeBuilder<Question> builder)
+    {
         builder.ToTable("questions");
 
-        builder.HasKey(q => q.QuestionId);
+        builder.HasKey(q => q.Id);
 
         builder.Property(q => q.Content)
             .IsRequired();
@@ -16,7 +18,7 @@ internal class QuestionConfiguration : SoftDeleteEntityConfiguration<Question> {
         builder.Property(q => q.Type)
             .IsRequired()
             .HasColumnType("smallint");
-        
+
         builder.HasMany(q => q.Answers)
             .WithOne(a => a.Question)
             .HasForeignKey(a => a.QuestionId)

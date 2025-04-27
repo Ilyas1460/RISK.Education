@@ -24,12 +24,12 @@ namespace Education.Infrastructure.Migrations
 
             modelBuilder.Entity("Education.Persistence.Answers.Answer", b =>
                 {
-                    b.Property<int>("AnswerId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("answer_id");
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("AnswerId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -52,11 +52,11 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("question_id");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("AnswerId")
+                    b.HasKey("Id")
                         .HasName("pk_answers");
 
                     b.HasIndex("QuestionId")
@@ -67,12 +67,12 @@ namespace Education.Infrastructure.Migrations
 
             modelBuilder.Entity("Education.Persistence.Categories.Category", b =>
                 {
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("category_id");
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CategoryId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -92,24 +92,29 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("title");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("CategoryId")
+                    b.HasKey("Id")
                         .HasName("pk_categories");
+
+                    b.HasIndex("Title")
+                        .IsUnique()
+                        .HasDatabaseName("ix_categories_title")
+                        .HasFilter("\"deleted_at\" IS NULL");
 
                     b.ToTable("categories", (string)null);
                 });
 
             modelBuilder.Entity("Education.Persistence.Courses.Course", b =>
                 {
-                    b.Property<int>("CourseId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("course_id");
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("CourseId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CategoryId")
                         .HasColumnType("integer")
@@ -137,11 +142,11 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("title");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("CourseId")
+                    b.HasKey("Id")
                         .HasName("pk_courses");
 
                     b.HasIndex("CategoryId")
@@ -155,12 +160,12 @@ namespace Education.Infrastructure.Migrations
 
             modelBuilder.Entity("Education.Persistence.Languages.Language", b =>
                 {
-                    b.Property<int>("LanguageId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("language_id");
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("LanguageId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Code")
                         .IsRequired()
@@ -181,24 +186,34 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("name");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("LanguageId")
+                    b.HasKey("Id")
                         .HasName("pk_languages");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasDatabaseName("ix_languages_code")
+                        .HasFilter("\"deleted_at\" IS NULL");
+
+                    b.HasIndex("Name")
+                        .IsUnique()
+                        .HasDatabaseName("ix_languages_name")
+                        .HasFilter("\"deleted_at\" IS NULL");
 
                     b.ToTable("languages", (string)null);
                 });
 
             modelBuilder.Entity("Education.Persistence.Questions.Question", b =>
                 {
-                    b.Property<int>("QuestionId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("question_id");
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("QuestionId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -221,11 +236,11 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnType("smallint")
                         .HasColumnName("type");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("QuestionId")
+                    b.HasKey("Id")
                         .HasName("pk_questions");
 
                     b.HasIndex("CourseId")
@@ -234,14 +249,14 @@ namespace Education.Infrastructure.Migrations
                     b.ToTable("questions", (string)null);
                 });
 
-            modelBuilder.Entity("Education.Persistence.Quizes.Quiz", b =>
+            modelBuilder.Entity("Education.Persistence.Quizzes.Quiz", b =>
                 {
-                    b.Property<int>("QuizId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("quiz_id");
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("QuizId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -269,11 +284,11 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("topic_id");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("QuizId")
+                    b.HasKey("Id")
                         .HasName("pk_quizzes");
 
                     b.HasIndex("TopicId")
@@ -287,12 +302,12 @@ namespace Education.Infrastructure.Migrations
 
             modelBuilder.Entity("Education.Persistence.Theories.Theory", b =>
                 {
-                    b.Property<int>("TheoryId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("theory_id");
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TheoryId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Content")
                         .IsRequired()
@@ -320,11 +335,11 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("topic_id");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("TheoryId")
+                    b.HasKey("Id")
                         .HasName("pk_theories");
 
                     b.HasIndex("TopicId")
@@ -338,12 +353,12 @@ namespace Education.Infrastructure.Migrations
 
             modelBuilder.Entity("Education.Persistence.Topics.Topic", b =>
                 {
-                    b.Property<int>("TopicId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("topic_id");
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("TopicId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<int>("CourseId")
                         .HasColumnType("integer")
@@ -371,11 +386,11 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("title");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
-                    b.HasKey("TopicId")
+                    b.HasKey("Id")
                         .HasName("pk_topics");
 
                     b.HasIndex("CourseId")
@@ -389,12 +404,12 @@ namespace Education.Infrastructure.Migrations
 
             modelBuilder.Entity("Education.Persistence.Videos.Video", b =>
                 {
-                    b.Property<int>("VideoId")
+                    b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("integer")
-                        .HasColumnName("video_id");
+                        .HasColumnName("id");
 
-                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("VideoId"));
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<DateTime>("CreatedAt")
                         .HasColumnType("timestamp with time zone")
@@ -417,7 +432,7 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnType("integer")
                         .HasColumnName("topic_id");
 
-                    b.Property<DateTime?>("UpdatedAt")
+                    b.Property<DateTime>("UpdatedAt")
                         .HasColumnType("timestamp with time zone")
                         .HasColumnName("updated_at");
 
@@ -426,7 +441,7 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnType("text")
                         .HasColumnName("url");
 
-                    b.HasKey("VideoId")
+                    b.HasKey("Id")
                         .HasName("pk_videos");
 
                     b.HasIndex("TopicId")
@@ -440,19 +455,19 @@ namespace Education.Infrastructure.Migrations
 
             modelBuilder.Entity("QuestionQuiz", b =>
                 {
-                    b.Property<int>("QuestionsQuestionId")
+                    b.Property<int>("QuestionsId")
                         .HasColumnType("integer")
-                        .HasColumnName("questions_question_id");
+                        .HasColumnName("questions_id");
 
-                    b.Property<int>("QuizzesQuizId")
+                    b.Property<int>("QuizzesId")
                         .HasColumnType("integer")
-                        .HasColumnName("quizzes_quiz_id");
+                        .HasColumnName("quizzes_id");
 
-                    b.HasKey("QuestionsQuestionId", "QuizzesQuizId")
+                    b.HasKey("QuestionsId", "QuizzesId")
                         .HasName("pk_question_quiz");
 
-                    b.HasIndex("QuizzesQuizId")
-                        .HasDatabaseName("ix_question_quiz_quizzes_quiz_id");
+                    b.HasIndex("QuizzesId")
+                        .HasDatabaseName("ix_question_quiz_quizzes_id");
 
                     b.ToTable("question_quiz", (string)null);
                 });
@@ -464,7 +479,7 @@ namespace Education.Infrastructure.Migrations
                         .HasForeignKey("QuestionId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_answers_question_question_id");
+                        .HasConstraintName("fk_answers_questions_question_id");
 
                     b.Navigation("Question");
                 });
@@ -483,7 +498,7 @@ namespace Education.Infrastructure.Migrations
                         .HasForeignKey("LanguageId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_courses_language_language_id");
+                        .HasConstraintName("fk_courses_languages_language_id");
 
                     b.Navigation("Category");
 
@@ -502,14 +517,14 @@ namespace Education.Infrastructure.Migrations
                     b.Navigation("Course");
                 });
 
-            modelBuilder.Entity("Education.Persistence.Quizes.Quiz", b =>
+            modelBuilder.Entity("Education.Persistence.Quizzes.Quiz", b =>
                 {
                     b.HasOne("Education.Persistence.Topics.Topic", "Topic")
                         .WithMany("Quizzes")
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_quizzes_topic_topic_id");
+                        .HasConstraintName("fk_quizzes_topics_topic_id");
 
                     b.Navigation("Topic");
                 });
@@ -521,7 +536,7 @@ namespace Education.Infrastructure.Migrations
                         .HasForeignKey("TopicId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_theories_topic_topic_id");
+                        .HasConstraintName("fk_theories_topics_topic_id");
 
                     b.Navigation("Topic");
                 });
@@ -554,17 +569,17 @@ namespace Education.Infrastructure.Migrations
                 {
                     b.HasOne("Education.Persistence.Questions.Question", null)
                         .WithMany()
-                        .HasForeignKey("QuestionsQuestionId")
+                        .HasForeignKey("QuestionsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_question_quiz_question_questions_question_id");
+                        .HasConstraintName("fk_question_quiz_questions_questions_id");
 
-                    b.HasOne("Education.Persistence.Quizes.Quiz", null)
+                    b.HasOne("Education.Persistence.Quizzes.Quiz", null)
                         .WithMany()
-                        .HasForeignKey("QuizzesQuizId")
+                        .HasForeignKey("QuizzesId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired()
-                        .HasConstraintName("fk_question_quiz_quiz_quizzes_quiz_id");
+                        .HasConstraintName("fk_question_quiz_quizzes_quizzes_id");
                 });
 
             modelBuilder.Entity("Education.Persistence.Categories.Category", b =>
