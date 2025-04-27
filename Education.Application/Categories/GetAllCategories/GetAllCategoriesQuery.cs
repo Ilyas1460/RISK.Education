@@ -1,5 +1,4 @@
-﻿using Education.Persistence.Categories;
-using MediatR;
+﻿using MediatR;
 
 namespace Education.Application.Categories.GetAllCategories;
 
