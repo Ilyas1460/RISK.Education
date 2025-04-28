@@ -31,10 +31,10 @@ public class ValidationExceptionHandler : IExceptionHandler
                 g => g.Key,
                 g => g.Select(e => e.ErrorMessage).ToArray());
 
-        await _problemDetailsService.WriteAsync(new ProblemDetailsContext()
+        await _problemDetailsService.WriteAsync(new ProblemDetailsContext
         {
             HttpContext = httpContext,
-            ProblemDetails = new ValidationProblemDetails()
+            ProblemDetails = new ValidationProblemDetails
             {
                 Type = exception.GetType().Name,
                 Title = "Validation failed.",

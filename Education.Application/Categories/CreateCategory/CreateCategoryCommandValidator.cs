@@ -1,4 +1,5 @@
-﻿using Education.Persistence.Categories;
+﻿using Education.Exceptions.Exceptions;
+using Education.Persistence.Categories;
 using FluentValidation;
 
 namespace Education.Application.Categories.CreateCategory;
@@ -16,8 +17,7 @@ internal sealed class CreateCategoryCommandValidator : AbstractValidator<CreateC
             .WithMessage("Title is required.")
             .MinimumLength(4)
             .WithMessage("Title must be at least 4 characters long.")
-            .MustAsync(IsUniqueTitle)
-            .WithMessage("Category with the same title already exists.");
+            .MustAsync(IsUniqueTitle);
 
         RuleFor(c => c.Description)
             .NotEmpty()
@@ -29,6 +29,12 @@ internal sealed class CreateCategoryCommandValidator : AbstractValidator<CreateC
     private async Task<bool> IsUniqueTitle(string title, CancellationToken cancellationToken)
     {
         var category = await _categoryRepository.GetByTitleAsync(title, cancellationToken);
-        return category is null;
+
+        if (category is not null)
+        {
+            throw new ConflictException($"Category with title '{title}' already exists.");
+        }
+
+        return true;
     }
 }

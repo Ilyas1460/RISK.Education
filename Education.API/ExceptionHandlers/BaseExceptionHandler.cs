@@ -1,16 +1,15 @@
-﻿using Microsoft.AspNetCore.Diagnostics;
+﻿using Education.Exceptions.Exceptions;
+using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Education.API.ExceptionHandlers;
 
-public class GlobalExceptionHandler : IExceptionHandler
+public class BaseExceptionHandler : IExceptionHandler
 {
     private readonly IProblemDetailsService _problemDetailsService;
-    private readonly IWebHostEnvironment _webHostEnvironment;
 
-    public GlobalExceptionHandler(IProblemDetailsService problemDetailsService, IWebHostEnvironment webHostEnvironment)
+    public BaseExceptionHandler(IProblemDetailsService problemDetailsService)
     {
-        _webHostEnvironment = webHostEnvironment;
         _problemDetailsService = problemDetailsService;
     }
 
@@ -19,7 +18,17 @@ public class GlobalExceptionHandler : IExceptionHandler
         Exception exception,
         CancellationToken cancellationToken)
     {
-        httpContext.Response.StatusCode = StatusCodes.Status500InternalServerError;
+        if (exception is not BaseException baseException)
+        {
+            return false;
+        }
+
+        httpContext.Response.StatusCode = baseException switch
+        {
+            NotFoundException => StatusCodes.Status404NotFound,
+            ConflictException => StatusCodes.Status409Conflict,
+            _ => StatusCodes.Status400BadRequest,
+        };
 
         await _problemDetailsService.WriteAsync(new ProblemDetailsContext
         {
@@ -27,10 +36,8 @@ public class GlobalExceptionHandler : IExceptionHandler
             ProblemDetails = new ProblemDetails
             {
                 Type = exception.GetType().Name,
-                Title = "An error occurred while processing your request.",
-                Detail = _webHostEnvironment.IsProduction()
-                    ? "An unexpected error occurred. Please try again later."
-                    : exception.Message
+                Title = "An error occurred.",
+                Detail = exception.Message
             }
         });
 

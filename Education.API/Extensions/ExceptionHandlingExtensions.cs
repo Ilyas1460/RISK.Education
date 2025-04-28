@@ -14,6 +14,7 @@ public static class ExceptionHandlingExtensions
             };
         });
 
+        services.AddExceptionHandler<BaseExceptionHandler>();
         services.AddExceptionHandler<ValidationExceptionHandler>();
         services.AddExceptionHandler<GlobalExceptionHandler>();
 
