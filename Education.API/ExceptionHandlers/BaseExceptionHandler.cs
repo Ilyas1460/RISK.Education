@@ -1,5 +1,6 @@
 ﻿using Education.Exceptions.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Education.API.ExceptionHandlers;
@@ -7,10 +8,12 @@ namespace Education.API.ExceptionHandlers;
 public class BaseExceptionHandler : IExceptionHandler
 {
     private readonly IProblemDetailsService _problemDetailsService;
+    private readonly ILogger<BaseExceptionHandler> _logger;
 
-    public BaseExceptionHandler(IProblemDetailsService problemDetailsService)
+    public BaseExceptionHandler(IProblemDetailsService problemDetailsService, ILogger<BaseExceptionHandler> logger)
     {
         _problemDetailsService = problemDetailsService;
+        _logger = logger;
     }
 
     public async ValueTask<bool> TryHandleAsync(
@@ -29,6 +32,21 @@ public class BaseExceptionHandler : IExceptionHandler
             ConflictException => StatusCodes.Status409Conflict,
             _ => StatusCodes.Status400BadRequest,
         };
+
+        _logger.LogError(exception,
+            "A base exception occured. \n" +
+            "Status Code: {StatusCode} \n" +
+            "Request Method: {RequestMethod}\n" +
+            "Request Path: {RequestPath}\n" +
+            "Request Id: {RequestId}\n" +
+            "Trace Id: {TraceId}\n" +
+            "Error Message: {ErrorMessage}",
+            httpContext.Response.StatusCode,
+            httpContext.Request.Method,
+            httpContext.Request.Path,
+            httpContext.TraceIdentifier,
+            httpContext.Features.Get<IHttpActivityFeature>()?.Activity.Id,
+            exception.Message);
 
         await _problemDetailsService.WriteAsync(new ProblemDetailsContext
         {
