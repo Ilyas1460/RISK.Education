@@ -3,14 +3,14 @@ using Education.Persistence.Topics;
 
 namespace Education.Persistence.Theories;
 
-public sealed class Theory : BaseEntity
+public class Theory : BaseEntity
 {
     public string Title { get; private set; }
     public string Content { get; private set; }
     public int OrderNumber { get; private set; }
     public int TopicId { get; private set; }
 
-    public Topic Topic { get; set; }
+    public virtual Topic Topic { get; set; }
 
     private Theory(string title, string content, int orderNumber, int topicId)
     {

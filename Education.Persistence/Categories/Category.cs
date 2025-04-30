@@ -3,12 +3,12 @@ using Education.Persistence.Courses;
 
 namespace Education.Persistence.Categories;
 
-public sealed class Category : BaseEntity
+public class Category : BaseEntity
 {
     public string Title { get; private set; }
     public string Description { get; private set; }
 
-    public List<Course> Courses { get; set; }
+    public virtual List<Course> Courses { get; set; }
 
     private Category(string title, string description)
     {

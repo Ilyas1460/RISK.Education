@@ -4,16 +4,16 @@ using Education.Persistence.Topics;
 
 namespace Education.Persistence.Quizzes;
 
-public sealed class Quiz : BaseEntity
+public class Quiz : BaseEntity
 {
     public string Title { get; private set; }
     public string Description { get; private set; }
     public int OrderNumber { get; private set; }
     public int TopicId { get; private set; }
 
-    public Topic Topic { get; set; }
+    public virtual Topic Topic { get; set; }
 
-    public List<Question> Questions { get; set; }
+    public virtual List<Question> Questions { get; set; }
 
     private Quiz(string title, string description, int orderNumber, int topicId)
     {
