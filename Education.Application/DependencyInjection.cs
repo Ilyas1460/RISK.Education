@@ -12,9 +12,11 @@ public static class DependencyInjection
         {
             configuration.RegisterServicesFromAssembly(typeof(DependencyInjection).Assembly);
 
+            configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+
             configuration.AddOpenBehavior(typeof(LoggingBehavior<,>));
 
-            configuration.AddOpenBehavior(typeof(ValidationBehavior<,>));
+            configuration.AddOpenBehavior(typeof(UnitOfWorkBehavior<,>));
         });
 
         services.AddValidatorsFromAssembly(typeof(DependencyInjection).Assembly, includeInternalTypes: true);

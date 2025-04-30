@@ -7,12 +7,10 @@ namespace Education.Application.Categories.DeleteCategory;
 internal sealed class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, DeleteCategoryCommandResponse>
 {
     private readonly ICategoryRepository _categoryRepository;
-    private readonly IUnitOfWork _unitOfWork;
 
-    public DeleteCategoryCommandHandler(ICategoryRepository categoryRepository, IUnitOfWork unitOfWork)
+    public DeleteCategoryCommandHandler(ICategoryRepository categoryRepository)
     {
         _categoryRepository = categoryRepository;
-        _unitOfWork = unitOfWork;
     }
 
     public async Task<DeleteCategoryCommandResponse> Handle(DeleteCategoryCommand request, CancellationToken cancellationToken)
@@ -21,8 +19,6 @@ internal sealed class DeleteCategoryCommandHandler : IRequestHandler<DeleteCateg
 
         _categoryRepository.Delete(category!, cancellationToken);
 
-        await _unitOfWork.SaveChangesAsync(cancellationToken);
-
-        return new DeleteCategoryCommandResponse(request.CategoryId);
+        return new DeleteCategoryCommandResponse(0);
     }
 }
