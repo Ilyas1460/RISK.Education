@@ -1,6 +1,6 @@
-﻿using FluentValidation;
-using Microsoft.AspNetCore.Diagnostics;
+﻿using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
+using ValidationException = Education.Exceptions.Exceptions.ValidationException;
 
 namespace Education.API.ExceptionHandlers;
 
@@ -25,7 +25,7 @@ public class ValidationExceptionHandler : IExceptionHandler
 
         httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
 
-        var validationErrors = validationException.Errors
+        var validationErrors = validationException.ValidationErrors
             .GroupBy(e => e.PropertyName)
             .ToDictionary(
                 g => g.Key,

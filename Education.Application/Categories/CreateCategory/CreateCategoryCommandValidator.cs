@@ -32,7 +32,7 @@ internal sealed class CreateCategoryCommandValidator : AbstractValidator<CreateC
 
         if (category is not null)
         {
-            throw new ConflictException($"Category with title '{title}' already exists.");
+            throw new ConflictException("Category with title {0} already exists.", title);
         }
 
         return true;

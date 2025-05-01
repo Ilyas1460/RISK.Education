@@ -35,9 +35,11 @@ public class BaseExceptionHandler : IExceptionHandler
             HttpContext = httpContext,
             ProblemDetails = new ProblemDetails
             {
-                Type = exception.GetType().Name,
+                Type = baseException.GetType().Name,
                 Title = "An error occurred.",
-                Detail = exception.Message
+                Detail = baseException.Parameters.Length > 0
+                    ? string.Format(baseException.Message, baseException.Parameters)
+                    : baseException.Message,
             }
         });
 

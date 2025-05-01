@@ -1,5 +1,7 @@
-﻿using FluentValidation;
+﻿using Education.Exceptions.Exceptions;
+using FluentValidation;
 using MediatR;
+using ValidationException = Education.Exceptions.Exceptions.ValidationException;
 
 namespace Education.Application.Abstractions.Behaviors;
 
@@ -26,15 +28,16 @@ public sealed class ValidationBehavior<TRequest, TResponse> : IPipelineBehavior<
         var validationResults = await Task.WhenAll(
             _validators.Select(validator => validator.ValidateAsync(context, cancellationToken)));
 
-        var validationFailures = validationResults
+        var validationErrors = validationResults
             .SelectMany(result => result.Errors)
             .Where(failure => failure is not null)
+            .Select(failure => new ValidationError(failure.PropertyName, failure.ErrorMessage))
             .Distinct()
             .ToList();
 
-        if (validationFailures.Any())
+        if (validationErrors.Any())
         {
-            throw new ValidationException(validationFailures);
+            throw new ValidationException(validationErrors);
         }
 
         return await next(cancellationToken);
