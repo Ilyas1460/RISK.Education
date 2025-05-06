@@ -20,6 +20,15 @@ internal abstract class SoftDeleteEntityConfiguration<TEntity> : IEntityTypeConf
         builder.Property(e => e.CreatedAt)
             .IsRequired();
 
+        builder.Property(e => e.DeletedBy)
+            .IsRequired(false);
+
+        builder.Property(e => e.UpdatedBy)
+            .IsRequired(false);
+
+        builder.Property(e => e.CreatedBy)
+            .IsRequired(false);
+
         ConfigureEntity(builder);
     }
 

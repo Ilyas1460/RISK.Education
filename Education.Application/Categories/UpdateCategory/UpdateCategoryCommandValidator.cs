@@ -19,18 +19,12 @@ internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateC
             .WithMessage("CategoryId must be greater than 0.")
             .MustAsync(DoesCategoryExist);
 
-        RuleFor(c => c.Title)
+        RuleFor(c => c.Name)
             .NotEmpty()
-            .WithMessage("Title is required.")
+            .WithMessage("Name is required.")
             .MinimumLength(4)
-            .WithMessage("Title must be at least 4 characters long.")
+            .WithMessage("Name must be at least 4 characters long.")
             .MustAsync(IsUniqueTitle);
-
-        RuleFor(c => c.Description)
-            .NotEmpty()
-            .WithMessage("Description is required.")
-            .MinimumLength(15)
-            .WithMessage("Description must be at least 15 characters long.");
     }
 
     private async Task<bool> DoesCategoryExist(int categoryId, CancellationToken cancellationToken)
@@ -47,7 +41,7 @@ internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateC
 
     private async Task<bool> IsUniqueTitle(string title, CancellationToken cancellationToken)
     {
-        var category = await _categoryRepository.GetByTitleAsync(title, cancellationToken);
+        var category = await _categoryRepository.GetByNameAsync(title, cancellationToken);
 
         if (category is not null)
         {

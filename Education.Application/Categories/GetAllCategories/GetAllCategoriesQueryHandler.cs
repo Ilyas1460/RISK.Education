@@ -19,8 +19,7 @@ internal sealed class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCateg
         var responseCategories = categories
             .Select(c => new GetCategoryQueryResponse(
                 c.Id,
-                c.Title,
-                c.Description,
+                c.Name,
                 c.CreatedAt,
                 c.UpdatedAt))
             .ToList();

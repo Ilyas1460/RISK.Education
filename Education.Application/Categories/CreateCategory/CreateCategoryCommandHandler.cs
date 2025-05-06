@@ -15,7 +15,7 @@ internal sealed class CreateCategoryCommandHandler : IRequestHandler<CreateCateg
 
     public Task<CreateCategoryCommandResponse> Handle(CreateCategoryCommand request, CancellationToken cancellationToken)
     {
-        var newCategory = Category.Create(request.Title, request.Description);
+        var newCategory = Category.Create(request.Name);
 
         _categoryRepository.Add(newCategory, cancellationToken);
 

@@ -15,8 +15,7 @@ internal sealed class GetCategoryQueryHandler : IRequestHandler<GetCategoryQuery
 
         return new GetCategoryQueryResponse(
             result!.Id,
-            result.Title,
-            result.Description,
+            result.Name,
             result.CreatedAt,
             result.UpdatedAt);
     }

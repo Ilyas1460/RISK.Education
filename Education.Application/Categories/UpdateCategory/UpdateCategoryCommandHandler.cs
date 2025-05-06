@@ -17,7 +17,7 @@ internal sealed class UpdateCategoryCommandHandler : IRequestHandler<UpdateCateg
     {
         var category = await _categoryRepository.GetByIdAsync(request.CategoryId, cancellationToken);
 
-        category!.UpdateCategory(request.Title, request.Description);
+        category!.UpdateCategory(request.Name);
 
         return new UpdateCategoryCommandResponse(0);
     }
