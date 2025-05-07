@@ -1,11 +1,18 @@
 ﻿using Education.Persistence.Abstractions;
+using Education.Persistence.AspNetUser;
 using Education.Persistence.Categories;
-using Education.Persistence.Models;
+using Education.Persistence.Contents;
+using Education.Persistence.Courses;
+using Education.Persistence.Lessons;
+using Education.Persistence.Orders;
+using Education.Persistence.Questions;
+using Education.Persistence.TestExams;
+using Education.Persistence.Users;
 using Microsoft.EntityFrameworkCore;
-using Course = Education.Persistence.Models.Course;
-using Language = Education.Persistence.Models.Language;
-using Question = Education.Persistence.Models.Question;
-using Topic = Education.Persistence.Models.Topic;
+using Course = Education.Persistence.Courses.Course;
+using Language = Education.Persistence.Languages.Language;
+using Question = Education.Persistence.Questions.Question;
+using Topic = Education.Persistence.Contents.Topic;
 
 namespace Education.Infrastructure;
 
@@ -36,7 +43,7 @@ public class ApplicationDbContext : DbContext, IUnitOfWork
     public DbSet<LessonQuizLink> LessonQuizLinks { get; set; }
     public DbSet<LessonQuizQuestionLink> LessonQuizQuestionLinks { get; set; }
     public DbSet<LessonQuizUserQuestionAnswerLink> LessonQuizUserQuestionAnswerLinks { get; set; }
-    public DbSet<LessonQuize> LessonQuizes { get; set; }
+    public DbSet<LessonQuiz> LessonQuizzes { get; set; }
     public DbSet<LessonTheory> LessonTheories { get; set; }
     public DbSet<LessonTheoryCompletion> LessonTheoryCompletions { get; set; }
     public DbSet<LessonTheoryLink> LessonTheoryLinks { get; set; }
@@ -625,7 +632,7 @@ public class ApplicationDbContext : DbContext, IUnitOfWork
                 .HasConstraintName("fk_lesson_quiz_user_question_answer_links_user_question_answer");
         });
 
-        modelBuilder.Entity<LessonQuize>(entity =>
+        modelBuilder.Entity<LessonQuiz>(entity =>
         {
             entity.HasKey(e => e.Id).HasName("pk_lesson_quizes");
 

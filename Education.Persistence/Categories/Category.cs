@@ -1,5 +1,6 @@
 ﻿using Education.Persistence.Abstractions;
-using Education.Persistence.Models;
+using Education.Persistence.Contents;
+using Education.Persistence.Courses;
 
 namespace Education.Persistence.Categories;
 
