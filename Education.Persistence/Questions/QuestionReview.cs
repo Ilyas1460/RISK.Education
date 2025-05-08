@@ -1,26 +1,14 @@
-﻿namespace Education.Persistence.Questions;
+﻿using Education.Persistence.Abstractions;
 
-public class QuestionReview
+namespace Education.Persistence.Questions;
+
+public class QuestionReview : BaseEntity
 {
-    public int Id { get; set; }
-
     public string? Comment { get; set; }
 
     public int QuestionReviewStatus { get; set; }
 
     public int? QuestionId { get; set; }
-
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     public int QuestionBugStatus { get; set; }
 

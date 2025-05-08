@@ -1,13 +1,12 @@
-﻿using Education.Persistence.Lessons;
+﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Lessons;
 using Education.Persistence.TestExams;
 using Education.Persistence.Users;
 
 namespace Education.Persistence.Questions;
 
-public class UserQuestionAnswer
+public class UserQuestionAnswer : BaseEntity
 {
-    public int Id { get; set; }
-
     public int? UserId { get; set; }
 
     public int? QuestionId { get; set; }
@@ -15,18 +14,6 @@ public class UserQuestionAnswer
     public bool AnsweredCorrect { get; set; }
 
     public int? QuestionAnswerEntityId { get; set; }
-
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     public virtual ICollection<LessonQuizUserQuestionAnswerLink> LessonQuizUserQuestionAnswerLinks { get; set; } = new List<LessonQuizUserQuestionAnswerLink>();
 

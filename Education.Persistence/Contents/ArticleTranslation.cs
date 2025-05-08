@@ -1,11 +1,10 @@
-﻿using Education.Persistence.Languages;
+﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Languages;
 
 namespace Education.Persistence.Contents;
 
-public class ArticleTranslation
+public class ArticleTranslation : BaseEntity
 {
-    public int Id { get; set; }
-
     public string Title { get; set; } = null!;
 
     public string Content { get; set; } = null!;
@@ -21,18 +20,6 @@ public class ArticleTranslation
     public int? LanguageId { get; set; }
 
     public int? ArticleId { get; set; }
-
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     public virtual Article? Article { get; set; }
 

@@ -1,32 +1,19 @@
-﻿using Education.Persistence.Categories;
+﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Categories;
 
 namespace Education.Persistence.Contents;
 
-public class Faq
+public class Faq : BaseEntity
 {
-    public int Id { get; set; }
-
-    public string Question { get; set; } = null!;
+    public string Question { get; set; }
 
     public string? ShortContent { get; set; }
 
-    public string Content { get; set; } = null!;
+    public string Content { get; set; }
 
     public bool IsActive { get; set; }
 
     public int? CategoryId { get; set; }
-
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     public int Order { get; set; }
 
@@ -38,7 +25,7 @@ public class Faq
 
     public string? MetaTitle { get; set; }
 
-    public string Slug { get; set; } = null!;
+    public string Slug { get; set; }
 
     public virtual Category? Category { get; set; }
 }

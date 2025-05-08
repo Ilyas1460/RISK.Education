@@ -1,31 +1,20 @@
-﻿using Education.Persistence.Contents;
+﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Contents;
 using Education.Persistence.Questions;
 
 namespace Education.Persistence.Lessons;
 
-public class Lesson
+public class Lesson : BaseEntity
 {
-    public int Id { get; set; }
-
     public string Name { get; set; } = null!;
 
     public string Description { get; set; } = null!;
 
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
+    public int? OrderInTopic { get; set; }
 
     public int? TopicId { get; set; }
 
-    public int? OrderInTopic { get; set; }
+    public virtual Topic? Topic { get; set; }
 
     public virtual ICollection<LessonQuizLink> LessonQuizLinks { get; set; } = new List<LessonQuizLink>();
 
@@ -35,5 +24,7 @@ public class Lesson
 
     public virtual ICollection<QuestionLessonLink> QuestionLessonLinks { get; set; } = new List<QuestionLessonLink>();
 
-    public virtual Topic? Topic { get; set; }
+    protected Lesson()
+    {
+    }
 }

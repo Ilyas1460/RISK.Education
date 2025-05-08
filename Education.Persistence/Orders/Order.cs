@@ -1,28 +1,15 @@
-﻿using Education.Persistence.Users;
+﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Users;
 
 namespace Education.Persistence.Orders;
 
-public class Order
+public class Order : BaseEntity
 {
-    public int Id { get; set; }
-
     public int? UserId { get; set; }
 
     public int Status { get; set; }
 
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
-
-    public string OrderNumber { get; set; } = null!;
+    public string OrderNumber { get; set; }
 
     public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
 

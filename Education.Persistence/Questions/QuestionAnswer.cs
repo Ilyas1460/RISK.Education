@@ -1,26 +1,14 @@
-﻿namespace Education.Persistence.Questions;
+﻿using Education.Persistence.Abstractions;
 
-public class QuestionAnswer
+namespace Education.Persistence.Questions;
+
+public class QuestionAnswer : BaseEntity
 {
-    public int Id { get; set; }
-
     public string? Text { get; set; }
 
     public bool IsCorrect { get; set; }
 
     public int? QuestionId { get; set; }
-
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     public int Type { get; set; }
 

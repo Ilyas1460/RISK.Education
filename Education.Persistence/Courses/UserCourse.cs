@@ -1,11 +1,10 @@
-﻿using Education.Persistence.Users;
+﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Users;
 
 namespace Education.Persistence.Courses;
 
-public class UserCourse
+public class UserCourse : BaseEntity
 {
-    public int Id { get; set; }
-
     public int? CourseId { get; set; }
 
     public int? UserId { get; set; }
@@ -15,18 +14,6 @@ public class UserCourse
     public DateTime StartTime { get; set; }
 
     public DateTime ExpireTime { get; set; }
-
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     public virtual Course? Course { get; set; }
 

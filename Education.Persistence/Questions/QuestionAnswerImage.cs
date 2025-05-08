@@ -1,10 +1,10 @@
-﻿namespace Education.Persistence.Questions;
+﻿using Education.Persistence.Abstractions;
 
-public class QuestionAnswerImage
+namespace Education.Persistence.Questions;
+
+public class QuestionAnswerImage : BaseEntity
 {
-    public int Id { get; set; }
-
-    public string ImageUrl { get; set; } = null!;
+    public string ImageUrl { get; set; }
 
     public string? ImageAlt { get; set; }
 
@@ -12,17 +12,5 @@ public class QuestionAnswerImage
 
     public int QuestionAnswerId { get; set; }
 
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
-
-    public virtual QuestionAnswer QuestionAnswer { get; set; } = null!;
+    public virtual QuestionAnswer QuestionAnswer { get; set; }
 }

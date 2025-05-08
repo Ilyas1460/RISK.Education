@@ -1,29 +1,16 @@
-﻿using Education.Persistence.Courses;
+﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Courses;
 using Education.Persistence.Lessons;
 
 namespace Education.Persistence.Contents;
 
-public class Topic
+public class Topic : BaseEntity
 {
-    public int Id { get; set; }
-
-    public string Name { get; set; } = null!;
+    public string Name { get; set; }
 
     public string? Description { get; set; }
 
     public int? CourseId { get; set; }
-
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     public int? OrderInCourse { get; set; }
 

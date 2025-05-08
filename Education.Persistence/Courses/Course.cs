@@ -1,4 +1,5 @@
-﻿using Education.Persistence.Categories;
+﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Categories;
 using Education.Persistence.Contents;
 using Education.Persistence.Languages;
 using Education.Persistence.Orders;
@@ -7,31 +8,17 @@ using Education.Persistence.Users;
 
 namespace Education.Persistence.Courses;
 
-public class Course
+public class Course : BaseEntity
 {
-    public int Id { get; set; }
+    public string Name { get; set; }
 
-    public string Name { get; set; } = null!;
+    public string ShortDescription { get; set; }
 
-    public string ShortDescription { get; set; } = null!;
-
-    public string Description { get; set; } = null!;
+    public string Description { get; set; }
 
     public int? CategoryId { get; set; }
 
     public int? LanguageId { get; set; }
-
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     public int? QuestionAnswerCount { get; set; }
 

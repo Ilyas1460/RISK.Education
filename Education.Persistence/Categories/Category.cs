@@ -8,11 +8,11 @@ public class Category : BaseEntity
 {
     public string Name { get; private set; }
 
-    public virtual List<Article> Articles { get; set; }
+    public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
-    public virtual List<Course> Courses { get; set; }
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
 
-    public virtual List<Faq> Faqs { get; set; }
+    public virtual ICollection<Faq> Faqs { get; set; } = new List<Faq>();
 
     private Category(string name)
     {

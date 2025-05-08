@@ -1,11 +1,10 @@
-﻿using Education.Persistence.Courses;
+﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Courses;
 
 namespace Education.Persistence.Orders;
 
-public class OrderDetail
+public class OrderDetail : BaseEntity
 {
-    public int Id { get; set; }
-
     public int? OrderId { get; set; }
 
     public int? CourseId { get; set; }
@@ -13,18 +12,6 @@ public class OrderDetail
     public int CourseAccessType { get; set; }
 
     public double? Price { get; set; }
-
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     public int? SubscriptionPlanId { get; set; }
 

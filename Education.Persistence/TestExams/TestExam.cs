@@ -1,12 +1,11 @@
-﻿using Education.Persistence.Courses;
+﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Courses;
 
 namespace Education.Persistence.TestExams;
 
-public class TestExam
+public class TestExam : BaseEntity
 {
-    public int Id { get; set; }
-
-    public string Title { get; set; } = null!;
+    public string Title { get; set; }
 
     public string? Description { get; set; }
 
@@ -15,18 +14,6 @@ public class TestExam
     public DateTime? PublishDate { get; set; }
 
     public int? CourseId { get; set; }
-
-    public string? CreatedBy { get; set; }
-
-    public DateTime CreatedAt { get; set; }
-
-    public string? UpdatedBy { get; set; }
-
-    public DateTime UpdatedAt { get; set; }
-
-    public string? DeletedBy { get; set; }
-
-    public DateTime? DeletedAt { get; set; }
 
     public int Duration { get; set; }
 
