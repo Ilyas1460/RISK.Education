@@ -4,12 +4,14 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Education.Infrastructure.Configurations;
 
-internal abstract class SoftDeleteEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
+public abstract class SoftDeleteEntityConfiguration<TEntity> : IEntityTypeConfiguration<TEntity>
     where TEntity : BaseEntity
 {
     public virtual void Configure(EntityTypeBuilder<TEntity> builder)
     {
         builder.HasQueryFilter(e => e.DeletedAt == null);
+
+        builder.HasKey(e => e.Id);
 
         builder.Property(e => e.DeletedAt)
             .IsRequired(false);
