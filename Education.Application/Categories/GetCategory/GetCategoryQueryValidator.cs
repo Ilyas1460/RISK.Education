@@ -1,4 +1,5 @@
-﻿using Education.Persistence.Categories;
+﻿using Education.Exceptions.Exceptions;
+using Education.Persistence.Categories;
 using FluentValidation;
 
 namespace Education.Application.Categories.GetCategory;
@@ -16,13 +17,18 @@ internal sealed class GetCategoryQueryValidator : AbstractValidator<GetCategoryQ
             .WithMessage("CategoryId is required.")
             .GreaterThan(0)
             .WithMessage("CategoryId must be greater than 0.")
-            .MustAsync(DoesCategoryExist)
-            .WithMessage("Category with the specified ID does not exist.");
+            .MustAsync(DoesCategoryExist);
     }
 
-    private async Task<bool> DoesCategoryExist(int id, CancellationToken cancellationToken)
+    private async Task<bool> DoesCategoryExist(int categoryId, CancellationToken cancellationToken)
     {
-        var category = await _categoryRepository.GetByIdAsync(id, cancellationToken);
-        return category is not null;
+        var category = await _categoryRepository.GetByIdAsync(categoryId, cancellationToken);
+
+        if (category is null)
+        {
+            throw new NotFoundException("Category with ID {0} not found.", categoryId);
+        }
+
+        return true;
     }
 }

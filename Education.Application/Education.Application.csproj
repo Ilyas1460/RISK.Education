@@ -1,6 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <ItemGroup>
+    <ProjectReference Include="..\Education.Exceptions\Education.Exceptions.csproj" />
     <ProjectReference Include="..\Education.Persistence\Education.Persistence.csproj"/>
   </ItemGroup>
 

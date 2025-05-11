@@ -1,4 +1,5 @@
-﻿using Education.Persistence.Categories;
+﻿using Education.Exceptions.Exceptions;
+using Education.Persistence.Categories;
 using FluentValidation;
 
 namespace Education.Application.Categories.DeleteCategory;
@@ -16,13 +17,18 @@ internal sealed class DeleteCategoryCommandValidator : AbstractValidator<DeleteC
             .WithMessage("Category ID must not be empty.")
             .GreaterThan(0)
             .WithMessage("Category ID must be greater than 0.")
-            .MustAsync(DoesCategoryExist)
-            .WithMessage("Category with the specified ID does not exist.");
+            .MustAsync(DoesCategoryExist);
     }
 
     private async Task<bool> DoesCategoryExist(int categoryId, CancellationToken cancellationToken)
     {
         var category = await _categoryRepository.GetByIdAsync(categoryId, cancellationToken);
-        return category is not null;
+
+        if (category is null)
+        {
+            throw new NotFoundException("Category with ID {0} not found.", categoryId);
+        }
+
+        return true;
     }
 }
