@@ -1,5 +1,5 @@
-﻿using MediatR;
+﻿using Education.Application.Abstractions.Messaging;
 
 namespace Education.Application.Categories.GetCategory;
 
-public sealed record GetCategoryQuery(int CategoryId) : IRequest<GetCategoryQueryResponse>;
+public sealed record GetCategoryQuery(int CategoryId) : IQuery<GetCategoryQueryResponse>;

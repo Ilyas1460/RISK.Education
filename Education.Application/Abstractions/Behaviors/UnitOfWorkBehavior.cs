@@ -1,4 +1,5 @@
-﻿using Education.Persistence.Abstractions;
+﻿using Education.Application.Abstractions.Messaging;
+using Education.Persistence.Abstractions;
 using MediatR;
 
 namespace Education.Application.Abstractions.Behaviors;
@@ -16,7 +17,7 @@ public sealed class UnitOfWorkBehavior<TRequest, TResponse> : IPipelineBehavior<
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        if (IsNotCommand())
+        if (request is not IBaseCommand)
         {
             return await next(cancellationToken);
         }
@@ -26,10 +27,5 @@ public sealed class UnitOfWorkBehavior<TRequest, TResponse> : IPipelineBehavior<
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return response;
-    }
-
-    private static bool IsNotCommand()
-    {
-        return !typeof(TRequest).Name.EndsWith("Command");
     }
 }

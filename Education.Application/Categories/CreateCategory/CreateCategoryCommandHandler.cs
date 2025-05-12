@@ -1,10 +1,9 @@
-﻿using Education.Persistence.Abstractions;
+﻿using Education.Application.Abstractions.Messaging;
 using Education.Persistence.Categories;
-using MediatR;
 
 namespace Education.Application.Categories.CreateCategory;
 
-internal sealed class CreateCategoryCommandHandler : IRequestHandler<CreateCategoryCommand, CreateCategoryCommandResponse>
+internal sealed class CreateCategoryCommandHandler : ICommandHandler<CreateCategoryCommand, CreateCategoryCommandResponse>
 {
     private readonly ICategoryRepository _categoryRepository;
 
