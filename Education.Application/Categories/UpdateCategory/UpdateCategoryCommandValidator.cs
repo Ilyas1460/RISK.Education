@@ -22,8 +22,6 @@ internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateC
         RuleFor(c => c.Name)
             .NotEmpty()
             .WithMessage("Name is required.")
-            .MinimumLength(4)
-            .WithMessage("Name must be at least 4 characters long.")
             .MustAsync(IsUniqueTitle);
     }
 
