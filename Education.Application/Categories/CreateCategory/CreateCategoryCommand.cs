@@ -1,5 +1,5 @@
-﻿using Education.Application.Abstractions.Messaging;
+﻿using MediatR;
 
 namespace Education.Application.Categories.CreateCategory;
 
-public sealed record CreateCategoryCommand(string Title, string Description) : ICommand<CreateCategoryCommandResponse>;
+public sealed record CreateCategoryCommand(string Title, string Description) : IRequest<CreateCategoryCommandResponse>;

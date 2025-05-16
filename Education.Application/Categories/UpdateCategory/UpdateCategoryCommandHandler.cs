@@ -1,9 +1,9 @@
-﻿using Education.Application.Abstractions.Messaging;
-using Education.Persistence.Categories;
+﻿using Education.Persistence.Categories;
+using MediatR;
 
 namespace Education.Application.Categories.UpdateCategory;
 
-internal sealed class UpdateCategoryCommandHandler : ICommandHandler<UpdateCategoryCommand, UpdateCategoryCommandResponse>
+internal sealed class UpdateCategoryCommandHandler : IRequestHandler<UpdateCategoryCommand, UpdateCategoryCommandResponse>
 {
     private readonly ICategoryRepository _categoryRepository;
 

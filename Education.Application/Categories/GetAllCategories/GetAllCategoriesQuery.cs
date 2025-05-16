@@ -1,5 +1,5 @@
-﻿using Education.Application.Abstractions.Messaging;
+﻿using MediatR;
 
 namespace Education.Application.Categories.GetAllCategories;
 
-public sealed record GetAllCategoriesQuery : IQuery<GetAllCategoriesQueryResponse>;
+public sealed record GetAllCategoriesQuery : IRequest<GetAllCategoriesQueryResponse>;

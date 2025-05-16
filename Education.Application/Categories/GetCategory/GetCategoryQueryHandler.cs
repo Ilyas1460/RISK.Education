@@ -1,9 +1,9 @@
-﻿using Education.Application.Abstractions.Messaging;
-using Education.Persistence.Categories;
+﻿using Education.Persistence.Categories;
+using MediatR;
 
 namespace Education.Application.Categories.GetCategory;
 
-internal sealed class GetCategoryQueryHandler : IQueryHandler<GetCategoryQuery, GetCategoryQueryResponse>
+internal sealed class GetCategoryQueryHandler : IRequestHandler<GetCategoryQuery, GetCategoryQueryResponse>
 {
     private readonly ICategoryRepository _categoryRepository;
 

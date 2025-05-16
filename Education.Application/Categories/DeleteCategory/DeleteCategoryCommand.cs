@@ -1,5 +1,5 @@
-﻿using Education.Application.Abstractions.Messaging;
+﻿using MediatR;
 
 namespace Education.Application.Categories.DeleteCategory;
 
-public sealed record DeleteCategoryCommand(int CategoryId) : ICommand<DeleteCategoryCommandResponse>;
+public sealed record DeleteCategoryCommand(int CategoryId) : IRequest<DeleteCategoryCommandResponse>;

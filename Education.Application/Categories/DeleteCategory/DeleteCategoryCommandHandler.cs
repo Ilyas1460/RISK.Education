@@ -1,9 +1,9 @@
-﻿using Education.Application.Abstractions.Messaging;
-using Education.Persistence.Categories;
+﻿using Education.Persistence.Categories;
+using MediatR;
 
 namespace Education.Application.Categories.DeleteCategory;
 
-internal sealed class DeleteCategoryCommandHandler : ICommandHandler<DeleteCategoryCommand, DeleteCategoryCommandResponse>
+internal sealed class DeleteCategoryCommandHandler : IRequestHandler<DeleteCategoryCommand, DeleteCategoryCommandResponse>
 {
     private readonly ICategoryRepository _categoryRepository;
 

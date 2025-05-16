@@ -1,10 +1,10 @@
-﻿using Education.Application.Abstractions.Messaging;
-using Education.Application.Categories.GetCategory;
+﻿using Education.Application.Categories.GetCategory;
 using Education.Persistence.Categories;
+using MediatR;
 
 namespace Education.Application.Categories.GetAllCategories;
 
-internal sealed class GetAllCategoriesQueryHandler : IQueryHandler<GetAllCategoriesQuery, GetAllCategoriesQueryResponse>
+internal sealed class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCategoriesQuery, GetAllCategoriesQueryResponse>
 {
     private readonly ICategoryRepository _categoryRepository;
 
