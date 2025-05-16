@@ -20,47 +20,15 @@ public class DeleteCategoryTests
     }
 
     [Fact]
-    public async Task Handle_Should_CallCategoryRepositoryDelete()
+    public async Task Handle_Should_ExecuteSuccessfully()
     {
-        // Arrange
-        var cancellationToken = CancellationToken.None;
         var category = Category.Create("Test Category");
-        _categoryRepository.GetByIdAsync(Command.CategoryId, cancellationToken).Returns(category);
+        _categoryRepository.GetByIdAsync(Command.CategoryId, CancellationToken.None).Returns(category);
 
-        // Act
-        await _handler.Handle(Command, cancellationToken);
+        var result = await _handler.Handle(Command, CancellationToken.None);
 
-        // Assert
-        _categoryRepository.Received(1).Delete(category, cancellationToken);
-    }
-
-    [Fact]
-    public async Task Handle_Should_CallCategoryRepositoryGetByIdAsync()
-    {
-        // Arrange
-        var cancellationToken = CancellationToken.None;
-        var category = Category.Create("Test Category");
-        _categoryRepository.GetByIdAsync(Command.CategoryId, cancellationToken).Returns(category);
-
-        // Act
-        await _handler.Handle(Command, cancellationToken);
-
-        // Assert
-        await _categoryRepository.Received(1).GetByIdAsync(Command.CategoryId, cancellationToken);
-    }
-
-    [Fact]
-    public async Task Handle_Should_ReturnDeleteCategoryCommandResponse()
-    {
-        // Arrange
-        var cancellationToken = CancellationToken.None;
-        var category = Category.Create("Test Category");
-        _categoryRepository.GetByIdAsync(Command.CategoryId, cancellationToken).Returns(category);
-
-        // Act
-        var result = await _handler.Handle(Command, cancellationToken);
-
-        // Assert
+        await _categoryRepository.Received(1).GetByIdAsync(Command.CategoryId, CancellationToken.None);
+        _categoryRepository.Received(1).Delete(category, CancellationToken.None);
         result.Should().BeOfType<DeleteCategoryCommandResponse>();
         result.Id.Should().Be(0); // Adjust it in future to return the actual ID
     }

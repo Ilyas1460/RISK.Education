@@ -20,32 +20,14 @@ public class GetCategoryTests
     }
 
     [Fact]
-    public async Task Handle_Should_CallCategoryRepositoryGetByIdAsync()
+    public async Task Handle_Should_ExecuteSuccessfully()
     {
-        // Arrange
-        var cancellationToken = CancellationToken.None;
         var category = Category.Create("Test Category");
-        _categoryRepository.GetByIdAsync(Query.CategoryId, cancellationToken).Returns(category);
+        _categoryRepository.GetByIdAsync(Query.CategoryId, CancellationToken.None).Returns(category);
 
-        // Act
-        await _handler.Handle(Query, cancellationToken);
+        var result = await _handler.Handle(Query, CancellationToken.None);
 
-        // Assert
-        await _categoryRepository.Received(1).GetByIdAsync(Query.CategoryId, cancellationToken);
-    }
-
-    [Fact]
-    public async Task Handle_Should_ReturnGetCategoryQueryResponse()
-    {
-        // Arrange
-        var cancellationToken = CancellationToken.None;
-        var category = Category.Create("Test Category");
-        _categoryRepository.GetByIdAsync(Query.CategoryId, cancellationToken).Returns(category);
-
-        // Act
-        var result = await _handler.Handle(Query, cancellationToken);
-
-        // Assert
+        await _categoryRepository.Received(1).GetByIdAsync(Query.CategoryId, CancellationToken.None);
         result.Should().BeOfType<GetCategoryQueryResponse>();
         result.Id.Should().Be(category.Id);
         result.Name.Should().Be(category.Name);

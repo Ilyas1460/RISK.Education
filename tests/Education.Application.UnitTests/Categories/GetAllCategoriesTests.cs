@@ -21,34 +21,18 @@ public class GetAllCategoriesTests
     }
 
     [Fact]
-    public async Task Handle_Should_CallCategoryRepositoryGetAllAsync()
+    public async Task Handle_Should_ExecuteSuccessfully()
     {
-        // Arrange
-        var cancellationToken = CancellationToken.None;
-
-        // Act
-        await _handler.Handle(Query, cancellationToken);
-
-        // Assert
-        await _categoryRepository.Received(1).GetAllAsync(cancellationToken);
-    }
-
-    [Fact]
-    public async Task Handle_Should_ReturnGetAllCategoriesQueryResponse()
-    {
-        // Arrange
-        var cancellationToken = CancellationToken.None;
         var categories = new List<Category>
         {
             Category.Create("Category 1"),
             Category.Create("Category 2")
         };
-        _categoryRepository.GetAllAsync(cancellationToken).Returns(categories);
+        _categoryRepository.GetAllAsync(CancellationToken.None).Returns(categories);
 
-        // Act
-        var result = await _handler.Handle(Query, cancellationToken);
+        var result = await _handler.Handle(Query, CancellationToken.None);
 
-        // Assert
+        await _categoryRepository.Received(1).GetAllAsync(CancellationToken.None);
         result.Should().BeOfType<GetAllCategoriesQueryResponse>();
         result.Categories.Should().Contain(categories
             .Select(c => new GetCategoryQueryResponse(

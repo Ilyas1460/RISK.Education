@@ -20,28 +20,11 @@ public class CreateCategoryTests
     }
 
     [Fact]
-    public async Task Handle_Should_CallCategoryRepositoryAdd()
+    public async Task Handle_Should_ExecuteSuccessfully()
     {
-        // Arrange
-        var cancellationToken = CancellationToken.None;
+        var result = await _handler.Handle(Command, CancellationToken.None);
 
-        // Act
-        await _handler.Handle(Command, cancellationToken);
-
-        // Assert
-        _categoryRepository.Received(1).Add(Arg.Is<Category>(c => c.Name == Command.Name), cancellationToken);
-    }
-
-    [Fact]
-    public async Task Handle_Should_ReturnCreateCategoryCommandResponse()
-    {
-        // Arrange
-        var cancellationToken = CancellationToken.None;
-
-        // Act
-        var result = await _handler.Handle(Command, cancellationToken);
-
-        // Assert
+        _categoryRepository.Received(1).Add(Arg.Is<Category>(c => c.Name == Command.Name), CancellationToken.None);
         result.Should().BeOfType<CreateCategoryCommandResponse>();
         result.Id.Should().Be(0); // Adjust it in future to return the actual ID
     }
