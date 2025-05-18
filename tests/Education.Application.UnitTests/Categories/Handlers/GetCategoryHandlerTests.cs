@@ -3,31 +3,31 @@ using Education.Persistence.Categories;
 using FluentAssertions;
 using NSubstitute;
 
-namespace Education.Application.UnitTests.Categories;
+namespace Education.Application.UnitTests.Categories.Handlers;
 
-public class GetCategoryTests
+public class GetCategoryHandlerTests
 {
-    private readonly GetCategoryQuery Query = new(1);
-
     private readonly GetCategoryQueryHandler _handler;
     private readonly ICategoryRepository _categoryRepository;
 
-    public GetCategoryTests()
+    public GetCategoryHandlerTests()
     {
         _categoryRepository = Substitute.For<ICategoryRepository>();
 
         _handler = new GetCategoryQueryHandler(_categoryRepository);
     }
 
-    [Fact]
-    public async Task Handle_Should_ExecuteSuccessfully()
+    [Theory]
+    [InlineData(1)]
+    public async Task Handle_Should_Pass(int categoryId)
     {
+        var query = new GetCategoryQuery(categoryId);
         var category = Category.Create("Test Category");
-        _categoryRepository.GetByIdAsync(Query.CategoryId, CancellationToken.None).Returns(category);
+        _categoryRepository.GetByIdAsync(query.CategoryId, CancellationToken.None).Returns(category);
 
-        var result = await _handler.Handle(Query, CancellationToken.None);
+        var result = await _handler.Handle(query, CancellationToken.None);
 
-        await _categoryRepository.Received(1).GetByIdAsync(Query.CategoryId, CancellationToken.None);
+        await _categoryRepository.Received(1).GetByIdAsync(query.CategoryId, CancellationToken.None);
         result.Should().BeOfType<GetCategoryQueryResponse>();
         result.Id.Should().Be(category.Id);
         result.Name.Should().Be(category.Name);

@@ -3,31 +3,31 @@ using Education.Persistence.Categories;
 using FluentAssertions;
 using NSubstitute;
 
-namespace Education.Application.UnitTests.Categories;
+namespace Education.Application.UnitTests.Categories.Handlers;
 
-public class DeleteCategoryTests
+public class DeleteCategoryHandlerTests
 {
-    private readonly DeleteCategoryCommand Command = new(1);
-
     private readonly DeleteCategoryCommandHandler _handler;
     private readonly ICategoryRepository _categoryRepository;
 
-    public DeleteCategoryTests()
+    public DeleteCategoryHandlerTests()
     {
         _categoryRepository = Substitute.For<ICategoryRepository>();
 
         _handler = new DeleteCategoryCommandHandler(_categoryRepository);
     }
 
-    [Fact]
-    public async Task Handle_Should_ExecuteSuccessfully()
+    [Theory]
+    [InlineData(1)]
+    public async Task Handle_Should_Pass(int categoryId)
     {
+        var command = new DeleteCategoryCommand(categoryId);
         var category = Category.Create("Test Category");
-        _categoryRepository.GetByIdAsync(Command.CategoryId, CancellationToken.None).Returns(category);
+        _categoryRepository.GetByIdAsync(command.CategoryId, CancellationToken.None).Returns(category);
 
-        var result = await _handler.Handle(Command, CancellationToken.None);
+        var result = await _handler.Handle(command, CancellationToken.None);
 
-        await _categoryRepository.Received(1).GetByIdAsync(Command.CategoryId, CancellationToken.None);
+        await _categoryRepository.Received(1).GetByIdAsync(command.CategoryId, CancellationToken.None);
         _categoryRepository.Received(1).Delete(category, CancellationToken.None);
         result.Should().BeOfType<DeleteCategoryCommandResponse>();
         result.Id.Should().Be(0); // Adjust it in future to return the actual ID

@@ -3,28 +3,29 @@ using Education.Persistence.Categories;
 using FluentAssertions;
 using NSubstitute;
 
-namespace Education.Application.UnitTests.Categories;
+namespace Education.Application.UnitTests.Categories.Handlers;
 
-public class CreateCategoryTests
+public class CreateCategoryHandlerTests
 {
-    private readonly CreateCategoryCommand Command = new("Test Category");
-
     private readonly CreateCategoryCommandHandler _handler;
     private readonly ICategoryRepository _categoryRepository;
 
-    public CreateCategoryTests()
+    public CreateCategoryHandlerTests()
     {
         _categoryRepository = Substitute.For<ICategoryRepository>();
 
         _handler = new CreateCategoryCommandHandler(_categoryRepository);
     }
 
-    [Fact]
-    public async Task Handle_Should_ExecuteSuccessfully()
+    [Theory]
+    [InlineData("Test Category")]
+    public async Task Handle_Should_Pass(string categoryName)
     {
-        var result = await _handler.Handle(Command, CancellationToken.None);
+        var command = new CreateCategoryCommand(categoryName);
 
-        _categoryRepository.Received(1).Add(Arg.Is<Category>(c => c.Name == Command.Name), CancellationToken.None);
+        var result = await _handler.Handle(command, CancellationToken.None);
+
+        _categoryRepository.Received(1).Add(Arg.Is<Category>(c => c.Name == command.Name), CancellationToken.None);
         result.Should().BeOfType<CreateCategoryCommandResponse>();
         result.Id.Should().Be(0); // Adjust it in future to return the actual ID
     }

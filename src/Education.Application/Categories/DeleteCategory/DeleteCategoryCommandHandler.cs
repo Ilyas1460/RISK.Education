@@ -1,5 +1,4 @@
-﻿using Education.Persistence.Abstractions;
-using Education.Persistence.Categories;
+﻿using Education.Persistence.Categories;
 using MediatR;
 
 namespace Education.Application.Categories.DeleteCategory;

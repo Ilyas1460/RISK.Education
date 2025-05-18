@@ -12,18 +12,19 @@ internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateC
     {
         _categoryRepository = categoryRepository;
 
-        RuleFor(c => c.CategoryId)
+        RuleFor(x => x.CategoryId)
             .NotEmpty()
-            .WithMessage("CategoryId is required.")
+            .WithMessage("Category ID must not be empty.")
             .GreaterThan(0)
-            .WithMessage("CategoryId must be greater than 0.")
-            .MustAsync(DoesCategoryExist);
+            .WithMessage("Category ID must be greater than 0.");
 
-        RuleFor(c => c.Name)
+        RuleFor(x => x.CategoryId)
+            .MustAsync(DoesCategoryExist)
+            .When(x => x.CategoryId > 0);
+
+        RuleFor(x => x.Name)
             .NotEmpty()
             .WithMessage("Name is required.")
-            .MinimumLength(4)
-            .WithMessage("Name must be at least 4 characters long.")
             .MustAsync(IsUniqueTitle);
     }
 

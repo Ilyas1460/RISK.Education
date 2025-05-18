@@ -4,16 +4,14 @@ using Education.Persistence.Categories;
 using FluentAssertions;
 using NSubstitute;
 
-namespace Education.Application.UnitTests.Categories;
+namespace Education.Application.UnitTests.Categories.Handlers;
 
-public class GetAllCategoriesTests
+public class GetAllCategoriesHandlerTests
 {
-    private readonly GetAllCategoriesQuery Query = new();
-
     private readonly GetAllCategoriesQueryHandler _handler;
     private readonly ICategoryRepository _categoryRepository;
 
-    public GetAllCategoriesTests()
+    public GetAllCategoriesHandlerTests()
     {
         _categoryRepository = Substitute.For<ICategoryRepository>();
 
@@ -21,8 +19,9 @@ public class GetAllCategoriesTests
     }
 
     [Fact]
-    public async Task Handle_Should_ExecuteSuccessfully()
+    public async Task Handle_Should_Pass()
     {
+        var query = new GetAllCategoriesQuery();
         var categories = new List<Category>
         {
             Category.Create("Category 1"),
@@ -30,7 +29,7 @@ public class GetAllCategoriesTests
         };
         _categoryRepository.GetAllAsync(CancellationToken.None).Returns(categories);
 
-        var result = await _handler.Handle(Query, CancellationToken.None);
+        var result = await _handler.Handle(query, CancellationToken.None);
 
         await _categoryRepository.Received(1).GetAllAsync(CancellationToken.None);
         result.Should().BeOfType<GetAllCategoriesQueryResponse>();

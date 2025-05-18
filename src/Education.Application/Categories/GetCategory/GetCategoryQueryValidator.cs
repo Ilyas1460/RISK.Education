@@ -14,10 +14,13 @@ internal sealed class GetCategoryQueryValidator : AbstractValidator<GetCategoryQ
 
         RuleFor(c => c.CategoryId)
             .NotEmpty()
-            .WithMessage("CategoryId is required.")
+            .WithMessage("Category ID is required.")
             .GreaterThan(0)
-            .WithMessage("CategoryId must be greater than 0.")
-            .MustAsync(DoesCategoryExist);
+            .WithMessage("Category ID must be greater than 0.");
+
+        RuleFor(c => c.CategoryId)
+            .MustAsync(DoesCategoryExist)
+            .When(x => x.CategoryId > 0);
     }
 
     private async Task<bool> DoesCategoryExist(int categoryId, CancellationToken cancellationToken)
