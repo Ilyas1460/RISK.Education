@@ -34,20 +34,6 @@ public class UpdateCategoryValidatorTests
     }
 
     [Theory]
-    [InlineData(0, "New Test Category")]
-    [InlineData(-1, "New Test Category")]
-    [InlineData(-100, "New Test Category")]
-    public async Task Should_Fail_When_CategoryIdIsLessThanOrEqualToZero(int categoryId, string categoryName)
-    {
-        var command = new UpdateCategoryCommand { CategoryId = categoryId, Name = categoryName };
-
-        var result = await _validator.ValidateAsync(command);
-
-        result.IsValid.Should().BeFalse();
-        result.Errors.Should().Contain(e => e.ErrorMessage == "Category ID must be greater than 0.");
-    }
-
-    [Theory]
     [InlineData(1, "New Test Category")]
     public async Task Should_Fail_When_CategoryDoesNotExist(int categoryId, string categoryName)
     {

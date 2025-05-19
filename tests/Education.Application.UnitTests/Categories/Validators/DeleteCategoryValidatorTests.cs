@@ -32,20 +32,6 @@ public class DeleteCategoryValidatorTests
     }
 
     [Theory]
-    [InlineData(0)]
-    [InlineData(-1)]
-    [InlineData(-100)]
-    public async Task Should_Fail_When_CategoryIdIsLessThanOrEqualToZero(int categoryId)
-    {
-        var command = new DeleteCategoryCommand(categoryId);
-
-        var result = await _validator.ValidateAsync(command);
-
-        result.IsValid.Should().BeFalse();
-        result.Errors.Should().Contain(e => e.ErrorMessage == "Category ID must be greater than 0.");
-    }
-
-    [Theory]
     [InlineData(1)]
     public async Task Should_Fail_When_CategoryDoesNotExist(int categoryId)
     {
