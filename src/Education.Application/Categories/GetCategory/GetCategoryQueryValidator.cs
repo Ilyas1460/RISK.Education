@@ -14,7 +14,7 @@ internal sealed class GetCategoryQueryValidator : AbstractValidator<GetCategoryQ
 
         RuleFor(c => c.CategoryId)
             .NotEmpty()
-            .WithMessage("Category ID is required.")
+            .WithMessage("Category ID must not be empty.")
             .MustAsync(DoesCategoryExist);
     }
 

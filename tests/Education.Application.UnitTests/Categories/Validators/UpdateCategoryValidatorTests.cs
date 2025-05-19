@@ -34,6 +34,19 @@ public class UpdateCategoryValidatorTests
     }
 
     [Theory]
+    [InlineData(0, "New Test Category")]
+    public async Task Should_Fail_When_CategoryIdIsEmpty(int categoryId, string categoryName)
+    {
+        var command = new UpdateCategoryCommand { CategoryId = categoryId, Name = categoryName };
+        _categoryRepository.GetByIdAsync(categoryId, CancellationToken.None).Returns(Category.Create("Test Category"));
+
+        var result = await _validator.ValidateAsync(command);
+
+        result.IsValid.Should().BeFalse();
+        result.Errors.Should().Contain(f => f.ErrorMessage == "Category ID must not be empty.");
+    }
+
+    [Theory]
     [InlineData(1, "New Test Category")]
     public async Task Should_Fail_When_CategoryDoesNotExist(int categoryId, string categoryName)
     {
