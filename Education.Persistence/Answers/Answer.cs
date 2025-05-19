@@ -3,13 +3,13 @@ using Education.Persistence.Questions;
 
 namespace Education.Persistence.Answers;
 
-public sealed class Answer : BaseEntity
+public class Answer : BaseEntity
 {
     public string Content { get; private set; }
     public bool IsCorrect { get; private set; }
     public int QuestionId { get; private set; }
 
-    public Question Question { get; set; }
+    public virtual Question Question { get; set; }
 
     private Answer(string content, bool isCorrect, int questionId)
     {

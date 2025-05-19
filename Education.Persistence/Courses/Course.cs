@@ -6,18 +6,18 @@ using Education.Persistence.Topics;
 
 namespace Education.Persistence.Courses;
 
-public sealed class Course : BaseEntity
+public class Course : BaseEntity
 {
     public string Title { get; private set; }
     public string Description { get; private set; }
     public int CategoryId { get; private set; }
     public int LanguageId { get; private set; }
 
-    public Category Category { get; set; }
-    public Language Language { get; set; }
+    public virtual Category Category { get; set; }
+    public virtual Language Language { get; set; }
 
-    public List<Topic> Topics { get; set; }
-    public List<Question> Questions { get; set; }
+    public virtual List<Topic> Topics { get; set; }
+    public virtual List<Question> Questions { get; set; }
 
     private Course(string title, string description, int categoryId, int languageId)
     {

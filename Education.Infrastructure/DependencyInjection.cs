@@ -25,7 +25,8 @@ public static class DependencyInjection
 
         services.AddDbContext<ApplicationDbContext>(options =>
         {
-            options.UseNpgsql(connectionString)
+            options.UseLazyLoadingProxies()
+                .UseNpgsql(connectionString)
                 .UseSnakeCaseNamingConvention()
                 .AddInterceptors(new AuditableEntityInterceptor());
         });
