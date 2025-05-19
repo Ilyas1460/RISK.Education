@@ -15,8 +15,7 @@ internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateC
         RuleFor(x => x.CategoryId)
             .NotEmpty()
             .WithMessage("Category ID must not be empty.")
-            .MustAsync(DoesCategoryExist)
-            .When(x => x.CategoryId > 0);
+            .MustAsync(DoesCategoryExist);
 
         RuleFor(x => x.Name)
             .NotEmpty()

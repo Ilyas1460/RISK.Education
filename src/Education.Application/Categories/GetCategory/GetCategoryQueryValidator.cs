@@ -15,8 +15,7 @@ internal sealed class GetCategoryQueryValidator : AbstractValidator<GetCategoryQ
         RuleFor(c => c.CategoryId)
             .NotEmpty()
             .WithMessage("Category ID is required.")
-            .MustAsync(DoesCategoryExist)
-            .When(x => x.CategoryId > 0);
+            .MustAsync(DoesCategoryExist);
     }
 
     private async Task<bool> DoesCategoryExist(int categoryId, CancellationToken cancellationToken)

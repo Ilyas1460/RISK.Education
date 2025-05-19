@@ -15,8 +15,7 @@ internal sealed class DeleteCategoryCommandValidator : AbstractValidator<DeleteC
         RuleFor(x => x.CategoryId)
             .NotEmpty()
             .WithMessage("Category ID must not be empty.")
-            .MustAsync(DoesCategoryExist)
-            .When(x => x.CategoryId > 0);
+            .MustAsync(DoesCategoryExist);
     }
 
     private async Task<bool> DoesCategoryExist(int categoryId, CancellationToken cancellationToken)
