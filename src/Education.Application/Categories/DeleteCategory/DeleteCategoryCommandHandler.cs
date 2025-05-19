@@ -18,6 +18,6 @@ internal sealed class DeleteCategoryCommandHandler : IRequestHandler<DeleteCateg
 
         _categoryRepository.Delete(category!, cancellationToken);
 
-        return new DeleteCategoryCommandResponse(0);
+        return new DeleteCategoryCommandResponse(category!.Id);
     }
 }
