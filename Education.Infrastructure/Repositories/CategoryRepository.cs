@@ -18,9 +18,9 @@ public sealed class CategoryRepository : Repository<Category>, ICategoryReposito
         await _dbContext.Categories
             .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
 
-    public async Task<Category?> GetByTitleAsync(string title, CancellationToken cancellationToken = default) =>
+    public async Task<Category?> GetByNameAsync(string name, CancellationToken cancellationToken = default) =>
         await _dbContext.Categories
-            .FirstOrDefaultAsync(c => c.Title == title, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Name == name, cancellationToken);
 
     public void Add(Category category, CancellationToken cancellationToken = default) =>
         _dbContext.Categories.Add(category);

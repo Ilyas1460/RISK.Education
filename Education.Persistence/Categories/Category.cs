@@ -1,29 +1,35 @@
 ﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Contents;
 using Education.Persistence.Courses;
 
 namespace Education.Persistence.Categories;
 
 public class Category : BaseEntity
 {
-    public string Title { get; private set; }
-    public string Description { get; private set; }
+    public string Name { get; private set; }
 
-    public virtual List<Course> Courses { get; set; }
+    public virtual ICollection<Article> Articles { get; set; } = new List<Article>();
 
-    private Category(string title, string description)
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
+
+    public virtual ICollection<Faq> Faqs { get; set; } = new List<Faq>();
+
+    private Category(string name)
     {
-        Title = title;
-        Description = description;
+        Name = name;
     }
 
-    public static Category Create(string title, string description)
+    protected Category()
     {
-        return new Category(title, description);
     }
 
-    public void UpdateCategory(string title, string description)
+    public static Category Create(string name)
     {
-        Title = title;
-        Description = description;
+        return new Category(name);
+    }
+
+    public void UpdateCategory(string name)
+    {
+        Name = name;
     }
 }

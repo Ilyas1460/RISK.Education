@@ -1,23 +1,23 @@
 ﻿using Education.Persistence.Abstractions;
+using Education.Persistence.Contents;
 using Education.Persistence.Courses;
 
 namespace Education.Persistence.Languages;
 
 public class Language : BaseEntity
 {
-    public string Name { get; private set; }
-    public string Code { get; private set; }
+    public string Code { get; set; } = null!;
 
-    public virtual List<Course> Courses { get; set; }
+    public virtual ICollection<ArticleTranslation> ArticleTranslations { get; set; } = new List<ArticleTranslation>();
 
-    private Language(string name, string code)
+    public virtual ICollection<Course> Courses { get; set; } = new List<Course>();
+
+    private Language(string code)
     {
-        Name = name;
         Code = code;
     }
 
-    public static Language Create(string name, string code)
+    protected Language()
     {
-        return new Language(name, code);
     }
 }
