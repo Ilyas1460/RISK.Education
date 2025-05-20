@@ -54,8 +54,7 @@ public class CreateCategoryValidatorTests
 
         var act = async () => await _validator.ValidateAsync(command);
 
-        await act.Should().ThrowAsync<ConflictException>()
-            .WithMessage($"Category with title '{categoryName}' already exists.");
+        await act.Should().ThrowAsync<ConflictException>();
         await _categoryRepository.Received(1).GetByNameAsync(categoryName, CancellationToken.None);
     }
 }

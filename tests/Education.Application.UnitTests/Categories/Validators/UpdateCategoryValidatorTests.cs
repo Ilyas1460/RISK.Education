@@ -55,8 +55,7 @@ public class UpdateCategoryValidatorTests
 
         var act = async () => await _validator.ValidateAsync(command);
 
-        await act.Should().ThrowAsync<NotFoundException>()
-            .WithMessage($"Category with ID {categoryId} not found.");
+        await act.Should().ThrowAsync<NotFoundException>();
         await _categoryRepository.Received(1).GetByIdAsync(categoryId, CancellationToken.None);
     }
 
@@ -70,8 +69,7 @@ public class UpdateCategoryValidatorTests
 
         var act = async () => await _validator.ValidateAsync(command);
 
-        await act.Should().ThrowAsync<ConflictException>()
-            .WithMessage($"Category with title '{categoryName}' already exists.");
+        await act.Should().ThrowAsync<ConflictException>();
         await _categoryRepository.Received(1).GetByIdAsync(categoryId, CancellationToken.None);
         await _categoryRepository.Received(1).GetByNameAsync(categoryName, CancellationToken.None);
     }

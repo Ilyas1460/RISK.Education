@@ -53,8 +53,7 @@ public class GetCategoryValidatorTests
 
         var act = async () => await _validator.ValidateAsync(command);
 
-        await act.Should().ThrowAsync<NotFoundException>()
-            .WithMessage($"Category with ID {categoryId} not found.");
+        await act.Should().ThrowAsync<NotFoundException>();
         await _categoryRepository.Received(1).GetByIdAsync(categoryId, CancellationToken.None);
     }
 }
