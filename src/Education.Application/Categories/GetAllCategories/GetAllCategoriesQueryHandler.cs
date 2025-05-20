@@ -8,8 +8,10 @@ internal sealed class GetAllCategoriesQueryHandler : IRequestHandler<GetAllCateg
 {
     private readonly ICategoryRepository _categoryRepository;
 
-    public GetAllCategoriesQueryHandler(ICategoryRepository categoryRepository) =>
+    public GetAllCategoriesQueryHandler(ICategoryRepository categoryRepository)
+    {
         _categoryRepository = categoryRepository;
+    }
 
     public async Task<GetAllCategoriesQueryResponse> Handle(GetAllCategoriesQuery request,
         CancellationToken cancellationToken)

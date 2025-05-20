@@ -2,21 +2,19 @@
 using Education.Persistence.Categories;
 using FluentValidation;
 
-namespace Education.Application.Categories.DeleteCategory;
+namespace Education.Application.Categories.GetCategory;
 
-internal sealed class DeleteCategoryCommandValidator : AbstractValidator<DeleteCategoryCommand>
+internal sealed class GetCategoryQueryValidator : AbstractValidator<GetCategoryQuery>
 {
     private readonly ICategoryRepository _categoryRepository;
 
-    public DeleteCategoryCommandValidator(ICategoryRepository categoryRepository)
+    public GetCategoryQueryValidator(ICategoryRepository categoryRepository)
     {
         _categoryRepository = categoryRepository;
 
-        RuleFor(x => x.CategoryId)
+        RuleFor(c => c.CategoryId)
             .NotEmpty()
             .WithMessage("Category ID must not be empty.")
-            .GreaterThan(0)
-            .WithMessage("Category ID must be greater than 0.")
             .MustAsync(DoesCategoryExist);
     }
 
