@@ -16,20 +16,10 @@ public sealed class UnitOfWorkBehavior<TRequest, TResponse> : IPipelineBehavior<
     public async Task<TResponse> Handle(TRequest request, RequestHandlerDelegate<TResponse> next,
         CancellationToken cancellationToken)
     {
-        if (IsNotCommand())
-        {
-            return await next(cancellationToken);
-        }
-
         var response = await next(cancellationToken);
 
         await _unitOfWork.SaveChangesAsync(cancellationToken);
 
         return response;
-    }
-
-    private static bool IsNotCommand()
-    {
-        return !typeof(TRequest).Name.EndsWith("Command");
     }
 }

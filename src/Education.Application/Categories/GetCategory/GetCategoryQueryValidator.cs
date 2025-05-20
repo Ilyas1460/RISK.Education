@@ -24,7 +24,7 @@ internal sealed class GetCategoryQueryValidator : AbstractValidator<GetCategoryQ
 
         if (category is null)
         {
-            throw new NotFoundException($"Category with ID {categoryId} not found.");
+            throw new NotFoundException("Category with ID {0} not found.", categoryId);
         }
 
         return true;

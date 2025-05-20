@@ -29,7 +29,7 @@ internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateC
 
         if (category is null)
         {
-            throw new NotFoundException($"Category with ID {categoryId} not found.");
+            throw new NotFoundException("Category with ID {0} not found.", categoryId);
         }
 
         return true;
@@ -41,7 +41,7 @@ internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateC
 
         if (category is not null)
         {
-            throw new ConflictException($"Category with title '{title}' already exists.");
+            throw new ConflictException("Category with title {0} already exists.", title);
         }
 
         return true;
