@@ -2,6 +2,7 @@
 using Education.Infrastructure.Repositories;
 using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
+using Education.Persistence.Courses;
 using Education.Persistence.Languages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -35,6 +36,8 @@ public static class DependencyInjection
         services.AddScoped<ICategoryRepository, CategoryRepository>();
 
         services.AddScoped<ILanguageRepository, LanguageRepository>();
+
+        services.AddScoped<ICourseRepository, CourseRepository>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
     }
