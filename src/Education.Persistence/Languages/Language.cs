@@ -20,4 +20,14 @@ public class Language : BaseEntity
     protected Language()
     {
     }
+
+    public static Language Create(string code)
+    {
+        return new Language(code);
+    }
+
+    public void UpdateLanguage(string code)
+    {
+        Code = code;
+    }
 }

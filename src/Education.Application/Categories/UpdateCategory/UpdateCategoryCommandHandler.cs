@@ -18,6 +18,6 @@ internal sealed class UpdateCategoryCommandHandler : IRequestHandler<UpdateCateg
 
         category!.UpdateCategory(request.Name);
 
-        return new UpdateCategoryCommandResponse(0);
+        return new UpdateCategoryCommandResponse(category.Id);
     }
 }

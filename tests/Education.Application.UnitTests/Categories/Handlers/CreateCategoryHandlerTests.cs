@@ -27,6 +27,6 @@ public class CreateCategoryHandlerTests
 
         _categoryRepository.Received(1).Add(Arg.Is<Category>(c => c.Name == command.Name), CancellationToken.None);
         result.Should().BeOfType<CreateCategoryCommandResponse>();
-        result.Id.Should().Be(0); // Adjust it in future to return the actual ID
+        result.Id.Should().Be(0); // TODO: Adjust it in future to return the actual ID
     }
 }

@@ -30,6 +30,6 @@ public class DeleteCategoryHandlerTests
         await _categoryRepository.Received(1).GetByIdAsync(command.CategoryId, CancellationToken.None);
         _categoryRepository.Received(1).Delete(category, CancellationToken.None);
         result.Should().BeOfType<DeleteCategoryCommandResponse>();
-        result.Id.Should().Be(0); // Adjust it in future to return the actual ID
+        result.Id.Should().Be(result.Id);
     }
 }

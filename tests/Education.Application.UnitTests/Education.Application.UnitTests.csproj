@@ -22,4 +22,8 @@
       <ProjectReference Include="..\..\src\Education.Application\Education.Application.csproj" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Folder Include="Languages\Validators\" />
+    </ItemGroup>
+
 </Project>

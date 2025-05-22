@@ -1,7 +1,10 @@
-﻿using Education.Infrastructure.Interceptors;
+﻿using Education.Application.Abstractions.Localization;
+using Education.Infrastructure.Interceptors;
+using Education.Infrastructure.Localization;
 using Education.Infrastructure.Repositories;
 using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
+using Education.Persistence.Languages;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +15,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSingleton<ILanguageCodeProvider, LanguageCodeProvider>();
+
         AddPersistence(services, configuration);
 
         return services;
@@ -32,6 +37,8 @@ public static class DependencyInjection
         });
 
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+
+        services.AddScoped<ILanguageRepository, LanguageRepository>();
 
         services.AddScoped<IUnitOfWork>(sp => sp.GetRequiredService<ApplicationDbContext>());
     }

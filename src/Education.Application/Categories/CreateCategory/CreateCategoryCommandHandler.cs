@@ -18,6 +18,6 @@ internal sealed class CreateCategoryCommandHandler : IRequestHandler<CreateCateg
 
         _categoryRepository.Add(newCategory, cancellationToken);
 
-        return Task.FromResult(new CreateCategoryCommandResponse(0));
+        return Task.FromResult(new CreateCategoryCommandResponse(0)); // TODO: fix this to return the created entity ID
     }
 }

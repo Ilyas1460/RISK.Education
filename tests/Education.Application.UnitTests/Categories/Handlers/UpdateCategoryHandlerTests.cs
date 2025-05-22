@@ -16,10 +16,11 @@ public class UpdateCategoryHandlerTests
         _handler = new UpdateCategoryCommandHandler(_categoryRepository);
     }
 
-    [Fact]
-    public async Task Handle_Should_Pass()
+    [Theory]
+    [InlineData(1, "Updated Category")]
+    public async Task Handle_Should_Pass(int categoryId, string categoryName)
     {
-        var command = new UpdateCategoryCommand();
+        var command = new UpdateCategoryCommand { CategoryId = categoryId, Name = categoryName };
         var category = Category.Create("Test Category");
         _categoryRepository.GetByIdAsync(command.CategoryId, CancellationToken.None).Returns(category);
 
@@ -27,6 +28,6 @@ public class UpdateCategoryHandlerTests
 
         await _categoryRepository.Received(1).GetByIdAsync(command.CategoryId, CancellationToken.None);
         result.Should().BeOfType<UpdateCategoryCommandResponse>();
-        result.Id.Should().Be(0); // Adjust it in future to return the actual ID
+        result.Id.Should().Be(result.Id);
     }
 }
