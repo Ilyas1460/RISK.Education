@@ -1,4 +1,5 @@
-﻿using Education.Exceptions.Exceptions;
+﻿using Education.Application.Abstractions.Localization;
+using Education.Exceptions.Exceptions;
 using Education.Persistence.Languages;
 using FluentValidation;
 
@@ -7,10 +8,12 @@ namespace Education.Application.Languages.UpdateLanguage;
 public class UpdateLanguageCommandValidator : AbstractValidator<UpdateLanguageCommand>
 {
     private readonly ILanguageRepository _languageRepository;
+    private readonly ILanguageCodeProvider _languageCodeProvider;
 
-    public UpdateLanguageCommandValidator(ILanguageRepository languageRepository)
+    public UpdateLanguageCommandValidator(ILanguageRepository languageRepository, ILanguageCodeProvider languageCodeProvider)
     {
         _languageRepository = languageRepository;
+        _languageCodeProvider = languageCodeProvider;
 
         RuleFor(x => x.LanguageId)
             .NotEmpty()
@@ -22,9 +25,7 @@ public class UpdateLanguageCommandValidator : AbstractValidator<UpdateLanguageCo
             .WithMessage("Code is required.")
             .Length(2)
             .WithMessage("Code must be exactly 2 characters long.")
-            .Matches("^[A-Z]{2}$")
-            .WithMessage("Code must be uppercase letters.")
-            .Must(code => LanguageCodes.ValidLanguageCodes.Contains(code.ToLower()))
+            .Must(code => languageCodeProvider.GetValidLanguageCodes().Contains(code.ToLower()))
             .WithMessage("Code must be a valid ISO 639-1 language code.")
             .MustAsync(IsUniqueCode);
     }

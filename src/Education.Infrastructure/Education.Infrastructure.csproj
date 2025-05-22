@@ -14,4 +14,11 @@
     <ProjectReference Include="..\Education.Application\Education.Application.csproj"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <None Remove="Resources\languageCodes.json" />
+    <Content Include="Resources\languageCodes.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
 </Project>

@@ -1,4 +1,6 @@
-﻿using Education.Infrastructure.Interceptors;
+﻿using Education.Application.Abstractions.Localization;
+using Education.Infrastructure.Interceptors;
+using Education.Infrastructure.Localization;
 using Education.Infrastructure.Repositories;
 using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
@@ -13,6 +15,8 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
     {
+        services.AddSingleton<ILanguageCodeProvider, LanguageCodeProvider>();
+
         AddPersistence(services, configuration);
 
         return services;
