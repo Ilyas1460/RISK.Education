@@ -9,8 +9,8 @@ public class LanguageCodeProvider : ILanguageCodeProvider
 
     public LanguageCodeProvider()
     {
-        string path = Path.Combine(AppContext.BaseDirectory, "Resources", "languageCodes.json");
-        string json = File.ReadAllText(path);
+        var path = Path.Combine(AppContext.BaseDirectory, "Resources", "languageCodes.json");
+        var json = File.ReadAllText(path);
         var codes = JsonSerializer.Deserialize<List<string>>(json) ?? [];
         _validCodes = new HashSet<string>(codes, StringComparer.OrdinalIgnoreCase);
     }
