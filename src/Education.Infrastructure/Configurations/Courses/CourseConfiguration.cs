@@ -19,6 +19,8 @@ public class CourseConfiguration : SoftDeleteEntityConfiguration<Course>
         builder.Property(e => e.CategoryId).IsRequired(false);
         builder.Property(e => e.LanguageId).IsRequired(false);
 
+        builder.HasIndex(e => e.Slug).IsUnique();
+
         builder.HasOne(e => e.Category)
             .WithMany(c => c.Courses)
             .HasForeignKey(e => e.CategoryId)

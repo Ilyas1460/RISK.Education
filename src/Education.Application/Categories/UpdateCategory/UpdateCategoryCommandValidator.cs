@@ -13,14 +13,16 @@ internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateC
         _categoryRepository = categoryRepository;
 
         RuleFor(x => x.CategoryId)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Category ID must not be empty.")
             .MustAsync(DoesCategoryExist);
 
         RuleFor(x => x.Name)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Name is required.")
-            .MustAsync(IsUniqueTitle);
+            .MustAsync((command, name, cancellationToken) => IsUniqueTitle(command.CategoryId, name, cancellationToken));
     }
 
     private async Task<bool> DoesCategoryExist(int categoryId, CancellationToken cancellationToken)
@@ -35,11 +37,11 @@ internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateC
         return true;
     }
 
-    private async Task<bool> IsUniqueTitle(string title, CancellationToken cancellationToken)
+    private async Task<bool> IsUniqueTitle(int categoryId, string title, CancellationToken cancellationToken)
     {
         var category = await _categoryRepository.GetByNameAsync(title, cancellationToken);
 
-        if (category is not null)
+        if (category is not null && category.Id != categoryId)
         {
             throw new ConflictException($"Category with title '{title}' already exists.");
         }

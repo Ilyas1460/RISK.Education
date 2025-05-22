@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Education.Application.Languages.GetLanguage;
 
-public class GetLanguageQueryHandler : IRequestHandler<GetLanguageQuery, GetLanguageQueryResponse>
+internal sealed class GetLanguageQueryHandler : IRequestHandler<GetLanguageQuery, GetLanguageQueryResponse>
 {
     private readonly ILanguageRepository _languageRepository;
 

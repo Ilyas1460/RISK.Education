@@ -13,6 +13,7 @@ internal sealed class CreateCategoryCommandValidator : AbstractValidator<CreateC
         _categoryRepository = categoryRepository;
 
         RuleFor(c => c.Name)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Name is required.")
             .MustAsync(IsUniqueTitle);

@@ -10,21 +10,21 @@ namespace Education.Persistence.Courses;
 
 public class Course : BaseEntity
 {
-    public string Name { get; set; }
+    public string Name { get; private set; }
 
-    public string ShortDescription { get; set; }
+    public string ShortDescription { get; private set; }
 
-    public string Description { get; set; }
+    public string Description { get; private set; }
 
-    public int? CategoryId { get; set; }
+    public int? CategoryId { get; private set; }
 
-    public int? LanguageId { get; set; }
+    public int? LanguageId { get; private set; }
 
-    public int? QuestionAnswerCount { get; set; }
+    public int? QuestionAnswerCount { get; private set; }
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get; private set; }
 
-    public string? Slug { get; set; }
+    public string? Slug { get; private set; }
 
     public virtual ICollection<AdminUserRoleLink> AdminUserRoleLinks { get; set; } = new List<AdminUserRoleLink>();
 
@@ -43,4 +43,41 @@ public class Course : BaseEntity
     public virtual ICollection<Topic> Topics { get; set; } = new List<Topic>();
 
     public virtual ICollection<UserCourse> UserCourses { get; set; } = new List<UserCourse>();
+
+    protected Course()
+    {
+    }
+
+    private Course(string name, string shortDescription, string description, int? categoryId, int? languageId,
+        int? questionAnswerCount, bool isActive, string? slug)
+    {
+        Name = name;
+        ShortDescription = shortDescription;
+        Description = description;
+        CategoryId = categoryId;
+        LanguageId = languageId;
+        QuestionAnswerCount = questionAnswerCount;
+        IsActive = isActive;
+        Slug = slug;
+    }
+
+    public static Course Create(string name, string shortDescription, string description, int? categoryId,
+        int? languageId, int? questionAnswerCount, bool isActive, string? slug)
+    {
+        return new Course(name, shortDescription, description, categoryId, languageId, questionAnswerCount, isActive,
+            slug);
+    }
+
+    public void UpdateCourse(string name, string shortDescription, string description, int? categoryId, int? languageId,
+        int? questionAnswerCount, bool isActive, string? slug)
+    {
+        Name = name;
+        ShortDescription = shortDescription;
+        Description = description;
+        CategoryId = categoryId;
+        LanguageId = languageId;
+        QuestionAnswerCount = questionAnswerCount;
+        IsActive = isActive;
+        Slug = slug;
+    }
 }

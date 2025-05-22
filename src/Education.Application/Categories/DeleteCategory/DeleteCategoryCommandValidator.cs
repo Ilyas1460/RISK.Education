@@ -13,6 +13,7 @@ internal sealed class DeleteCategoryCommandValidator : AbstractValidator<DeleteC
         _categoryRepository = categoryRepository;
 
         RuleFor(x => x.CategoryId)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Category ID must not be empty.")
             .MustAsync(DoesCategoryExist);

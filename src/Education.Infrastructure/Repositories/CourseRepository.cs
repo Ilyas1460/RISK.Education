@@ -13,12 +13,34 @@ public class CourseRepository : Repository<Course>, ICourseRepository
     {
         return await _dbContext.Courses
             .AsNoTracking()
+            .Include(c => c.Category)
+            .Include(c => c.Language)
             .ToListAsync(cancellationToken);
     }
 
     public async Task<Course?> GetByIdAsync(int id, CancellationToken cancellationToken = default) =>
         await _dbContext.Courses
             .FirstOrDefaultAsync(c => c.Id == id, cancellationToken);
+
+    public async Task<Course?> GetBySlugAsync(string slug, CancellationToken cancellationToken = default) =>
+        await _dbContext.Courses
+            .FirstOrDefaultAsync(c => c.Slug == slug, cancellationToken);
+
+    public async Task<bool> ExistsByNameCategoryAndLanguageAsync(string name, int? categoryId, int? languageId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Courses
+            .AnyAsync(c => c.Name == name && c.CategoryId == categoryId && c.LanguageId == languageId,
+                cancellationToken);
+    }
+
+    public async Task<bool> ExistsByNameCategoryAndLanguageExcludingIdAsync(int id, string name, int? categoryId, int? languageId,
+        CancellationToken cancellationToken = default)
+    {
+        return await _dbContext.Courses
+            .AnyAsync(c => c.Id != id && c.Name == name && c.CategoryId == categoryId && c.LanguageId == languageId,
+                cancellationToken);
+    }
 
     public void Add(Course course, CancellationToken cancellationToken = default) =>
         _dbContext.Courses.Add(course);

@@ -2,4 +2,4 @@
 
 namespace Education.Application.Languages.GetAllLanguages;
 
-public record GetAllLanguagesQuery : IRequest<GetAllLanguagesQueryResponse>;
+public sealed record GetAllLanguagesQuery : IRequest<GetAllLanguagesQueryResponse>;

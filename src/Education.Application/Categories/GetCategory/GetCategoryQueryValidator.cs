@@ -13,6 +13,7 @@ internal sealed class GetCategoryQueryValidator : AbstractValidator<GetCategoryQ
         _categoryRepository = categoryRepository;
 
         RuleFor(c => c.CategoryId)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Category ID must not be empty.")
             .MustAsync(DoesCategoryExist);

@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Education.Application.Languages.UpdateLanguage;
 
-public class UpdateLanguageCommandValidator : AbstractValidator<UpdateLanguageCommand>
+internal sealed class UpdateLanguageCommandValidator : AbstractValidator<UpdateLanguageCommand>
 {
     private readonly ILanguageRepository _languageRepository;
 
@@ -13,6 +13,7 @@ public class UpdateLanguageCommandValidator : AbstractValidator<UpdateLanguageCo
         _languageRepository = languageRepository;
 
         RuleFor(x => x.LanguageId)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Language ID must not be empty.")
             .MustAsync(DoesLanguageExist);
@@ -26,7 +27,7 @@ public class UpdateLanguageCommandValidator : AbstractValidator<UpdateLanguageCo
             .WithMessage("Code must be uppercase letters.")
             .Must(code => LanguageCodes.ValidLanguageCodes.Contains(code.ToLower()))
             .WithMessage("Code must be a valid ISO 639-1 language code.")
-            .MustAsync(IsUniqueCode);
+            .MustAsync((command, code, cancellationToken) => IsUniqueCode(command.LanguageId, code, cancellationToken));
     }
 
     private async Task<bool> DoesLanguageExist(int languageId, CancellationToken cancellationToken)
@@ -41,11 +42,11 @@ public class UpdateLanguageCommandValidator : AbstractValidator<UpdateLanguageCo
         return true;
     }
 
-    private async Task<bool> IsUniqueCode(string code, CancellationToken cancellationToken)
+    private async Task<bool> IsUniqueCode(int languageId, string code, CancellationToken cancellationToken)
     {
         var language = await _languageRepository.GetByCodeAsync(code, cancellationToken);
 
-        if (language is not null)
+        if (language is not null && language.Id != languageId)
         {
             throw new ConflictException($"Language with code '{code}' already exists.");
         }
