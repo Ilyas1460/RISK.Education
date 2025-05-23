@@ -24,13 +24,13 @@ public class CourseRepository : Repository<Course>, ICourseRepository
 
     public async Task<Course?> GetBySlugAsync(string slug, CancellationToken cancellationToken = default) =>
         await _dbContext.Courses
-            .FirstOrDefaultAsync(c => c.Slug == slug, cancellationToken);
+            .FirstOrDefaultAsync(c => c.Slug!.ToLower() == slug.ToLower(), cancellationToken);
 
     public async Task<bool> ExistsByNameCategoryAndLanguageAsync(string name, int? categoryId, int? languageId,
         CancellationToken cancellationToken = default)
     {
         return await _dbContext.Courses
-            .AnyAsync(c => c.Name == name && c.CategoryId == categoryId && c.LanguageId == languageId,
+            .AnyAsync(c => c.Name.ToLower() == name.ToLower() && c.CategoryId == categoryId && c.LanguageId == languageId,
                 cancellationToken);
     }
 
@@ -38,7 +38,9 @@ public class CourseRepository : Repository<Course>, ICourseRepository
         CancellationToken cancellationToken = default)
     {
         return await _dbContext.Courses
-            .AnyAsync(c => c.Id != id && c.Name == name && c.CategoryId == categoryId && c.LanguageId == languageId,
+            .AnyAsync(
+                c => c.Id != id && c.Name.ToLower() == name.ToLower() && c.CategoryId == categoryId &&
+                     c.LanguageId == languageId,
                 cancellationToken);
     }
 
