@@ -8,11 +8,12 @@ namespace Education.Application.Courses.CreateCourse;
 
 internal sealed class CreateCourseCommandValidator : AbstractValidator<CreateCourseCommand>
 {
+    private readonly ICategoryRepository _categoryRepository;
     private readonly ICourseRepository _courseRepository;
     private readonly ILanguageRepository _languageRepository;
-    private readonly ICategoryRepository _categoryRepository;
 
-    public CreateCourseCommandValidator(ICourseRepository courseRepository, ILanguageRepository languageRepository,
+    public CreateCourseCommandValidator(ICourseRepository courseRepository,
+        ILanguageRepository languageRepository,
         ICategoryRepository categoryRepository)
     {
         _languageRepository = languageRepository;
@@ -27,30 +28,16 @@ internal sealed class CreateCourseCommandValidator : AbstractValidator<CreateCou
             .WithMessage("Course name is required.");
 
         RuleFor(x => x.ShortDescription)
-            .NotEmpty()
-            .WithMessage("Short description is required.")
             .MaximumLength(200)
             .WithMessage("Short description must not exceed 200 characters.");
 
-        RuleFor(x => x.Description)
-            .NotEmpty()
-            .WithMessage("Description is required.");
-
-        RuleFor(x => x.IsActive)
-            .NotNull()
-            .WithMessage("IsActive is required.");
-
         RuleFor(x => x.Slug)
-            .Cascade(CascadeMode.Stop)
-            .NotEmpty()
-            .WithMessage("Slug is required.")
-            .MustAsync(IsSlugUnique);
+            .MustAsync(IsSlugUnique!)
+            .When(x => !string.IsNullOrEmpty(x.Slug));
 
         RuleFor(x => x.QuestionAnswerCount)
-            .NotNull()
-            .WithMessage("QuestionAnswerCount is required.")
-            .GreaterThan(0)
-            .WithMessage("QuestionAnswerCount must be greater than 0.");
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("QuestionAnswerCount must be greater than or equal to 0.");
 
         RuleFor(x => x.CategoryId)
             .Cascade(CascadeMode.Stop)
@@ -68,20 +55,22 @@ internal sealed class CreateCourseCommandValidator : AbstractValidator<CreateCou
     private async Task<bool> IsUniqueNameCategoryLanguageGroup(CreateCourseCommand command,
         CancellationToken cancellationToken)
     {
-        var doesExistByNameAndCategoryIdAndLanguageId =
-            await _courseRepository.ExistsByNameCategoryAndLanguageAsync(command.Name, command.CategoryId,
-                command.LanguageId,
-                cancellationToken);
+        var doesExistByNameAndCategoryIdAndLanguageId = await _courseRepository.ExistsByNameCategoryAndLanguageAsync(
+            command.Name,
+            command.CategoryId,
+            command.LanguageId,
+            cancellationToken);
 
         if (doesExistByNameAndCategoryIdAndLanguageId)
         {
-            throw new ConflictException($"Course with name '{command.Name}' already exists in the same category and language.");
+            throw new ConflictException(
+                $"Course with name '{command.Name}' already exists in the same category and language.");
         }
 
         return true;
     }
 
-    private async Task<bool> IsSlugUnique(string? slug, CancellationToken cancellationToken)
+    private async Task<bool> IsSlugUnique(string slug, CancellationToken cancellationToken)
     {
         var course = await _courseRepository.GetBySlugAsync(slug, cancellationToken);
 

@@ -11,8 +11,8 @@ public class CourseConfiguration : SoftDeleteEntityConfiguration<Course>
         builder.ToTable("courses");
 
         builder.Property(e => e.Name).IsRequired();
-        builder.Property(e => e.Description).IsRequired();
-        builder.Property(e => e.ShortDescription).IsRequired();
+        builder.Property(e => e.Description).IsRequired(false);
+        builder.Property(e => e.ShortDescription).IsRequired(false);
         builder.Property(e => e.Slug).IsRequired(false);
         builder.Property(e => e.QuestionAnswerCount).IsRequired(false);
         builder.Property(e => e.IsActive).IsRequired().HasDefaultValue(false);

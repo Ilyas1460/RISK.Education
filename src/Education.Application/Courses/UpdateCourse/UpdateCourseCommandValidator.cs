@@ -32,30 +32,16 @@ internal sealed class UpdateCourseCommandValidator : AbstractValidator<UpdateCou
             .WithMessage("Course name is required.");
 
         RuleFor(x => x.ShortDescription)
-            .NotEmpty()
-            .WithMessage("Short description is required.")
             .MaximumLength(200)
             .WithMessage("Short description must not exceed 200 characters.");
 
-        RuleFor(x => x.Description)
-            .NotEmpty()
-            .WithMessage("Description is required.");
-
-        RuleFor(x => x.IsActive)
-            .NotNull()
-            .WithMessage("IsActive is required.");
-
         RuleFor(x => x.Slug)
-            .Cascade(CascadeMode.Stop)
-            .NotEmpty()
-            .WithMessage("Slug is required.")
-            .MustAsync((command, slug, cancellationToken) => IsSlugUnique(command.CourseId, slug, cancellationToken));
+            .MustAsync((command, slug, cancellationToken) => IsSlugUnique(command.CourseId, slug, cancellationToken))
+            .When(x => !string.IsNullOrEmpty(x.Slug));
 
         RuleFor(x => x.QuestionAnswerCount)
-            .NotNull()
-            .WithMessage("QuestionAnswerCount is required.")
-            .GreaterThan(0)
-            .WithMessage("QuestionAnswerCount must be greater than 0.");
+            .GreaterThanOrEqualTo(0)
+            .WithMessage("QuestionAnswerCount must be greater than or equal to 0.");
 
         RuleFor(x => x.CategoryId)
             .Cascade(CascadeMode.Stop)

@@ -4,11 +4,11 @@ namespace Education.Application.Courses.CreateCourse;
 
 public sealed record CreateCourseCommand(
     string Name,
-    string ShortDescription,
-    string Description,
+    string? ShortDescription,
+    string? Description,
     int CategoryId,
     int LanguageId,
-    int QuestionAnswerCount,
+    int? QuestionAnswerCount,
     bool IsActive,
-    string Slug
+    string? Slug
     ) : IRequest<CreateCourseCommandResponse>;
