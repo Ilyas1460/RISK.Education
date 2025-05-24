@@ -22,7 +22,7 @@ public class LanguageRepository : Repository<Language>, ILanguageRepository
 
     public async Task<Language?> GetByCodeAsync(string code, CancellationToken cancellationToken = default) =>
         await _dbContext.Languages
-            .FirstOrDefaultAsync(l => l.Code == code, cancellationToken);
+            .FirstOrDefaultAsync(l => l.Code.ToLower() == code.ToLower(), cancellationToken);
 
     public void Add(Language language, CancellationToken cancellationToken = default) =>
         _dbContext.Languages.Add(language);

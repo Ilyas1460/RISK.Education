@@ -2,4 +2,4 @@
 
 namespace Education.Application.Languages.CreateLanguage;
 
-public record CreateLanguageCommand(string Code) : IRequest<CreateLanguageCommandResponse>;
+public sealed record CreateLanguageCommand(string Code) : IRequest<CreateLanguageCommandResponse>;

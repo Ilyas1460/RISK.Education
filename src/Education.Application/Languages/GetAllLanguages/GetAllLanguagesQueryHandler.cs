@@ -4,7 +4,7 @@ using MediatR;
 
 namespace Education.Application.Languages.GetAllLanguages;
 
-public class GetAllLanguagesQueryHandler : IRequestHandler<GetAllLanguagesQuery, GetAllLanguagesQueryResponse>
+internal sealed class GetAllLanguagesQueryHandler : IRequestHandler<GetAllLanguagesQuery, GetAllLanguagesQueryResponse>
 {
     private readonly ILanguageRepository _languageRepository;
 

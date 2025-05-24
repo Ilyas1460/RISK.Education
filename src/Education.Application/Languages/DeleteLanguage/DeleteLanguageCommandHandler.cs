@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Education.Application.Languages.DeleteLanguage;
 
-public class DeleteLanguageCommandHandler : IRequestHandler<DeleteLanguageCommand, DeleteLanguageCommandResponse>
+internal sealed class DeleteLanguageCommandHandler : IRequestHandler<DeleteLanguageCommand, DeleteLanguageCommandResponse>
 {
     private readonly ILanguageRepository _languageRepository;
 

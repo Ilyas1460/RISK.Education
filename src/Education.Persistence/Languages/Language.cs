@@ -6,7 +6,7 @@ namespace Education.Persistence.Languages;
 
 public class Language : BaseEntity
 {
-    public string Code { get; set; } = null!;
+    public string Code { get; private set; } = null!;
 
     public virtual ICollection<ArticleTranslation> ArticleTranslations { get; set; } = new List<ArticleTranslation>();
 

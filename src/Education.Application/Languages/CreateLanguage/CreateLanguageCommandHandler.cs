@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Education.Application.Languages.CreateLanguage;
 
-public class CreateLanguageCommandHandler : IRequestHandler<CreateLanguageCommand, CreateLanguageCommandResponse>
+internal sealed class CreateLanguageCommandHandler : IRequestHandler<CreateLanguageCommand, CreateLanguageCommandResponse>
 {
     private readonly ILanguageRepository _languageRepository;
 

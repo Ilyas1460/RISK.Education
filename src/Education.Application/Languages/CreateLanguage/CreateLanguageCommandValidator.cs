@@ -5,7 +5,7 @@ using FluentValidation;
 
 namespace Education.Application.Languages.CreateLanguage;
 
-public class CreateLanguageCommandValidator : AbstractValidator<CreateLanguageCommand>
+internal sealed class CreateLanguageCommandValidator : AbstractValidator<CreateLanguageCommand>
 {
     private readonly ILanguageRepository _languageRepository;
     private readonly ILanguageCodeProvider _languageCodeProvider;

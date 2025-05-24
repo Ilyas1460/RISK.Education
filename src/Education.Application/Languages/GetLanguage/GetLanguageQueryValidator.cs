@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Education.Application.Languages.GetLanguage;
 
-public class GetLanguageQueryValidator : AbstractValidator<GetLanguageQuery>
+internal sealed class GetLanguageQueryValidator : AbstractValidator<GetLanguageQuery>
 {
     private readonly ILanguageRepository _languageRepository;
 
@@ -13,6 +13,7 @@ public class GetLanguageQueryValidator : AbstractValidator<GetLanguageQuery>
         _languageRepository = languageRepository;
 
         RuleFor(x => x.LanguageId)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Language ID must not be empty.")
             .MustAsync(DoesLanguageExist);

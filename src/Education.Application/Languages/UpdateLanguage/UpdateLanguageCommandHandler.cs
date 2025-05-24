@@ -3,7 +3,7 @@ using MediatR;
 
 namespace Education.Application.Languages.UpdateLanguage;
 
-public class UpdateLanguageCommandHandler : IRequestHandler<UpdateLanguageCommand, UpdateLanguageCommandResponse>
+internal sealed class UpdateLanguageCommandHandler : IRequestHandler<UpdateLanguageCommand, UpdateLanguageCommandResponse>
 {
     private readonly ILanguageRepository _languageRepository;
 

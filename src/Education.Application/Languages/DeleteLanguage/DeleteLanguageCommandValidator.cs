@@ -4,7 +4,7 @@ using FluentValidation;
 
 namespace Education.Application.Languages.DeleteLanguage;
 
-public class DeleteLanguageCommandValidator : AbstractValidator<DeleteLanguageCommand>
+internal sealed class DeleteLanguageCommandValidator : AbstractValidator<DeleteLanguageCommand>
 {
     private readonly ILanguageRepository _languageRepository;
 
@@ -13,6 +13,7 @@ public class DeleteLanguageCommandValidator : AbstractValidator<DeleteLanguageCo
         _languageRepository = languageRepository;
 
         RuleFor(x => x.LanguageId)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Language ID must not be empty.")
             .MustAsync(DoesLanguageExist);

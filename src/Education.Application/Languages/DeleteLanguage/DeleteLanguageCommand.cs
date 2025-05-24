@@ -2,4 +2,4 @@
 
 namespace Education.Application.Languages.DeleteLanguage;
 
-public record DeleteLanguageCommand(int LanguageId) : IRequest<DeleteLanguageCommandResponse>;
+public sealed record DeleteLanguageCommand(int LanguageId) : IRequest<DeleteLanguageCommandResponse>;
