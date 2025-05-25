@@ -33,12 +33,10 @@ public class UpdateCategoryValidatorTests
         await _categoryRepository.Received(1).GetByNameAsync(categoryName, CancellationToken.None);
     }
 
-    [Theory]
-    [InlineData(0, "New Test Category")]
-    public async Task Should_Fail_When_CategoryIdIsEmpty(int categoryId, string categoryName)
+    [Fact]
+    public async Task Should_Fail_When_CategoryIdIsEmpty()
     {
-        var command = new UpdateCategoryCommand { CategoryId = categoryId, Name = categoryName };
-        _categoryRepository.GetByIdAsync(categoryId, CancellationToken.None).Returns(Category.Create("Test Category"));
+        var command = new UpdateCategoryCommand { CategoryId = 0 };
 
         var result = await _validator.ValidateAsync(command);
 

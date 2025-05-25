@@ -31,12 +31,10 @@ public class GetCategoryValidatorTests
         await _categoryRepository.Received(1).GetByIdAsync(categoryId, CancellationToken.None);
     }
 
-    [Theory]
-    [InlineData(0)]
-    public async Task Should_Fail_When_CategoryIdIsEmpty(int categoryId)
+    [Fact]
+    public async Task Should_Fail_When_CategoryIdIsEmpty()
     {
-        var command = new GetCategoryQuery(categoryId);
-        _categoryRepository.GetByIdAsync(categoryId, CancellationToken.None).Returns(Category.Create("Test Category"));
+        var command = new GetCategoryQuery(0);
 
         var result = await _validator.ValidateAsync(command);
 

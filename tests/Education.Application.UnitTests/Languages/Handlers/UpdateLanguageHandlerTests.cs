@@ -18,7 +18,7 @@ public class UpdateLanguageHandlerTests
     }
 
     [Theory]
-    [InlineData(1, "RU")]
+    [InlineData(1, "Ru")]
     public async Task Handle_Should_Pass(int languageId, string code)
     {
         var command = new UpdateLanguageCommand { LanguageId = languageId, Code = code };

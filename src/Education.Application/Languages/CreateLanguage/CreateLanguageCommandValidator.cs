@@ -20,7 +20,7 @@ internal sealed class CreateLanguageCommandValidator : AbstractValidator<CreateL
             .WithMessage("Code is required.")
             .Length(2)
             .WithMessage("Code must be exactly 2 characters long.")
-            .Must(code => languageCodeProvider.GetValidLanguageCodes().Contains(code.ToLower()))
+            .Must(code => _languageCodeProvider.GetValidLanguageCodes().Contains(code.ToLower()))
             .WithMessage("Code must be a valid ISO 639-1 language code.")
             .MustAsync(IsUniqueCode);
     }
