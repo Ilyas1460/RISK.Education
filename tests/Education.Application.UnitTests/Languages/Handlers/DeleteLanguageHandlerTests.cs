@@ -30,6 +30,5 @@ public class DeleteLanguageHandlerTests
         await _languageRepository.Received(1).GetByIdAsync(command.LanguageId, CancellationToken.None);
         _languageRepository.Received(1).Delete(language, CancellationToken.None);
         result.Should().BeOfType<DeleteLanguageCommandResponse>();
-        result.Id.Should().Be(result.Id);
     }
 }

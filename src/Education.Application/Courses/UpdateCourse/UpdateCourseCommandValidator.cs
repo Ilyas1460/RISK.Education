@@ -20,6 +20,7 @@ internal sealed class UpdateCourseCommandValidator : AbstractValidator<UpdateCou
         _courseRepository = courseRepository;
 
         RuleFor(x => x.CourseId)
+            .Cascade(CascadeMode.Stop)
             .NotEmpty()
             .WithMessage("Course ID must not be empty.")
             .MustAsync(DoesCourseExist);
@@ -72,7 +73,8 @@ internal sealed class UpdateCourseCommandValidator : AbstractValidator<UpdateCou
         CancellationToken cancellationToken)
     {
         var doesExistByNameAndCategoryIdAndLanguageId =
-            await _courseRepository.ExistsByNameCategoryAndLanguageExcludingIdAsync(command.CourseId, command.Name,
+            await _courseRepository.ExistsByNameCategoryAndLanguageExcludingIdAsync(command.CourseId,
+                command.Name,
                 command.CategoryId,
                 command.LanguageId,
                 cancellationToken);
