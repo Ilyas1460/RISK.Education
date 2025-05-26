@@ -17,7 +17,7 @@ internal sealed class CreateLanguageCommandHandler : IRequestHandler<CreateLangu
     {
         var language = Language.Create(request.Code);
 
-        _languageRepository.Add(language);
+        _languageRepository.Add(language, cancellationToken);
 
         return Task.FromResult(new CreateLanguageCommandResponse(0)); // TODO: fix this to return the created entity ID
     }

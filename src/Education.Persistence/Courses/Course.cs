@@ -12,9 +12,9 @@ public class Course : BaseEntity
 {
     public string Name { get; private set; }
 
-    public string ShortDescription { get; private set; }
+    public string? ShortDescription { get; private set; }
 
-    public string Description { get; private set; }
+    public string? Description { get; private set; }
 
     public int? CategoryId { get; private set; }
 
@@ -48,7 +48,7 @@ public class Course : BaseEntity
     {
     }
 
-    private Course(string name, string shortDescription, string description, int? categoryId, int? languageId,
+    private Course(string name, string? shortDescription, string? description, int? categoryId, int? languageId,
         int? questionAnswerCount, bool isActive, string? slug)
     {
         Name = name;
@@ -61,14 +61,14 @@ public class Course : BaseEntity
         Slug = slug;
     }
 
-    public static Course Create(string name, string shortDescription, string description, int? categoryId,
+    public static Course Create(string name, string? shortDescription, string? description, int? categoryId,
         int? languageId, int? questionAnswerCount, bool isActive, string? slug)
     {
         return new Course(name, shortDescription, description, categoryId, languageId, questionAnswerCount, isActive,
             slug);
     }
 
-    public void UpdateCourse(string name, string shortDescription, string description, int? categoryId, int? languageId,
+    public void UpdateCourse(string name, string? shortDescription, string? description, int? categoryId, int? languageId,
         int? questionAnswerCount, bool isActive, string? slug)
     {
         Name = name;
