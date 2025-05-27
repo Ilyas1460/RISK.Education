@@ -1,29 +1,38 @@
-﻿using Education.Application.Categories.GetCategory;
+﻿using System.Net;
+using System.Net.Http.Json;
+using Education.Application.Categories.GetCategory;
+using Education.Infrastructure;
 using Education.Persistence.Categories;
 using FluentAssertions;
 
 namespace Education.IntegrationTests.Categories;
 
-public class GetCategoryQueryTests : BaseIntegrationTest
+[Collection("Integration Tests")]
+public class GetCategoryQueryTests
 {
-    public GetCategoryQueryTests(IntegrationTestWebAppFactory factory) : base(factory)
+    private readonly HttpClient _client;
+    private readonly ApplicationDbContext _dbContext;
+
+    public GetCategoryQueryTests(IntegrationTestFixture fixture)
     {
+        _client = fixture.Client;
+        _dbContext = fixture.DbContext;
     }
 
     [Fact]
     public async Task Should_Return_Category_When_CategoryExists()
     {
         var category = Category.Create("Test Category");
-        DbContext.Categories.Add(category);
-        await DbContext.SaveChangesAsync();
+        _dbContext.Categories.Add(category);
+        await _dbContext.SaveChangesAsync();
 
-        var query = new GetCategoryQuery(category.Id);
-        var result = await Sender.Send(query);
+        var response = await _client.GetAsync($"/api/categories/{category.Id}");
 
-        result.Should().NotBeNull();
-        result.Id.Should().Be(category.Id);
-        result.Name.Should().Be(category.Name);
-        result.CreatedAt.Should().Be(category.CreatedAt);
-        result.UpdatedAt.Should().Be(category.UpdatedAt);
+        response.StatusCode.Should().Be(HttpStatusCode.OK);
+
+        var content = await response.Content.ReadFromJsonAsync<GetCategoryQueryResponse>();
+        content.Should().NotBeNull();
+        content.Id.Should().Be(category.Id);
+        content.Name.Should().Be(category.Name);
     }
 }
