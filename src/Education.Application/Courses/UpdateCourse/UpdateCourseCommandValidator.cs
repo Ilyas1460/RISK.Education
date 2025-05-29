@@ -63,7 +63,7 @@ internal sealed class UpdateCourseCommandValidator : AbstractValidator<UpdateCou
 
         if (course is null)
         {
-            throw new NotFoundException($"Course with ID {courseId} not found.");
+            throw new NotFoundException("Course with ID '{0}' not found.", courseId);
         }
 
         return true;
@@ -81,7 +81,8 @@ internal sealed class UpdateCourseCommandValidator : AbstractValidator<UpdateCou
 
         if (doesExistByNameAndCategoryIdAndLanguageId)
         {
-            throw new ConflictException($"Course with name '{command.Name}' already exists in the same category and language.");
+            throw new ConflictException("Course with name '{0}' already exists in the same category and language.",
+                command.Name);
         }
 
         return true;
@@ -93,7 +94,7 @@ internal sealed class UpdateCourseCommandValidator : AbstractValidator<UpdateCou
 
         if (course is not null && course.Id != courseId)
         {
-            throw new ConflictException($"Course with slug '{slug}' already exists.");
+            throw new ConflictException("Course with slug '{0}' already exists.", slug!);
         }
 
         return true;
@@ -105,7 +106,7 @@ internal sealed class UpdateCourseCommandValidator : AbstractValidator<UpdateCou
 
         if (category is null)
         {
-            throw new NotFoundException($"Category with ID '{categoryId}' does not exist.");
+            throw new NotFoundException("Category with ID '{0}' does not exist.", categoryId);
         }
 
         return true;
@@ -117,7 +118,7 @@ internal sealed class UpdateCourseCommandValidator : AbstractValidator<UpdateCou
 
         if (language is null)
         {
-            throw new NotFoundException($"Language with ID '{languageId}' does not exist.");
+            throw new NotFoundException("Language with ID '{0}' does not exist.", languageId);
         }
 
         return true;

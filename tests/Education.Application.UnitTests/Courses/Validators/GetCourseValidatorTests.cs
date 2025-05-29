@@ -61,7 +61,7 @@ public class GetCourseValidatorTests
         var act = async () => await _validator.ValidateAsync(command);
 
         await act.Should().ThrowAsync<NotFoundException>()
-            .WithMessage($"Course with ID {courseId} not found.");
+            .WithMessage("Course with ID '{0}' not found.");
         await _courseRepository.Received(1).GetByIdAsync(courseId, CancellationToken.None);
     }
 }
