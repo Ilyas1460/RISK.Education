@@ -24,7 +24,7 @@ public class CreateCategoryCommandTests : IClassFixture<IntegrationTestFixture>
     }
 
     [Theory]
-    [InlineData(CategoryConstants.CategoryNameToAdd)]
+    [InlineData("Programming")]
     public async Task Should_Create_Category_When_ValidDataProvided(string categoryName)
     {
         var command = new CreateCategoryCommand(categoryName);

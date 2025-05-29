@@ -1,4 +1,6 @@
-﻿INSERT INTO "categories" ("id", "name", "created_at", "updated_at", "deleted_at")
+﻿-- Categories
+
+INSERT INTO "categories" ("id", "name", "created_at", "updated_at", "deleted_at")
 VALUES
     (1,  'Mathematics',       '2025-04-20 08:15:00+00', '2025-05-15 14:30:00+00', NULL),
     (2,  'Physics',           '2025-04-22 10:45:00+00', '2025-05-17 09:00:00+00', NULL),
@@ -13,3 +15,23 @@ VALUES
 
 -- Reset the sequence after seeding
 SELECT setval(pg_get_serial_sequence('categories', 'id'), (SELECT MAX(id) FROM categories));
+
+
+
+-- Languages
+
+INSERT INTO "languages" ("id", "code", "created_at", "updated_at", "deleted_at")
+VALUES
+    (1,  'en', '2025-04-20 08:00:00+00', '2025-04-20 08:00:00+00', NULL),
+    (2,  'fr', '2025-04-20 08:00:00+00', '2025-04-20 08:00:00+00', NULL),
+    (3,  'de', '2025-04-20 08:00:00+00', '2025-04-20 08:00:00+00', NULL),
+    (4,  'es', '2025-04-20 08:00:00+00', '2025-04-20 08:00:00+00', '2025-04-23 08:00:00+00'),
+    (5,  'ru', '2025-04-20 08:00:00+00', '2025-04-20 08:00:00+00', NULL),
+    (6,  'zh', '2025-04-20 08:00:00+00', '2025-04-20 08:00:00+00', '2025-04-24 08:00:00+00'),
+    (7,  'az', '2025-04-20 08:00:00+00', '2025-04-20 08:00:00+00', NULL),
+    (8,  'it', '2025-04-20 08:00:00+00', '2025-04-20 08:00:00+00', NULL),
+    (9,  'tr', '2025-04-20 08:00:00+00', '2025-04-20 08:00:00+00', NULL);
+
+-- Reset the sequence after seeding
+SELECT setval(pg_get_serial_sequence('languages', 'id'), (SELECT MAX(id) FROM "languages"));
+

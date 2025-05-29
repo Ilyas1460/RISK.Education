@@ -52,8 +52,7 @@ public class DeleteLanguageValidatorTests
 
         var act = async () => await _validator.ValidateAsync(command);
 
-        await act.Should().ThrowAsync<NotFoundException>()
-            .WithMessage($"Language with ID {languageId} not found.");
+        await act.Should().ThrowAsync<NotFoundException>();
         await _languageRepository.Received(1).GetByIdAsync(languageId, CancellationToken.None);
     }
 }

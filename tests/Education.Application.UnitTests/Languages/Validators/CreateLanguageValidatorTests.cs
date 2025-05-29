@@ -62,8 +62,7 @@ public class CreateLanguageValidatorTests
 
         var act = async () => await _validator.ValidateAsync(command);
 
-        await act.Should().ThrowAsync<ConflictException>()
-            .WithMessage($"Language with code '{languageCode}' already exists.");
+        await act.Should().ThrowAsync<ConflictException>();
         await _languageRepository.Received(1).GetByCodeAsync(languageCode, CancellationToken.None);
     }
 

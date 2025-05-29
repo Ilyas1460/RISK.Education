@@ -22,7 +22,7 @@ public class UpdateCategoryCommandTests : IClassFixture<IntegrationTestFixture>
     }
 
     [Theory]
-    [InlineData(CategoryConstants.SampleCategoryId, CategoryConstants.UpdatedCategoryName)]
+    [InlineData(CategoryConstants.SampleCategoryId, "Programming")]
     public async Task Should_Update_Category_When_ValidDataProvided(int categoryId, string updatedCategoryName)
     {
         var command = new UpdateCategoryCommand { CategoryId = categoryId, Name = updatedCategoryName };
@@ -40,7 +40,7 @@ public class UpdateCategoryCommandTests : IClassFixture<IntegrationTestFixture>
     }
 
     [Theory]
-    [InlineData(CategoryConstants.EmptyCategoryId, CategoryConstants.AnotherUpdatedCategoryName)]
+    [InlineData(CategoryConstants.EmptyCategoryId, "Advanced Programming")]
     public async Task Should_Return_BadRequest_When_CategoryIdIsEmpty(int categoryId, string updatedCategoryName)
     {
         var command = new UpdateCategoryCommand { CategoryId = categoryId, Name = updatedCategoryName };
@@ -58,7 +58,7 @@ public class UpdateCategoryCommandTests : IClassFixture<IntegrationTestFixture>
     }
 
     [Theory]
-    [InlineData(CategoryConstants.NonExistentCategoryId, CategoryConstants.UpdatedCategoryName)]
+    [InlineData(CategoryConstants.NonExistentCategoryId, "C# Programming")]
     public async Task Should_Return_NotFound_When_CategoryDoesNotExist(int categoryId, string updatedCategoryName)
     {
         var command = new UpdateCategoryCommand { CategoryId = categoryId, Name = updatedCategoryName };
@@ -69,7 +69,7 @@ public class UpdateCategoryCommandTests : IClassFixture<IntegrationTestFixture>
         var content = await response.Content.ReadFromJsonAsync<CustomProblemDetails>();
         content.Should().NotBeNull();
         content.Type.Should().Be(nameof(NotFoundException));
-        content.Detail.Should().Be($"Category with ID {categoryId} not found.");
+        content.Detail.Should().Be($"Category with ID '{categoryId}' not found.");
         content.Status.Should().Be((int)HttpStatusCode.NotFound);
     }
 

@@ -47,7 +47,7 @@ public class GetCategoryQueryTests : IClassFixture<IntegrationTestFixture>
         var content = await response.Content.ReadFromJsonAsync<CustomProblemDetails>();
         content.Should().NotBeNull();
         content.Type.Should().Be(nameof(NotFoundException));
-        content.Detail.Should().Be($"Category with ID {categoryId} not found.");
+        content.Detail.Should().Be($"Category with ID '{categoryId}' not found.");
         content.Status.Should().Be((int)HttpStatusCode.NotFound);
     }
 

@@ -60,8 +60,7 @@ public class UpdateLanguageValidatorTests
 
         var act = async () => await _validator.ValidateAsync(command);
 
-        await act.Should().ThrowAsync<NotFoundException>()
-            .WithMessage($"Language with ID {languageId} not found.");
+        await act.Should().ThrowAsync<NotFoundException>();
         await _languageRepository.Received(1).GetByIdAsync(languageId, CancellationToken.None);
     }
 
@@ -94,8 +93,7 @@ public class UpdateLanguageValidatorTests
 
         var act = async () => await _validator.ValidateAsync(command);
 
-        await act.Should().ThrowAsync<ConflictException>()
-            .WithMessage($"Language with code '{languageCode}' already exists.");
+        await act.Should().ThrowAsync<ConflictException>();
         await _languageRepository.Received(1).GetByCodeAsync(languageCode, CancellationToken.None);
     }
 

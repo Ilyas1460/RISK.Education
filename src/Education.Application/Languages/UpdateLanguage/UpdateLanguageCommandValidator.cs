@@ -37,7 +37,7 @@ internal sealed class UpdateLanguageCommandValidator : AbstractValidator<UpdateL
 
         if (language is null)
         {
-            throw new NotFoundException($"Language with ID {languageId} not found.");
+            throw new NotFoundException("Language with ID '{0}' not found.", languageId);
         }
 
         return true;
@@ -49,7 +49,7 @@ internal sealed class UpdateLanguageCommandValidator : AbstractValidator<UpdateL
 
         if (language is not null && language.Id != languageId)
         {
-            throw new ConflictException($"Language with code '{code}' already exists.");
+            throw new ConflictException("Language with code '{0}' already exists.", code);
         }
 
         return true;
