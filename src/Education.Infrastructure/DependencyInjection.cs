@@ -1,4 +1,5 @@
 ﻿using Education.Application.Abstractions.Localization;
+using Education.Infrastructure.Extensions;
 using Education.Infrastructure.Interceptors;
 using Education.Infrastructure.Localization;
 using Education.Infrastructure.Repositories;
@@ -29,13 +30,7 @@ public static class DependencyInjection
                                   throw new ArgumentNullException(nameof(configuration),
                                       "Database connection string is missing.");
 
-        services.AddDbContext<ApplicationDbContext>(options =>
-        {
-            options.UseLazyLoadingProxies()
-                .UseNpgsql(connectionString)
-                .UseSnakeCaseNamingConvention()
-                .AddInterceptors(new AuditableEntityInterceptor());
-        });
+        services.AddApplicationDbContext(connectionString);
 
         services.AddScoped<ICategoryRepository, CategoryRepository>();
 

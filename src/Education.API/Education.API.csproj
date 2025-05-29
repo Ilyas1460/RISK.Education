@@ -12,4 +12,7 @@
     <ProjectReference Include="..\Education.Infrastructure\Education.Infrastructure.csproj"/>
   </ItemGroup>
 
+  <ItemGroup>
+    <InternalsVisibleTo Include="Education.IntegrationTests" />
+  </ItemGroup>
 </Project>

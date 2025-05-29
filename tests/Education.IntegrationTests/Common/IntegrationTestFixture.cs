@@ -1,15 +1,14 @@
 ﻿using Education.Infrastructure;
-using Microsoft.AspNetCore.Routing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Testcontainers.PostgreSql;
 
-namespace Education.IntegrationTests;
+namespace Education.IntegrationTests.Common;
 
 public class IntegrationTestFixture : IAsyncLifetime
 {
     private readonly PostgreSqlContainer _postgreSql = new PostgreSqlBuilder()
-        .WithImage("postgres:16")
+        .WithImage("postgres:latest")
         .WithUsername("postgres")
         .WithPassword("postgres")
         .WithDatabase("risk_education_test")
@@ -31,7 +30,10 @@ public class IntegrationTestFixture : IAsyncLifetime
         DbContext = _scope.ServiceProvider.GetRequiredService<ApplicationDbContext>();
         await DbContext.Database.MigrateAsync();
 
-        // Seed the database if necessary
+        var path = Path.Combine(AppContext.BaseDirectory, "Common", "Seed", "seedData.sql");
+        var sql = await File.ReadAllTextAsync(path);
+
+        await DbContext.Database.ExecuteSqlRawAsync(sql);
 
         Client = _factory.CreateClient();
     }

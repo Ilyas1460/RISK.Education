@@ -1,14 +1,14 @@
 ﻿using Education.Infrastructure;
-using Education.Infrastructure.Interceptors;
+using Education.Infrastructure.Extensions;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc.Testing;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Testcontainers.PostgreSql;
 
-namespace Education.IntegrationTests;
+namespace Education.IntegrationTests.Common;
 
-public sealed class ApiFactory : WebApplicationFactory<Program>
+internal sealed class ApiFactory : WebApplicationFactory<Program>
 {
     private readonly PostgreSqlContainer _postgres;
 
@@ -24,12 +24,7 @@ public sealed class ApiFactory : WebApplicationFactory<Program>
             var descriptor = services.Single(d => d.ServiceType == typeof(DbContextOptions<ApplicationDbContext>));
             services.Remove(descriptor);
 
-            services.AddDbContext<ApplicationDbContext>(options =>
-                options
-                    .UseLazyLoadingProxies()
-                    .UseNpgsql(_postgres.GetConnectionString())
-                    .UseSnakeCaseNamingConvention()
-                    .AddInterceptors(new AuditableEntityInterceptor()));
+            services.AddApplicationDbContext(_postgres.GetConnectionString());
 
             services
                 .AddControllers()

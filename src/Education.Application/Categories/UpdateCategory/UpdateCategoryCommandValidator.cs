@@ -43,7 +43,7 @@ internal sealed class UpdateCategoryCommandValidator : AbstractValidator<UpdateC
 
         if (category is not null && category.Id != categoryId)
         {
-            throw new ConflictException("Category with title {0} already exists.", title);
+            throw new ConflictException("Category with title '{0}' already exists.", title);
         }
 
         return true;

@@ -1,46 +1,48 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using Education.Application.Categories.GetCategory;
+using Education.Application.Categories.DeleteCategory;
 using Education.Exceptions.Exceptions;
 using Education.Infrastructure;
 using Education.IntegrationTests.Common;
 using Education.IntegrationTests.Common.Response;
-using Education.Persistence.Categories;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace Education.IntegrationTests.Categories;
 
-public class GetCategoryQueryTests : IClassFixture<IntegrationTestFixture>
+public class DeleteCategoryCommandTests : IClassFixture<IntegrationTestFixture>
 {
     private readonly HttpClient _client;
     private readonly ApplicationDbContext _dbContext;
 
-    public GetCategoryQueryTests(IntegrationTestFixture fixture)
+    public DeleteCategoryCommandTests(IntegrationTestFixture fixture)
     {
         _client = fixture.Client;
         _dbContext = fixture.DbContext;
     }
 
     [Theory]
-    [InlineData(CategoryConstants.SampleCategoryId, CategoryConstants.SampleCategoryName)]
-    public async Task Should_Return_Category_When_CategoryExists(int categoryId, string categoryName)
+    [InlineData(CategoryConstants.SampleCategoryId)]
+    public async Task Should_Delete_Category_When_CategoryExists(int categoryId)
     {
-        var response = await _client.GetAsync($"/api/categories/{categoryId}");
+        var response = await _client.DeleteAsync($"/api/categories/{categoryId}");
 
         response.StatusCode.Should().Be(HttpStatusCode.OK);
 
-        var content = await response.Content.ReadFromJsonAsync<GetCategoryQueryResponse>();
+        var content = await response.Content.ReadFromJsonAsync<DeleteCategoryCommandResponse>();
+
         content.Should().NotBeNull();
         content.Id.Should().Be(categoryId);
-        content.Name.Should().Be(categoryName);
+
+        var deletedCategory = await _dbContext.Categories.FirstOrDefaultAsync(c => c.Id == categoryId);
+        deletedCategory.Should().BeNull();
     }
 
     [Theory]
     [InlineData(CategoryConstants.NonExistentCategoryId)]
     public async Task Should_Return_NotFound_When_CategoryDoesNotExist(int categoryId)
     {
-        var response = await _client.GetAsync($"/api/categories/{categoryId}");
+        var response = await _client.DeleteAsync($"/api/categories/{categoryId}");
 
         response.StatusCode.Should().Be(HttpStatusCode.NotFound);
 
@@ -55,7 +57,7 @@ public class GetCategoryQueryTests : IClassFixture<IntegrationTestFixture>
     [InlineData(CategoryConstants.EmptyCategoryId)]
     public async Task Should_Return_BadRequest_When_CategoryIdIsEmpty(int categoryId)
     {
-        var response = await _client.GetAsync($"/api/categories/{categoryId}");
+        var response = await _client.DeleteAsync($"/api/categories/{categoryId}");
 
         response.StatusCode.Should().Be(HttpStatusCode.BadRequest);
 
