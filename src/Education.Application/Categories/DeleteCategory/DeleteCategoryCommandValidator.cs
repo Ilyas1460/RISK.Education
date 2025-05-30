@@ -25,7 +25,7 @@ internal sealed class DeleteCategoryCommandValidator : AbstractValidator<DeleteC
 
         if (category is null)
         {
-            throw new NotFoundException("Category with ID {0} not found.", categoryId);
+            throw new NotFoundException("Category with ID '{0}' not found.", categoryId);
         }
 
         return true;

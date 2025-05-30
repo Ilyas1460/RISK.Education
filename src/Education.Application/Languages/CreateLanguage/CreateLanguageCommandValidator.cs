@@ -31,7 +31,7 @@ internal sealed class CreateLanguageCommandValidator : AbstractValidator<CreateL
 
         if (language is not null)
         {
-            throw new ConflictException($"Language with code '{code}' already exists.");
+            throw new ConflictException("Language with code '{0}' already exists.", code);
         }
 
         return true;

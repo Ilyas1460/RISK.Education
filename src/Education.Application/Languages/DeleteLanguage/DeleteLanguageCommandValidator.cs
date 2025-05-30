@@ -25,7 +25,7 @@ internal sealed class DeleteLanguageCommandValidator : AbstractValidator<DeleteL
 
         if (language is null)
         {
-            throw new NotFoundException($"Language with ID {languageId} not found.");
+            throw new NotFoundException("Language with ID '{0}' not found.", languageId);
         }
 
         return true;
