@@ -64,7 +64,7 @@ internal sealed class CreateCourseCommandValidator : AbstractValidator<CreateCou
         if (doesExistByNameAndCategoryIdAndLanguageId)
         {
             throw new ConflictException(
-                $"Course with name '{command.Name}' already exists in the same category and language.");
+                "Course with name '{0}' already exists in the same category and language.", command.Name);
         }
 
         return true;
@@ -76,7 +76,7 @@ internal sealed class CreateCourseCommandValidator : AbstractValidator<CreateCou
 
         if (course is not null)
         {
-            throw new ConflictException($"Course with slug '{slug}' already exists.");
+            throw new ConflictException("Course with slug '{0}' already exists.", slug);
         }
 
         return true;
@@ -88,7 +88,7 @@ internal sealed class CreateCourseCommandValidator : AbstractValidator<CreateCou
 
         if (category is null)
         {
-            throw new NotFoundException($"Category with ID '{categoryId}' does not exist.");
+            throw new NotFoundException("Category with ID '{0}' does not exist.", categoryId);
         }
 
         return true;
@@ -100,7 +100,7 @@ internal sealed class CreateCourseCommandValidator : AbstractValidator<CreateCou
 
         if (language is null)
         {
-            throw new NotFoundException($"Language with ID '{languageId}' does not exist.");
+            throw new NotFoundException("Language with ID '{0}' does not exist.", languageId);
         }
 
         return true;

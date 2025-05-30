@@ -140,7 +140,7 @@ public class UpdateCourseValidatorTests
         var act = async () => await _validator.ValidateAsync(command);
 
         await act.Should().ThrowAsync<NotFoundException>()
-            .WithMessage($"Course with ID {courseId} not found.");
+            .WithMessage("Course with ID '{0}' not found.");
         await _courseRepository.Received(1).GetByIdAsync(courseId, CancellationToken.None);
     }
 
@@ -354,7 +354,7 @@ public class UpdateCourseValidatorTests
         var act = async () => await _validator.ValidateAsync(command);
 
         await act.Should().ThrowAsync<NotFoundException>()
-            .WithMessage($"Category with ID '{categoryId}' does not exist.");
+            .WithMessage("Category with ID '{0}' does not exist.");
         await _categoryRepository.Received(1).GetByIdAsync(categoryId, CancellationToken.None);
     }
 
@@ -399,7 +399,7 @@ public class UpdateCourseValidatorTests
         var act = async () => await _validator.ValidateAsync(command);
 
         await act.Should().ThrowAsync<NotFoundException>()
-            .WithMessage($"Language with ID '{languageId}' does not exist.");
+            .WithMessage("Language with ID '{0}' does not exist.");
         await _categoryRepository.Received(1).GetByIdAsync(categoryId, CancellationToken.None);
     }
 
@@ -444,7 +444,7 @@ public class UpdateCourseValidatorTests
         var act = async () => await _validator.ValidateAsync(command);
 
         await act.Should().ThrowAsync<ConflictException>()
-            .WithMessage($"Course with name '{name}' already exists in the same category and language.");
+            .WithMessage("Course with name '{0}' already exists in the same category and language.");
         await _courseRepository.Received(1).ExistsByNameCategoryAndLanguageExcludingIdAsync(
             courseId,
             name,
@@ -505,6 +505,6 @@ public class UpdateCourseValidatorTests
         var act = async () => await _validator.ValidateAsync(command);
 
         await act.Should().ThrowAsync<ConflictException>()
-            .WithMessage($"Course with slug '{slug}' already exists.");
+            .WithMessage("Course with slug '{0}' already exists.");
     }
 }

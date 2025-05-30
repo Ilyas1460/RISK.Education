@@ -25,7 +25,7 @@ internal sealed class DeleteCourseCommandValidator : AbstractValidator<DeleteCou
 
         if (course is null)
         {
-            throw new NotFoundException($"Course with ID {courseId} not found.");
+            throw new NotFoundException("Course with ID '{0}' not found.", courseId);
         }
 
         return true;
