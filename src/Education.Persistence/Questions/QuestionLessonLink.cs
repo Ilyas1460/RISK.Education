@@ -5,11 +5,11 @@ namespace Education.Persistence.Questions;
 
 public class QuestionLessonLink : BaseEntity
 {
-    public int? LessonId { get; set; }
+    public int? LessonId { get; private set; }
 
-    public int? QuestionId { get; set; }
+    public int? QuestionId { get; private set; }
 
-    public virtual Lesson? Lesson { get; set; }
+    public virtual Lesson? Lesson { get; private set; }
 
-    public virtual Question? Question { get; set; }
+    public virtual Question? Question { get; private set; }
 }

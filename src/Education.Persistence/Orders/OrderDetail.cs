@@ -5,19 +5,19 @@ namespace Education.Persistence.Orders;
 
 public class OrderDetail : BaseEntity
 {
-    public int? OrderId { get; set; }
+    public int? OrderId { get; private set; }
 
-    public int? CourseId { get; set; }
+    public int? CourseId { get; private set; }
 
-    public int CourseAccessType { get; set; }
+    public int CourseAccessType { get; private set; }
 
-    public double? Price { get; set; }
+    public double? Price { get; private set; }
 
-    public int? SubscriptionPlanId { get; set; }
+    public int? SubscriptionPlanId { get; private set; }
 
-    public virtual Course? Course { get; set; }
+    public virtual Course? Course { get; private set; }
 
-    public virtual Order? Order { get; set; }
+    public virtual Order? Order { get; private set; }
 
-    public virtual SubscriptionPlan? SubscriptionPlan { get; set; }
+    public virtual SubscriptionPlan? SubscriptionPlan { get; private set; }
 }

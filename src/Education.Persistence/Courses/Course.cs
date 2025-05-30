@@ -26,23 +26,23 @@ public class Course : BaseEntity
 
     public string? Slug { get; private set; }
 
-    public virtual ICollection<AdminUserRoleLink> AdminUserRoleLinks { get; set; } = new List<AdminUserRoleLink>();
+    public virtual ICollection<AdminUserRoleLink> AdminUserRoleLinks { get; private set; } = new List<AdminUserRoleLink>();
 
-    public virtual Category? Category { get; set; }
+    public virtual Category? Category { get; private set; }
 
-    public virtual Language? Language { get; set; }
+    public virtual Language? Language { get; private set; }
 
-    public virtual ICollection<OrderDetail> OrderDetails { get; set; } = new List<OrderDetail>();
+    public virtual ICollection<OrderDetail> OrderDetails { get; private set; } = new List<OrderDetail>();
 
-    public virtual ICollection<Price> Prices { get; set; } = new List<Price>();
+    public virtual ICollection<Price> Prices { get; private set; } = new List<Price>();
 
-    public virtual ICollection<SubscriptionPlan> SubscriptionPlans { get; set; } = new List<SubscriptionPlan>();
+    public virtual ICollection<SubscriptionPlan> SubscriptionPlans { get; private set; } = new List<SubscriptionPlan>();
 
-    public virtual ICollection<TestExam> TestExams { get; set; } = new List<TestExam>();
+    public virtual ICollection<TestExam> TestExams { get; private set; } = new List<TestExam>();
 
-    public virtual ICollection<Topic> Topics { get; set; } = new List<Topic>();
+    public virtual ICollection<Topic> Topics { get; private set; } = new List<Topic>();
 
-    public virtual ICollection<UserCourse> UserCourses { get; set; } = new List<UserCourse>();
+    public virtual ICollection<UserCourse> UserCourses { get; private set; } = new List<UserCourse>();
 
     protected Course()
     {

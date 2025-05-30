@@ -4,11 +4,11 @@ namespace Education.Persistence.Lessons;
 
 public class LessonVideoLink : BaseEntity
 {
-    public int? LessonId { get; set; }
+    public int? LessonId { get; private set; }
 
-    public int? LessonVideoId { get; set; }
+    public int? LessonVideoId { get; private set; }
 
-    public virtual Lesson? Lesson { get; set; }
+    public virtual Lesson? Lesson { get; private set; }
 
-    public virtual LessonVideo? LessonVideo { get; set; }
+    public virtual LessonVideo? LessonVideo { get; private set; }
 }

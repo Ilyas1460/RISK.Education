@@ -5,17 +5,17 @@ namespace Education.Persistence.Contents;
 
 public class Article : BaseEntity
 {
-    public string Slug { get; set; } = null!;
+    public string Slug { get; private set; } = null!;
 
-    public string? CoverImageUrl { get; set; }
+    public string? CoverImageUrl { get; private set; }
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get; private set; }
 
-    public DateTime PublishedDate { get; set; }
+    public DateTime PublishedDate { get; private set; }
 
-    public int? CategoryId { get; set; }
+    public int? CategoryId { get; private set; }
 
-    public virtual ICollection<ArticleTranslation> ArticleTranslations { get; set; } = new List<ArticleTranslation>();
+    public virtual ICollection<ArticleTranslation> ArticleTranslations { get; private set; } = new List<ArticleTranslation>();
 
-    public virtual Category? Category { get; set; }
+    public virtual Category? Category { get; private set; }
 }

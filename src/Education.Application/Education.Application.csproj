@@ -13,6 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <InternalsVisibleTo Include="Education.Application.UnitTests" />
+    <InternalsVisibleTo Include="Education.Unit.Tests" />
   </ItemGroup>
 </Project>

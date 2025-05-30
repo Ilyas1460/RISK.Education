@@ -2,15 +2,15 @@
 
 public class CourseSummary
 {
-    public int? CourseId { get; set; }
+    public int? CourseId { get; private set; }
 
-    public bool? IsActive { get; set; }
+    public bool? IsActive { get; private set; }
 
-    public string? LanguageCode { get; set; }
+    public string? LanguageCode { get; private set; }
 
-    public long? TopicCount { get; set; }
+    public long? TopicCount { get; private set; }
 
-    public long? QuestionCount { get; set; }
+    public long? QuestionCount { get; private set; }
 
-    public long? TestExamCount { get; set; }
+    public long? TestExamCount { get; private set; }
 }

@@ -4,9 +4,9 @@ namespace Education.Persistence.Courses;
 
 public class CourseProgressLevel : BaseEntity
 {
-    public string Name { get; set; } = null!;
+    public string Name { get; private set; } = null!;
 
-    public int Order { get; set; }
+    public int Order { get; private set; }
 
-    public virtual ICollection<CourseProgressConfiguration> CourseProgressConfigurations { get; set; } = new List<CourseProgressConfiguration>();
+    public virtual ICollection<CourseProgressConfiguration> CourseProgressConfigurations { get; private set; } = new List<CourseProgressConfiguration>();
 }
