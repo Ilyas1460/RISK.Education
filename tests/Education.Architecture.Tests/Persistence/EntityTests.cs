@@ -2,9 +2,9 @@
 using FluentAssertions;
 using NetArchTest.Rules;
 
-namespace Education.Architecture.Tests;
+namespace Education.Architecture.Tests.Persistence;
 
-public class PersistenceLayerTests : BaseArchitectureTests
+public class EntityTests : BaseArchitectureTests
 {
     [Fact]
     public void Entities_Should_Have_PrivateSetters()

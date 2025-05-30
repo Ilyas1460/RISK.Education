@@ -114,14 +114,14 @@ public class CreateCourseCommandTests : IClassFixture<IntegrationTestFixture>
     }
 
     [Theory]
-    [InlineData("Test Course",
+    [InlineData("Test Course 13",
         "Veryyyyyyyyyyyyyy loooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooonggg descriptionnnn",
         "Detailed Description",
         1,
         1,
         5,
         true,
-        "slug")]
+        null)]
     public async Task Should_Return_BadRequest_When_ShortDescriptionIsTooLong(
         string name,
         string shortDescription,
