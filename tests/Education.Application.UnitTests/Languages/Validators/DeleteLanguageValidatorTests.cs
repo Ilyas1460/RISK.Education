@@ -1,5 +1,4 @@
 ﻿using Education.Application.Languages.DeleteLanguage;
-using Education.Application.Languages.GetLanguage;
 using Education.Exceptions.Exceptions;
 using Education.Persistence.Languages;
 using FluentAssertions;

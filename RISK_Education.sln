@@ -28,6 +28,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Application.UnitT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.IntegrationTests", "tests\Education.IntegrationTests\Education.IntegrationTests.csproj", "{7695A904-CDE1-4208-8FB7-8AA6FC8DBF12}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Infrastructure.MigrationTests", "tests\Education.Infrastructure.MigrationTests\Education.Infrastructure.MigrationTests.csproj", "{F656B9FC-440D-4598-9359-A7C1B4BB2ACD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -66,6 +68,10 @@ Global
 		{7695A904-CDE1-4208-8FB7-8AA6FC8DBF12}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7695A904-CDE1-4208-8FB7-8AA6FC8DBF12}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7695A904-CDE1-4208-8FB7-8AA6FC8DBF12}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F656B9FC-440D-4598-9359-A7C1B4BB2ACD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F656B9FC-440D-4598-9359-A7C1B4BB2ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F656B9FC-440D-4598-9359-A7C1B4BB2ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F656B9FC-440D-4598-9359-A7C1B4BB2ACD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5AC81078-4931-4826-8815-61050C584886} = {B0EA08BA-216F-48C0-BFB1-14849FB0357D}
@@ -80,5 +86,6 @@ Global
 		{F5C62696-6F92-4A8C-866A-E66C555FB835} = {8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}
 		{F2277111-D2D3-42B1-B4EA-B7B2EDC6310F} = {8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}
 		{7695A904-CDE1-4208-8FB7-8AA6FC8DBF12} = {8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}
+		{F656B9FC-440D-4598-9359-A7C1B4BB2ACD} = {8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}
 	EndGlobalSection
 EndGlobal
