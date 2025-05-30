@@ -22,15 +22,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{059763E1-7DF
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Persistence.UnitTests", "tests\Education.Persistence.UnitTests\Education.Persistence.UnitTests.csproj", "{F5C62696-6F92-4A8C-866A-E66C555FB835}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Unit.Tests", "tests\Education.Unit.Tests\Education.Unit.Tests.csproj", "{F2277111-D2D3-42B1-B4EA-B7B2EDC6310F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Application.UnitTests", "tests\Education.Application.UnitTests\Education.Application.UnitTests.csproj", "{F2277111-D2D3-42B1-B4EA-B7B2EDC6310F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Integration.Tests", "tests\Education.Integration.Tests\Education.Integration.Tests.csproj", "{7695A904-CDE1-4208-8FB7-8AA6FC8DBF12}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.IntegrationTests", "tests\Education.IntegrationTests\Education.IntegrationTests.csproj", "{7695A904-CDE1-4208-8FB7-8AA6FC8DBF12}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Migration.Tests", "tests\Education.Migration.Tests\Education.Migration.Tests.csproj", "{F656B9FC-440D-4598-9359-A7C1B4BB2ACD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Infrastructure.MigrationTests", "tests\Education.Infrastructure.MigrationTests\Education.Infrastructure.MigrationTests.csproj", "{F656B9FC-440D-4598-9359-A7C1B4BB2ACD}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.ArchitecturalTests", "Education.ArchitecturalTests\Education.ArchitecturalTests.csproj", "{58523FA7-B415-4DBB-B2A3-589A017F496B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Education.Architecture.Tests", "tests\Education.Architecture.Tests\Education.Architecture.Tests.csproj", "{762C62E6-7546-434B-9BD3-C19783855DA9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,10 +56,6 @@ Global
 		{E6B38890-0D6C-4C24-8A5A-6980E4DA10C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E6B38890-0D6C-4C24-8A5A-6980E4DA10C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E6B38890-0D6C-4C24-8A5A-6980E4DA10C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{F5C62696-6F92-4A8C-866A-E66C555FB835}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{F5C62696-6F92-4A8C-866A-E66C555FB835}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{F5C62696-6F92-4A8C-866A-E66C555FB835}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{F5C62696-6F92-4A8C-866A-E66C555FB835}.Release|Any CPU.Build.0 = Release|Any CPU
 		{F2277111-D2D3-42B1-B4EA-B7B2EDC6310F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{F2277111-D2D3-42B1-B4EA-B7B2EDC6310F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F2277111-D2D3-42B1-B4EA-B7B2EDC6310F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -74,10 +68,10 @@ Global
 		{F656B9FC-440D-4598-9359-A7C1B4BB2ACD}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F656B9FC-440D-4598-9359-A7C1B4BB2ACD}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F656B9FC-440D-4598-9359-A7C1B4BB2ACD}.Release|Any CPU.Build.0 = Release|Any CPU
-		{58523FA7-B415-4DBB-B2A3-589A017F496B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{58523FA7-B415-4DBB-B2A3-589A017F496B}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{58523FA7-B415-4DBB-B2A3-589A017F496B}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{58523FA7-B415-4DBB-B2A3-589A017F496B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{762C62E6-7546-434B-9BD3-C19783855DA9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{762C62E6-7546-434B-9BD3-C19783855DA9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{762C62E6-7546-434B-9BD3-C19783855DA9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{762C62E6-7546-434B-9BD3-C19783855DA9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{5AC81078-4931-4826-8815-61050C584886} = {B0EA08BA-216F-48C0-BFB1-14849FB0357D}
@@ -89,10 +83,9 @@ Global
 		{98F202CA-7148-4C9B-8B26-0D5A003A70C9} = {059763E1-7DF6-424F-B238-9230C2873613}
 		{B0EA08BA-216F-48C0-BFB1-14849FB0357D} = {059763E1-7DF6-424F-B238-9230C2873613}
 		{377664DF-2939-4120-978A-498AC465FD6F} = {059763E1-7DF6-424F-B238-9230C2873613}
-		{F5C62696-6F92-4A8C-866A-E66C555FB835} = {8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}
 		{F2277111-D2D3-42B1-B4EA-B7B2EDC6310F} = {8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}
 		{7695A904-CDE1-4208-8FB7-8AA6FC8DBF12} = {8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}
 		{F656B9FC-440D-4598-9359-A7C1B4BB2ACD} = {8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}
-		{58523FA7-B415-4DBB-B2A3-589A017F496B} = {8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}
+		{762C62E6-7546-434B-9BD3-C19783855DA9} = {8F1BCDCA-4603-4B21-B263-6CF2FDB62BD8}
 	EndGlobalSection
 EndGlobal
