@@ -5,11 +5,11 @@ namespace Education.Persistence.Lessons;
 
 public class LessonVideoCompletion : BaseEntity
 {
-    public int? UserId { get; set; }
+    public int? UserId { get; private set; }
 
-    public int? LessonVideoId { get; set; }
+    public int? LessonVideoId { get; private set; }
 
-    public virtual LessonVideo? LessonVideo { get; set; }
+    public virtual LessonVideo? LessonVideo { get; private set; }
 
-    public virtual User? User { get; set; }
+    public virtual User? User { get; private set; }
 }

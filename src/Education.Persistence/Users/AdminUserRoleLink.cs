@@ -5,13 +5,13 @@ namespace Education.Persistence.Users;
 
 public class AdminUserRoleLink : BaseEntity
 {
-    public int AdminUserId { get; set; }
+    public int AdminUserId { get; private set; }
 
-    public int? CourseId { get; set; }
+    public int? CourseId { get; private set; }
 
-    public int AdminRole { get; set; }
+    public int AdminRole { get; private set; }
 
-    public virtual AdminUser AdminUser { get; set; } = null!;
+    public virtual AdminUser AdminUser { get; private set; } = null!;
 
-    public virtual Course? Course { get; set; }
+    public virtual Course? Course { get; private set; }
 }

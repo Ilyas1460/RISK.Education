@@ -5,11 +5,11 @@ namespace Education.Persistence.TestExams;
 
 public class TestExamHistoryUserQuestionAnswerLink : BaseEntity
 {
-    public int? UserQuestionAnswerId { get; set; }
+    public int? UserQuestionAnswerId { get; private set; }
 
-    public int TestExamHistoryId { get; set; }
+    public int TestExamHistoryId { get; private set; }
 
-    public virtual TestExamHistory TestExamHistory { get; set; } = null!;
+    public virtual TestExamHistory TestExamHistory { get; private set; } = null!;
 
-    public virtual UserQuestionAnswer? UserQuestionAnswer { get; set; }
+    public virtual UserQuestionAnswer? UserQuestionAnswer { get; private set; }
 }

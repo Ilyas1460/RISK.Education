@@ -5,11 +5,11 @@ namespace Education.Persistence.TestExams;
 
 public class TestExamTag : BaseEntity
 {
-    public int TestExamId { get; set; }
+    public int TestExamId { get; private set; }
 
-    public int TagId { get; set; }
+    public int TagId { get; private set; }
 
-    public virtual Tag Tag { get; set; }
+    public virtual Tag Tag { get; private set; }
 
-    public virtual TestExam TestExam { get; set; }
+    public virtual TestExam TestExam { get; private set; }
 }

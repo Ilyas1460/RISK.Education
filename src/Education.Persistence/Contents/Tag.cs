@@ -5,7 +5,7 @@ namespace Education.Persistence.Contents;
 
 public class Tag : BaseEntity
 {
-    public string Name { get; set; }
+    public string Name { get; private set; }
 
-    public virtual ICollection<TestExamTag> TestExamTags { get; set; } = new List<TestExamTag>();
+    public virtual ICollection<TestExamTag> TestExamTags { get; private set; } = new List<TestExamTag>();
 }

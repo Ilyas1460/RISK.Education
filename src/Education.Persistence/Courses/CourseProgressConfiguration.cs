@@ -4,11 +4,11 @@ namespace Education.Persistence.Courses;
 
 public class CourseProgressConfiguration : BaseEntity
 {
-    public int? LevelId { get; set; }
+    public int? LevelId { get; private set; }
 
-    public int Component { get; set; }
+    public int Component { get; private set; }
 
-    public double Weight { get; set; }
+    public double Weight { get; private set; }
 
-    public virtual CourseProgressLevel? Level { get; set; }
+    public virtual CourseProgressLevel? Level { get; private set; }
 }

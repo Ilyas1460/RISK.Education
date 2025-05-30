@@ -5,27 +5,27 @@ namespace Education.Persistence.Contents;
 
 public class Faq : BaseEntity
 {
-    public string Question { get; set; }
+    public string Question { get; private set; }
 
-    public string? ShortContent { get; set; }
+    public string? ShortContent { get; private set; }
 
-    public string Content { get; set; }
+    public string Content { get; private set; }
 
-    public bool IsActive { get; set; }
+    public bool IsActive { get; private set; }
 
-    public int? CategoryId { get; set; }
+    public int? CategoryId { get; private set; }
 
-    public int Order { get; set; }
+    public int Order { get; private set; }
 
-    public bool ShowOnMain { get; set; }
+    public bool ShowOnMain { get; private set; }
 
-    public string? MetaDescription { get; set; }
+    public string? MetaDescription { get; private set; }
 
-    public string? MetaKeywords { get; set; }
+    public string? MetaKeywords { get; private set; }
 
-    public string? MetaTitle { get; set; }
+    public string? MetaTitle { get; private set; }
 
-    public string Slug { get; set; }
+    public string Slug { get; private set; }
 
-    public virtual Category? Category { get; set; }
+    public virtual Category? Category { get; private set; }
 }

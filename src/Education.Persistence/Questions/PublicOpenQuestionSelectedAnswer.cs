@@ -4,9 +4,9 @@ namespace Education.Persistence.Questions;
 
 public class PublicOpenQuestionSelectedAnswer : BaseEntity
 {
-    public int? PublicQuestionAnswerId { get; set; }
+    public int? PublicQuestionAnswerId { get; private set; }
 
-    public string Answer { get; set; }
+    public string Answer { get; private set; }
 
-    public virtual PublicQuestionAnswer? PublicQuestionAnswer { get; set; }
+    public virtual PublicQuestionAnswer? PublicQuestionAnswer { get; private set; }
 }

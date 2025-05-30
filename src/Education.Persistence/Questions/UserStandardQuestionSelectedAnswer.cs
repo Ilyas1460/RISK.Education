@@ -4,11 +4,11 @@ namespace Education.Persistence.Questions;
 
 public class UserStandardQuestionSelectedAnswer : BaseEntity
 {
-    public int? UserQuestionAnswerId { get; set; }
+    public int? UserQuestionAnswerId { get; private set; }
 
-    public int UserSelectedAnswerId { get; set; }
+    public int UserSelectedAnswerId { get; private set; }
 
-    public virtual UserQuestionAnswer? UserQuestionAnswer { get; set; }
+    public virtual UserQuestionAnswer? UserQuestionAnswer { get; private set; }
 
-    public virtual QuestionAnswer UserSelectedAnswer { get; set; } = null!;
+    public virtual QuestionAnswer UserSelectedAnswer { get; private set; } = null!;
 }

@@ -4,11 +4,11 @@ namespace Education.Persistence.Questions;
 
 public class RelatedQuestion : BaseEntity
 {
-    public string Question { get; set; } = null!;
+    public string Question { get; private set; } = null!;
 
-    public int QuestionType { get; set; }
+    public int QuestionType { get; private set; }
 
-    public string? AudioUrl { get; set; }
+    public string? AudioUrl { get; private set; }
 
-    public virtual ICollection<RelatedQuestionLink> RelatedQuestionLinks { get; set; } = new List<RelatedQuestionLink>();
+    public virtual ICollection<RelatedQuestionLink> RelatedQuestionLinks { get; private set; } = new List<RelatedQuestionLink>();
 }
