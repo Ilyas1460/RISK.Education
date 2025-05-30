@@ -1,5 +1,4 @@
-﻿using System.Collections.Immutable;
-using System.Net;
+﻿using System.Net;
 using System.Net.Http.Json;
 using Education.Application.Categories.DeleteCategory;
 using Education.Exceptions.Exceptions;

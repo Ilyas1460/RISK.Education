@@ -1,5 +1,4 @@
 ﻿using Education.Application.Courses.GetAllCourses;
-using Education.Application.Courses.GetCourse;
 using Education.Persistence.Courses;
 using FluentAssertions;
 using NSubstitute;

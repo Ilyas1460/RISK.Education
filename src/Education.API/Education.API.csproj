@@ -14,5 +14,6 @@
 
   <ItemGroup>
     <InternalsVisibleTo Include="Education.IntegrationTests" />
+    <InternalsVisibleTo Include="Education.Infrastructure.MigrationTests" />
   </ItemGroup>
 </Project>

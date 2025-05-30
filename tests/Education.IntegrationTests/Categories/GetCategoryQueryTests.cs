@@ -5,9 +5,7 @@ using Education.Exceptions.Exceptions;
 using Education.Infrastructure;
 using Education.IntegrationTests.Common;
 using Education.IntegrationTests.Common.Response;
-using Education.Persistence.Categories;
 using FluentAssertions;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Education.IntegrationTests.Categories;
 

@@ -1,13 +1,11 @@
 ﻿using Education.Application.Abstractions.Localization;
 using Education.Infrastructure.Extensions;
-using Education.Infrastructure.Interceptors;
 using Education.Infrastructure.Localization;
 using Education.Infrastructure.Repositories;
 using Education.Persistence.Abstractions;
 using Education.Persistence.Categories;
 using Education.Persistence.Courses;
 using Education.Persistence.Languages;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
