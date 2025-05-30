@@ -3,17 +3,17 @@ using NetArchTest.Rules;
 
 namespace Education.Architecture.Tests.LayerDependency;
 
-public class PersistenceLayer : BaseArchitectureTests
+public class ExceptionLayerTests : BaseArchitectureTests
 {
     [Fact]
-    public void PersistenceLayer_ShouldNotDependOn_HigherLayers()
+    public void ExceptionLayer_ShouldNotDependOn_HigherLayers()
     {
         var result = Types
-            .InAssembly(PersistenceAssembly)
+            .InAssembly(ExceptionsAssembly)
             .Should()
             .NotHaveDependencyOn(ApplicationAssemblyName)
             .And()
-            .NotHaveDependencyOn(ExceptionsAssemblyName)
+            .NotHaveDependencyOn(PersistenceAssemblyName)
             .And()
             .NotHaveDependencyOn(InfrastructureAssemblyName)
             .And()

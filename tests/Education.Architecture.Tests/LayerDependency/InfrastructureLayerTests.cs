@@ -3,7 +3,7 @@ using NetArchTest.Rules;
 
 namespace Education.Architecture.Tests.LayerDependency;
 
-public class InfrastructureLayer : BaseArchitectureTests
+public class InfrastructureLayerTests : BaseArchitectureTests
 {
     [Fact]
     public void InfrastructureLayer_ShouldNotDependOn_HigherLayers()
