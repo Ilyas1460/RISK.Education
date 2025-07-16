@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Education.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250509181701_InitialCreate")]
+    [Migration("20250712185459_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -659,7 +659,6 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnName("deleted_by");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("description");
 
@@ -683,7 +682,6 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnName("question_answer_count");
 
                     b.Property<string>("ShortDescription")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("short_description");
 
@@ -707,6 +705,10 @@ namespace Education.Infrastructure.Migrations
 
                     b.HasIndex("LanguageId")
                         .HasDatabaseName("ix_courses_language_id");
+
+                    b.HasIndex("Slug")
+                        .IsUnique()
+                        .HasDatabaseName("ix_courses_slug");
 
                     b.ToTable("courses", (string)null);
                 });

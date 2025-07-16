@@ -12,8 +12,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Education.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20250522143423_SlugPropertyOfCourseIsUnique")]
-    partial class SlugPropertyOfCourseIsUnique
+    [Migration("20250714205220_AddTopicsFix")]
+    partial class AddTopicsFix
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -659,7 +659,6 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnName("deleted_by");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("description");
 
@@ -683,7 +682,6 @@ namespace Education.Infrastructure.Migrations
                         .HasColumnName("question_answer_count");
 
                     b.Property<string>("ShortDescription")
-                        .IsRequired()
                         .HasColumnType("text")
                         .HasColumnName("short_description");
 
