@@ -6,8 +6,8 @@ using Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore;
 var builder = WebApplication.CreateBuilder();
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer(); // Swagger
-builder.Services.AddSwaggerGen();           // Swagger
+builder.Services.AddEndpointsApiExplorer();
+builder.Services.AddSwaggerGen();
 
 builder.Services.AddExceptionHandling();
 builder.Services.AddApplication();
@@ -17,7 +17,7 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 var app = builder.Build();
 
-if (app.Environment.IsDevelopment())        // Swagger
+if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();

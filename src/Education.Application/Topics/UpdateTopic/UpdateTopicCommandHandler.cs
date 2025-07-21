@@ -1,9 +1,10 @@
 using MediatR;
 using Education.Persistence.Contents;
+using Education.Application.Exceptions;
 
 namespace Education.Application.Topics.UpdateTopic;
 
-public class UpdateTopicCommandHandler : IRequestHandler<UpdateTopicCommand, UpdateTopicCommandResponse>
+public sealed class UpdateTopicCommandHandler : IRequestHandler<UpdateTopicCommand, UpdateTopicCommandResponse>
 {
     private readonly ITopicRepository _topicRepository;
 
@@ -16,15 +17,16 @@ public class UpdateTopicCommandHandler : IRequestHandler<UpdateTopicCommand, Upd
     {
         var topic = await _topicRepository.GetByIdAsync(request.TopicId, cancellationToken);
 
-        if (topic == null)
+        if (topic is null)
         {
-            throw new Exception($"Topic with Id {request.TopicId} was not found.");
+            throw new NotFoundException(nameof(Topic), request.TopicId);
         }
 
         topic.Name = request.Name;
+        topic.Description = request.Description;
+        topic.OrderInCourse = request.OrderInCourse;
 
-        await _topicRepository.UpdateAsync(topic);
-        await _topicRepository.SaveChangesAsync(cancellationToken);
+        await _topicRepository.UpdateAsync(topic, cancellationToken);
 
         return new UpdateTopicCommandResponse(topic.Id);
     }

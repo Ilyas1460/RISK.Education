@@ -1,36 +1,34 @@
 using Education.Exceptions.Exceptions;
 using Education.Persistence.Contents;
+using Education.Persistence.Courses;
 using FluentValidation;
 
 namespace Education.Application.Topics.CreateTopic;
 
 internal sealed class CreateTopicCommandValidator : AbstractValidator<CreateTopicCommand>
 {
-    private readonly ITopicRepository _topicRepository;
+    private readonly ICourseRepository _courseRepository;
 
-    public CreateTopicCommandValidator(ITopicRepository topicRepository)
+    public CreateTopicCommandValidator(ICourseRepository courseRepository)
     {
-        _topicRepository = topicRepository;
+        _courseRepository = courseRepository;
 
         RuleFor(x => x.Name)
             .Cascade(CascadeMode.Stop)
             .NotEmpty()
-            .WithMessage("Topic name is required.")
-            .MustAsync(IsUniqueName);
+            .WithMessage("Topic name is required.");
 
         RuleFor(x => x.CourseId)
-            .GreaterThan(0).When(x => x.CourseId.HasValue);
+            .Cascade(CascadeMode.Stop)
+            .NotEmpty()
+            .WithMessage("CourseId is required.")
+            .MustAsync(CourseExists)
+            .WithMessage("Provided course does not exist.");
     }
 
-    private async Task<bool> IsUniqueName(string name, CancellationToken cancellationToken)
+    private async Task<bool> CourseExists(int courseId, CancellationToken cancellationToken)
     {
-        var topic = await _topicRepository.GetByNameAsync(name, cancellationToken);
-
-        if (topic is not null)
-        {
-            throw new ConflictException("Topic with name '{0}' already exists.", name);
-        }
-
-        return true;
+        var course = await _courseRepository.GetByIdAsync(courseId, cancellationToken);
+        return course is not null;
     }
 }

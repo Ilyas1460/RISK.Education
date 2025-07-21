@@ -26,7 +26,6 @@ internal sealed class GetAllTopicsQueryHandler : IRequestHandler<GetAllTopicsQue
                 t.CourseId,
                 t.CreatedAt,
                 t.UpdatedAt))
-            .OrderBy(t =>t.Id)
             .ToList();
 
         return new GetAllTopicsQueryResponse(responseTopics);
