@@ -1,5 +1,3 @@
-using Education.Exceptions.Exceptions;
-using Education.Persistence.Contents;
 using Education.Persistence.Courses;
 using FluentValidation;
 

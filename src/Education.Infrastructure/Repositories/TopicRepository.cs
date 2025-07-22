@@ -21,14 +21,11 @@ public class TopicRepository : Repository<Topic>, ITopicRepository
 
     public async Task<List<Topic>> GetAllAsync(CancellationToken cancellationToken)
     {
-        return await _dbContext.Topics
-            .OrderBy(t => t.Id)
-            .ToListAsync(cancellationToken);
+        return await _dbContext.Topics.ToListAsync(cancellationToken);
     }
 
-    public Task DeleteAsync(Topic topic)
+    public async Task AddAsync(Topic topic, CancellationToken cancellationToken)
     {
-        _dbContext.Topics.Remove(topic);
-        return Task.CompletedTask;
+        await _dbContext.Topics.AddAsync(topic, cancellationToken);
     }
 }

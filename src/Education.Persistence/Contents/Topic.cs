@@ -20,15 +20,19 @@ public class Topic : BaseEntity
 
     public virtual ICollection<TopicContent> TopicContents { get; private set; } = new List<TopicContent>();
 
-    private Topic() { } // Required for EF Core
-
-    public static Topic Create(string name, int? courseId)
+    private Topic(string name, string? description, int? courseId, int? orderInCourse)
     {
-        return new Topic
-        {
-            Name = name,
-            CourseId = courseId
-        };
+        Name = name;
+        Description = description;
+        CourseId = courseId;
+        OrderInCourse = orderInCourse;
+    }
+
+    private Topic() { }
+
+    public static Topic Create(string name, string? description, int? courseId, int? orderInCourse)
+    {
+        return new Topic(name, description, courseId, orderInCourse);
     }
 
     public void Update(string name)

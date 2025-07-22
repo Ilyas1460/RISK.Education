@@ -22,10 +22,7 @@ public sealed class UpdateTopicCommandHandler : IRequestHandler<UpdateTopicComma
             throw new NotFoundException(nameof(Topic), request.TopicId);
         }
 
-        topic.Name = request.Name;
-        topic.Description = request.Description;
-        topic.OrderInCourse = request.OrderInCourse;
-
+        topic.Update(request.Name);
         await _topicRepository.UpdateAsync(topic, cancellationToken);
 
         return new UpdateTopicCommandResponse(topic.Id);

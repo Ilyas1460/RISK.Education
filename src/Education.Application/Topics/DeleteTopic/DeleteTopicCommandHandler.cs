@@ -1,10 +1,9 @@
-using MediatR;
-using Education.Application.Exceptions;
 using Education.Persistence.Contents;
+using MediatR;
 
 namespace Education.Application.Topics.DeleteTopic;
 
-public sealed class DeleteTopicCommandHandler : IRequestHandler<DeleteTopicCommand>
+internal sealed class DeleteTopicCommandHandler : IRequestHandler<DeleteTopicCommand, DeleteTopicCommandResponse>
 {
     private readonly ITopicRepository _topicRepository;
 
@@ -13,15 +12,12 @@ public sealed class DeleteTopicCommandHandler : IRequestHandler<DeleteTopicComma
         _topicRepository = topicRepository;
     }
 
-    public async Task Handle(DeleteTopicCommand request, CancellationToken cancellationToken)
+    public async Task<DeleteTopicCommandResponse> Handle(DeleteTopicCommand request, CancellationToken cancellationToken)
     {
-        var topic = await _topicRepository.GetByIdAsync(request.TopicId, cancellationToken);
+        var topic = await _topicRepository.GetByIdAsync(request.Id, cancellationToken);
 
-        if (topic is null)
-        {
-            throw new NotFoundException(nameof(Topic), request.TopicId);
-        }
+        _topicRepository.Delete(topic);
 
-        await _topicRepository.DeleteAsync(topic, cancellationToken);
+        return new DeleteTopicCommandResponse();
     }
 }
